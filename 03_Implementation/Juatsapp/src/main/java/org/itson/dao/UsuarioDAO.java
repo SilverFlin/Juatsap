@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package org.itson.DAOS;
+package org.itson.dao;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.result.DeleteResult;
@@ -21,14 +21,14 @@ import org.itson.dominio.Usuario;
 public class UsuarioDAO extends BaseDAO<Usuario> {
 
     @Override
-    protected MongoCollection<Usuario> getCollecion() {
+    protected MongoCollection<Usuario> getCollection() {
         return this.getDataBase().getCollection("usuarios", Usuario.class);
     }
 
     @Override
     public void agregar(Usuario usuario) {
         try {
-            MongoCollection<Usuario> coleccion = this.getCollecion();
+            MongoCollection<Usuario> coleccion = this.getCollection();
             coleccion.insertOne(usuario);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "El usuario no se ha guardado", "Informacion", JOptionPane.INFORMATION_MESSAGE);
@@ -37,13 +37,13 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
 
     @Override
     public void actualizar(Usuario usuario) {
-       
+
     }
 
     @Override
     public Usuario consultar(String idEntidad) {
         List<Usuario> listaUsuarios = new ArrayList<>();
-        MongoCollection<Usuario> coleccion = this.getCollecion();
+        MongoCollection<Usuario> coleccion = this.getCollection();
         Document filtro = new Document();
         filtro.append("_id", new ObjectId(idEntidad));
         coleccion.find(filtro).into(listaUsuarios);
@@ -57,10 +57,9 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
     @Override
     public List<Usuario> consultarTodo() {
         List<Usuario> listaUsuarios = new ArrayList<>();
-        MongoCollection<Usuario> coleccion = this.getCollecion();
+        MongoCollection<Usuario> coleccion = this.getCollection();
         coleccion.find().into(listaUsuarios);
         return listaUsuarios;
     }
 
 }
-

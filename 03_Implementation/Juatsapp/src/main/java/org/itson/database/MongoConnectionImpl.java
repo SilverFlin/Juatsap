@@ -1,5 +1,6 @@
 package org.itson.database;
 
+import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -20,6 +21,8 @@ public class MongoConnectionImpl implements MongoConnection {
     private final MongoClient mongoClient;
     private final MongoDatabase database;
 
+    private final String HOST = "localhost";
+    private final int PUERTO = 27017;
     private static final String DATABASE_NAME = "juatsapp";
 
     public MongoConnectionImpl() {
@@ -36,19 +39,14 @@ public class MongoConnectionImpl implements MongoConnection {
     }
 
     private MongoClientSettings loadClientSettings() {
-        CodecProvider provider
-                = PojoCodecProvider
-                        .builder()
-                        .automatic(true)
-                        .build();
-        CodecRegistry registry = MongoClientSettings.getDefaultCodecRegistry();
+        CodecRegistry pojoCodecRegistry = fromProviders(PojoCodecProvider.builder().automatic(true).build());
 
-        CodecRegistry pojoCodecRegistry
-                = fromRegistries(registry, fromProviders(provider));
+        CodecRegistry codeRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(), pojoCodecRegistry);
 
-        return MongoClientSettings
-                .builder()
-                .codecRegistry(pojoCodecRegistry)
+        ConnectionString cadenaConexion = new ConnectionString("mongodb://" + HOST + "/" + PUERTO);
+
+        return MongoClientSettings.builder().applyConnectionString(cadenaConexion)
+                .codecRegistry(codeRegistry)
                 .build();
     }
 

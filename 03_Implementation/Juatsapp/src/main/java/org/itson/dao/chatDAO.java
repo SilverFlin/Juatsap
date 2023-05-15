@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package org.itson.DAOS;
+package org.itson.dao;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.result.UpdateResult;
@@ -17,10 +17,10 @@ import org.itson.dominio.Chat;
  *
  * @author deivid
  */
-public class chatDAO extends BaseDAO<Chat> {
+public class ChatDAO extends BaseDAO<Chat> {
 
     @Override
-    protected MongoCollection<Chat> getCollecion() {
+    protected MongoCollection<Chat> getCollection() {
         return this.getDataBase().getCollection("chats", Chat.class);
     }
 
@@ -37,7 +37,7 @@ public class chatDAO extends BaseDAO<Chat> {
     @Override
     public Chat consultar(String idChat) {
         List<Chat> listaChats = new ArrayList<>();
-        MongoCollection<Chat> coleccion = this.getCollecion();
+        MongoCollection<Chat> coleccion = this.getCollection();
         Document filtro = new Document();
         filtro.append("_id", new ObjectId(idChat));
         coleccion.find(filtro).into(listaChats);
@@ -51,7 +51,7 @@ public class chatDAO extends BaseDAO<Chat> {
     @Override
     public List<Chat> consultarTodo() {
         List<Chat> listaChat = new ArrayList<>();
-        MongoCollection<Chat> coleccion = this.getCollecion();
+        MongoCollection<Chat> coleccion = this.getCollection();
         coleccion.find().into(listaChat);
         return listaChat;
     }
