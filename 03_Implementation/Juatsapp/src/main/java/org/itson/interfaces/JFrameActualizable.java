@@ -4,10 +4,13 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author mig_2
+ * @author Toled
  */
-public abstract class JFrameActualizable extends JFrame{
-    
+public abstract class JFrameActualizable extends JFrame {
+
+    /**
+     * Ejecuta todos los métodos para que el frame esté actualizado.
+     */
     public abstract void actualizaFrame();
-    
+
 }
