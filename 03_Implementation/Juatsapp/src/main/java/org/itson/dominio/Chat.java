@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.itson.dominio;
 
 import java.time.LocalDateTime;
@@ -19,12 +15,12 @@ public class Chat {
     private ObjectId receptor;
     private ObjectId emisor;
     private LocalDateTime fecha;
-    private List<String> historial;
+    private List<Mensaje> historial;
 
     public Chat() {
         this._id = new ObjectId();
         this.historial = new ArrayList<>();
-    
+
     }
 
     public Chat(ObjectId receptor, ObjectId emisor, LocalDateTime fecha) {
@@ -42,7 +38,7 @@ public class Chat {
         this.fecha = fecha;
     }
 
-    public Chat(ObjectId _id, ObjectId receptor, ObjectId emisor, List<String> historial) {
+    public Chat(ObjectId _id, ObjectId receptor, ObjectId emisor, List<Mensaje> historial) {
         this._id = _id;
         this.receptor = receptor;
         this.emisor = emisor;
@@ -57,11 +53,11 @@ public class Chat {
         this.emisor = emisor;
     }
 
-    public List<String> getHistorial() {
+    public List<Mensaje> getHistorial() {
         return historial;
     }
 
-    public void setHistorial(List<String> historial) {
+    public void setHistorial(List<Mensaje> historial) {
         this.historial = historial;
     }
 
@@ -81,10 +77,8 @@ public class Chat {
         this._id = _id;
     }
 
-
-    public void agregarMensajes(String mensaje) {
+    public void agregarMensajes(Mensaje mensaje) {
         historial.add(mensaje);
     }
 
 }
-

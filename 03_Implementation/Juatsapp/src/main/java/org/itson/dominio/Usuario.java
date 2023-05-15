@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.itson.dominio;
-
 
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 import org.bson.types.ObjectId;
-
 
 /**
  *
@@ -19,12 +12,16 @@ import org.bson.types.ObjectId;
 public class Usuario {
 
     private ObjectId _id;
-    private String nombre, correo, contraseña,telefono;
+    private String nombre;
+    private String correo;
+    private String password;
+    private String telefono;
     private Sexo sexo;
     private List<ObjectId> chat;
-
+    private ObjectId imagenPerfil;
     private Calendar fecha_nacimiento;
-    
+    private Direccion direccion;
+
     public Usuario() {
     }
 
@@ -32,7 +29,7 @@ public class Usuario {
         this._id = _id;
         this.nombre = nombre;
         this.correo = correo;
-        this.contraseña = contraseña;
+        this.password = contraseña;
         this.telefono = telefono;
         this.sexo = sexo;
         this.chat = chat;
@@ -41,7 +38,7 @@ public class Usuario {
 
     public Usuario(String correo, String contraseña, String telefono, Sexo sexo, List<ObjectId> chat, Calendar fecha_nacimiento) {
         this.correo = correo;
-        this.contraseña = contraseña;
+        this.password = contraseña;
         this.telefono = telefono;
         this.sexo = sexo;
         this.chat = chat;
@@ -51,7 +48,7 @@ public class Usuario {
     public Usuario(String nombre, String correo, String contraseña) {
         this.nombre = nombre;
         this.correo = correo;
-        this.contraseña = contraseña;
+        this.password = contraseña;
     }
 
     public Usuario(String nombre, List<ObjectId> chat) {
@@ -75,7 +72,6 @@ public class Usuario {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
-      
     public Sexo getSexo() {
         return sexo;
     }
@@ -117,14 +113,14 @@ public class Usuario {
     }
 
     public String getContraseña() {
-        return contraseña;
+        return password;
     }
 
     public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+        this.password = contraseña;
     }
-    
-    public void agregarChat(ObjectId id){
+
+    public void agregarChat(ObjectId id) {
         chat.add(id);
     }
 
@@ -134,7 +130,7 @@ public class Usuario {
         hash = 43 * hash + Objects.hashCode(this._id);
         hash = 43 * hash + Objects.hashCode(this.nombre);
         hash = 43 * hash + Objects.hashCode(this.correo);
-        hash = 43 * hash + Objects.hashCode(this.contraseña);
+        hash = 43 * hash + Objects.hashCode(this.password);
         hash = 43 * hash + Objects.hashCode(this.telefono);
         hash = 43 * hash + Objects.hashCode(this.sexo);
         hash = 43 * hash + Objects.hashCode(this.chat);
@@ -160,7 +156,7 @@ public class Usuario {
         if (!Objects.equals(this.correo, other.correo)) {
             return false;
         }
-        if (!Objects.equals(this.contraseña, other.contraseña)) {
+        if (!Objects.equals(this.password, other.password)) {
             return false;
         }
         if (!Objects.equals(this.telefono, other.telefono)) {
@@ -180,13 +176,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "_id=" + _id + ", nombre=" + nombre + ", correo=" + correo + ", contrase\u00f1a=" + contraseña + ", telefono=" + telefono + ", sexo=" + sexo + ", chat=" + chat + ", fecha_nacimiento=" + fecha_nacimiento + '}';
+        return "Usuario{" + "_id=" + _id + ", nombre=" + nombre + ", correo=" + correo + ", contrase\u00f1a=" + password + ", telefono=" + telefono + ", sexo=" + sexo + ", chat=" + chat + ", fecha_nacimiento=" + fecha_nacimiento + '}';
     }
-
-    
-
-    
-
-        
 
 }
