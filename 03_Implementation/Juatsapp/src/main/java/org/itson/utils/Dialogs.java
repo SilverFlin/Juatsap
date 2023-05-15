@@ -7,26 +7,47 @@ import javax.swing.JOptionPane;
  *
  * @author Toled
  */
-public class Dialogs {
-
-    public static final int OPCION_SI = JOptionPane.YES_OPTION;
-    public static final int OPCION_NO = JOptionPane.NO_OPTION;
+public final class Dialogs {
 
     private Dialogs() {
         throw new IllegalStateException("Utility class");
     }
 
-    public static void mostrarMensajeError(Component componente, String msg) {
-        JOptionPane.showMessageDialog(componente, msg, "Error", JOptionPane.ERROR_MESSAGE);
+    /**
+     * Muestra un mensaje de error sobre el componente especificado.
+     *
+     * @param componente
+     * @param msg
+     */
+    public static void mostrarMensajeError(
+            final Component componente,
+            final String msg
+    ) {
+        JOptionPane.showMessageDialog(
+                componente,
+                msg,
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+        );
 
     }
 
-    public static void mostrarMensajeExito(Component componente, String msg) {
-        JOptionPane.showMessageDialog(componente, msg, "Exito", JOptionPane.PLAIN_MESSAGE);
+    /**
+     * Muestra un mensaje de exito sobre el componente especificado.
+     *
+     * @param componente
+     * @param msg
+     */
+    public static void mostrarMensajeExito(
+            final Component componente,
+            final String msg
+    ) {
+        JOptionPane.showMessageDialog(
+                componente,
+                msg,
+                "Exito",
+                JOptionPane.PLAIN_MESSAGE
+        );
     }
 
-    public static int mostrarMensajeYesNoOption(Component componente, String msg, String titulo) {
-        return JOptionPane.showConfirmDialog(componente, msg, titulo, JOptionPane.YES_NO_OPTION);
-
-    }
 }

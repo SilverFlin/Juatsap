@@ -7,13 +7,23 @@ import org.itson.interfaces.JFrameActualizable;
  *
  * @author Toled
  */
-public class Forms {
+public final class Forms {
 
     private Forms() {
         throw new IllegalStateException("Utility class");
     }
 
-    public static <T extends JFrame> void cargarForm(T cargar, JFrame actual) {
+    /**
+     * Carga un JFrame y oculta el JFrame actual.
+     *
+     * @param <T>
+     * @param cargar
+     * @param actual
+     */
+    public static <T extends JFrame> void cargarForm(
+            final T cargar,
+            final JFrame actual
+    ) {
         if (cargar != null) {
             actual.setVisible(false);
             cargar.setVisible(true);
@@ -22,7 +32,17 @@ public class Forms {
         throw new InstantiationError("Form no instanciado");
     }
 
-    public static <T extends JFrameActualizable> void cargarForm(T cargar, JFrame actual) {
+    /**
+     * Carga un JFrameActualizable, lo actualiza, y oculta el actual.
+     *
+     * @param <T>
+     * @param cargar
+     * @param actual
+     */
+    public static <T extends JFrameActualizable> void cargarForm(
+            final T cargar,
+            final JFrame actual
+    ) {
         if (cargar != null) {
             actual.setVisible(false);
             cargar.actualizaFrame();
@@ -32,7 +52,16 @@ public class Forms {
         throw new InstantiationError("Form no instanciado");
     }
 
-    public static void regresar(JFrameActualizable frmAnterior, JFrame actual) {
+    /**
+     * Se regresa al JFrame anterior.
+     *
+     * @param frmAnterior
+     * @param actual
+     */
+    public static void regresar(
+            final JFrameActualizable frmAnterior,
+            final JFrame actual
+    ) {
         frmAnterior.actualizaFrame();
         frmAnterior.setVisible(true);
         actual.setVisible(false);

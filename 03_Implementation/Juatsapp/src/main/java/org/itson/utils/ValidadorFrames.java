@@ -4,33 +4,51 @@ package org.itson.utils;
  *
  * @author Toled
  */
-public class ValidadorFrames {
+public final class ValidadorFrames {
 
     private ValidadorFrames() {
         throw new IllegalStateException("Utility class");
     }
 
-    public static boolean isValidText(String texto) {
+    /**
+     * Valida que un texto entre en el rango de 1 y 100 caracteres.
+     *
+     * @param texto
+     * @return true si es válido.
+     */
+    public static boolean isValidText(final String texto) {
         // Expresión regular que valida un string de 1 a 100 caracteres
         String regex = "^.{1,100}$";
         // Validar el texto con la expresión regular
         return texto.matches(regex);
     }
 
-    public static boolean isValidEmail(String email) {
+    /**
+     * Checa si un string es un email válido.
+     *
+     * @param email
+     * @return true si es válido.
+     */
+    public static boolean isValidEmail(final String email) {
 
         String regex = "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,}$";
 
         return email.matches(regex);
     }
 
-    public static boolean isMismaPassword(String password, String confirmPassword) {
-        return password.matches(confirmPassword);
-    }
-
-    public static boolean isValidTelefono(String telefono) {
+    /**
+     * Valida el formato de un teléfono.
+     *
+     * @param telefono
+     * @return true si es válido.
+     */
+    public static boolean isValidTelefono(final String telefono) {
         // TODO buscar regex para telefono.
-        return telefono.length() >= 8 && telefono.length() <= 10;
+
+        // Expresión regular que valida un string de 1 a 100 caracteres
+        String regex = "^.{8,10}$";
+        // Validar el texto con la expresión regular
+        return telefono.matches(regex);
     }
 
 }

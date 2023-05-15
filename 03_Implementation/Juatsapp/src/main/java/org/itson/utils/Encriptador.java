@@ -6,22 +6,53 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
  *
  * @author Toled
  */
-public class Encriptador {
+public final class Encriptador {
+
+    /**
+     * Costo de encriptación.
+     */
+    public static final int COST = 12;
 
     private Encriptador() {
         throw new IllegalStateException("Utility class");
     }
 
-    public static String encriptarPassword(String password) {
-        return BCrypt.withDefaults().hashToString(12, password.toCharArray());
+    /**
+     * Encripta una contraseña y regresa el hash creado.
+     *
+     * @param password
+     * @return El hash generado.
+     */
+    public static String encriptarPassword(final String password) {
+        return BCrypt.withDefaults().hashToString(COST, password.toCharArray());
     }
 
-    public static String encriptarPassword(char[] password) {
-        return BCrypt.withDefaults().hashToString(12, password);
+    /**
+     * Encripta una contraseña dada como array de caracteres y regresa el hashs.
+     *
+     * @param password
+     * @return el hash generado.
+     */
+    public static String encriptarPassword(final char[] password) {
+        return BCrypt.withDefaults().hashToString(COST, password);
     }
 
-    public static boolean verificarPasswordConHash(String password, String hashedPassword) {
-        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
+    /**
+     * Valida una contraseña comparandola con un hash.
+     *
+     * @param password
+     * @param hashedPassword
+     * @return true, si las contraseñas coinciden.
+     */
+    public static boolean verificarPasswordConHash(
+            final String password,
+            final String hashedPassword
+    ) {
+
+        BCrypt.Result result
+                = BCrypt
+                        .verifyer()
+                        .verify(password.toCharArray(), hashedPassword);
         return result.verified;
     }
 }
