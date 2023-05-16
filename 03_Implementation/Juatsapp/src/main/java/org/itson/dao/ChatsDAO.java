@@ -10,8 +10,8 @@ import org.itson.dominio.Chat;
 /**
  *
  */
-public final class ChatDAO extends BaseDAO<Chat> {
- 
+public final class ChatsDAO extends BaseDAO<Chat> {
+
     @Override
     protected MongoCollection<Chat> getCollection() {
         return this.getDataBase().getCollection("chats", Chat.class);

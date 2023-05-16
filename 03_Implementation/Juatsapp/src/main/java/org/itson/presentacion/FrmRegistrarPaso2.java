@@ -441,7 +441,10 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         Forms.regresar(frmAnterior, this);
     }
 
-    private boolean validarCampo(JTextField campo, String nombreCampo) {
+    private boolean validarCampo(
+            final JTextField campo,
+            final String nombreCampo
+    ) {
         if (!ValidadorFrames.isValidText(campo.getText())) {
             Dialogs.mostrarMensajeError(
                     this,

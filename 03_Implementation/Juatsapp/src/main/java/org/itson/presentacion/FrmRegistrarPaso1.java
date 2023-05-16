@@ -36,7 +36,7 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
     private Usuario usuarioRegistrando;
 
     /**
-     * Clase para gestionar el crud de dao
+     * Clase para gestionar el crud de dao.
      */
     private UsuarioDAO usuarioDAO;
 
