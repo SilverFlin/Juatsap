@@ -1,15 +1,15 @@
-package org.itson.GUI;
+package org.itson.presentacion;
 
 /**
  *
  *
  */
-public class FrmLogin extends javax.swing.JFrame {
+public class FrmEditProfile extends javax.swing.JFrame {
 
     /**
-     * Creates new form inicioSesion.
+     * Creates new form menuPrincipal.
      */
-    public FrmLogin() {
+    public FrmEditProfile() {
         initComponents();
     }
 

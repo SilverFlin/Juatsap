@@ -1,15 +1,15 @@
-package org.itson.GUI;
+package org.itson.presentacion;
 
 /**
  *
  *
  */
-public class FrmEditProfile extends javax.swing.JFrame {
+public class FrmChats extends javax.swing.JFrame {
 
     /**
-     * Creates new form menuPrincipal.
+     * Creates new form chatJuatsapp.
      */
-    public FrmEditProfile() {
+    public FrmChats() {
         initComponents();
     }
 
