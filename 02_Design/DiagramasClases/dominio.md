@@ -7,29 +7,30 @@ class User{
     -ObjectId _id
     -String username
     -String password
-    -Document imagenPerfil
-    -String email
+    -Imagen imagenPerfil
+    -String correo
     -Sexo sexo
     -List~ObjectId~ chats
-    -Date fechaNacimiento
+    -LocalDateTime fechaNacimiento
     -String telefono
-    -Document direccion    
+    -Direccion direccion    
 }
 
 class Chat{
     -ObjectId _id
-    -Document imagenChat
-    -ObjectId idEmisor
-    -ObjectId idReceptor
-    -List<ObjectId> mensajes
+    -ObjectId receptor
+    -ObjectId emisor
+    -LocalDateTime fecha
+    -List<ObjectId> historialMensajes
 }
 
 class Mensaje{
     -ObjectId _id   
-    -ObjectId emisorId
-    -String mensaje
-    -Document imagenPerfil 
-    -TimesStamp timestamp
+    -ObjectId userId
+    -String contenidoMensaje
+    -Imagen imagen
+    -LocalDateTime timestamp
     -boolean disponibilidad
+}
 }
 ```
