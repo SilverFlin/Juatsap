@@ -27,6 +27,7 @@ public class FrmIniciarSesion extends JFrameActualizable {
     public FrmIniciarSesion() {
         initComponents();
         cargarLogo();
+        cargarBotones();
         this.unitOfWork = new UnitOfWork();
 
     }
@@ -80,7 +81,7 @@ public class FrmIniciarSesion extends JFrameActualizable {
         btnRegistrarse.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnRegistrarse.setForeground(new java.awt.Color(0, 153, 153));
         btnRegistrarse.setText("REGISTRARSE");
-        btnRegistrarse.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRegistrarse.setBorder(null);
         btnRegistrarse.setBorderPainted(false);
         btnRegistrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegistrarse.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -107,7 +108,7 @@ public class FrmIniciarSesion extends JFrameActualizable {
         btnIniciarSesion.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnIniciarSesion.setForeground(new java.awt.Color(0, 153, 153));
         btnIniciarSesion.setText("INICIAR SESIÓN");
-        btnIniciarSesion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnIniciarSesion.setBorder(null);
         btnIniciarSesion.setBorderPainted(false);
         btnIniciarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnIniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -272,6 +273,11 @@ public class FrmIniciarSesion extends JFrameActualizable {
 
     private void iniciarSesion(Usuario usuario) {
         Forms.cargarForm(new FrmChats(usuario, unitOfWork), this);
+    }
+
+    private void cargarBotones() {
+        Forms.desiluminarBoton(btnIniciarSesion);
+        Forms.desiluminarBoton(btnRegistrarse);
     }
 
 }

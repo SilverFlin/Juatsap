@@ -47,6 +47,7 @@ public class FrmChats extends JFrameActualizable {
         initComponents();
         this.usuarioLoggeado = usuarioLoggeado;
         this.unitOfWork = unitOfWork;
+        cargarBotones();
         cargarListaChats();
 
     }
@@ -61,7 +62,12 @@ public class FrmChats extends JFrameActualizable {
         scPnChats = new javax.swing.JScrollPane();
         btnNuevoChat = new javax.swing.JButton();
         pnChatActivo = new javax.swing.JPanel();
+        txtNuevoMensaje = new javax.swing.JTextField();
+        btnEnviar = new javax.swing.JButton();
+        btnFoto = new javax.swing.JButton();
         pnNavBar = new javax.swing.JPanel();
+        btnCerrarSesion = new javax.swing.JButton();
+        btnPerfil = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
@@ -114,30 +120,136 @@ public class FrmChats extends JFrameActualizable {
 
         pnChatActivo.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnEnviar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
+        btnEnviar.setForeground(new java.awt.Color(0, 153, 153));
+        btnEnviar.setText("Enviar");
+        btnEnviar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEnviar.setBorderPainted(false);
+        btnEnviar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEnviar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEnviarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEnviarMouseExited(evt);
+            }
+        });
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
+
+        btnFoto.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
+        btnFoto.setForeground(new java.awt.Color(0, 153, 153));
+        btnFoto.setText("Foto");
+        btnFoto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnFoto.setBorderPainted(false);
+        btnFoto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnFoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnFotoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnFotoMouseExited(evt);
+            }
+        });
+        btnFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFotoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnChatActivoLayout = new javax.swing.GroupLayout(pnChatActivo);
         pnChatActivo.setLayout(pnChatActivoLayout);
         pnChatActivoLayout.setHorizontalGroup(
             pnChatActivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGroup(pnChatActivoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtNuevoMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnChatActivoLayout.setVerticalGroup(
             pnChatActivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChatActivoLayout.createSequentialGroup()
+                .addGap(0, 402, Short.MAX_VALUE)
+                .addGroup(pnChatActivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addGroup(pnChatActivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnChatActivoLayout.createSequentialGroup()
+                            .addGap(2, 2, 2)
+                            .addComponent(txtNuevoMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))))
+                .addContainerGap())
         );
 
         Background.add(pnChatActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 710, 450));
 
         pnNavBar.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnCerrarSesion.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
+        btnCerrarSesion.setForeground(new java.awt.Color(0, 153, 153));
+        btnCerrarSesion.setText("CERRAR SESIÓN");
+        btnCerrarSesion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCerrarSesion.setBorderPainted(false);
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseExited(evt);
+            }
+        });
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
+
+        btnPerfil.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
+        btnPerfil.setForeground(new java.awt.Color(0, 153, 153));
+        btnPerfil.setText("PERFIL");
+        btnPerfil.setBorder(null);
+        btnPerfil.setBorderPainted(false);
+        btnPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnPerfilMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnPerfilMouseExited(evt);
+            }
+        });
+        btnPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerfilActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnNavBarLayout = new javax.swing.GroupLayout(pnNavBar);
         pnNavBar.setLayout(pnNavBarLayout);
         pnNavBarLayout.setHorizontalGroup(
             pnNavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 950, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnNavBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 737, Short.MAX_VALUE)
+                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnNavBarLayout.setVerticalGroup(
             pnNavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
+            .addGroup(pnNavBarLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(pnNavBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         Background.add(pnNavBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 90));
@@ -173,16 +285,69 @@ public class FrmChats extends JFrameActualizable {
         this.nuevoChat();
     }//GEN-LAST:event_btnNuevoChatActionPerformed
 
+    private void btnCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseEntered
+        Forms.iluminarBoton(btnCerrarSesion);
+    }//GEN-LAST:event_btnCerrarSesionMouseEntered
+
+    private void btnCerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseExited
+        Forms.desiluminarBoton(btnCerrarSesion);
+    }//GEN-LAST:event_btnCerrarSesionMouseExited
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void btnEnviarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseEntered
+        Forms.iluminarBoton(btnEnviar);
+    }//GEN-LAST:event_btnEnviarMouseEntered
+
+    private void btnEnviarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseExited
+        Forms.desiluminarBoton(btnEnviar);
+    }//GEN-LAST:event_btnEnviarMouseExited
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void btnPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPerfilMouseEntered
+        Forms.iluminarBoton(btnPerfil);
+    }//GEN-LAST:event_btnPerfilMouseEntered
+
+    private void btnPerfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPerfilMouseExited
+        Forms.desiluminarBoton(btnPerfil);
+    }//GEN-LAST:event_btnPerfilMouseExited
+
+    private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPerfilActionPerformed
+
+    private void btnFotoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFotoMouseEntered
+        Forms.iluminarBoton(btnFoto);
+    }//GEN-LAST:event_btnFotoMouseEntered
+
+    private void btnFotoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFotoMouseExited
+        Forms.desiluminarBoton(btnFoto);
+    }//GEN-LAST:event_btnFotoMouseExited
+
+    private void btnFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFotoActionPerformed
+
     //CHECKSTYLE:OFF
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnContinuar;
+    private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnFoto;
     private javax.swing.JButton btnNuevoChat;
+    private javax.swing.JButton btnPerfil;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel pnChatActivo;
     private javax.swing.JPanel pnListaChats;
     private javax.swing.JPanel pnNavBar;
     private javax.swing.JScrollPane scPnChats;
+    private javax.swing.JTextField txtNuevoMensaje;
     // End of variables declaration//GEN-END:variables
     //CHECKSTYLE:ON
 
@@ -254,6 +419,14 @@ public class FrmChats extends JFrameActualizable {
 
     private void actualizarUsuarioLoggeado() {
         this.usuarioLoggeado = unitOfWork.usuariosDAO().consultar(this.usuarioLoggeado.getId().toString());
+    }
+
+    private void cargarBotones() {
+        Forms.desiluminarBoton(btnCerrarSesion);
+        Forms.desiluminarBoton(btnEnviar);
+        Forms.desiluminarBoton(btnFoto);
+        Forms.desiluminarBoton(btnNuevoChat);
+        Forms.desiluminarBoton(btnPerfil);
     }
 
 }
