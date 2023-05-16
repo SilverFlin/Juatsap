@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JList;
 import org.bson.types.ObjectId;
-import org.itson.dao.ChatsDAO;
-import org.itson.dao.UsuarioDAO;
 import org.itson.dominio.Chat;
 import org.itson.dominio.Imagen;
 import org.itson.dominio.Usuario;
@@ -318,7 +316,7 @@ public class FrmChats extends JFrameActualizable {
     }//GEN-LAST:event_btnPerfilMouseExited
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
-        // TODO add your handling code here:
+        this.cargarPerfil();
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnFotoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFotoMouseEntered
@@ -427,6 +425,10 @@ public class FrmChats extends JFrameActualizable {
         Forms.desiluminarBoton(btnFoto);
         Forms.desiluminarBoton(btnNuevoChat);
         Forms.desiluminarBoton(btnPerfil);
+    }
+
+    private void cargarPerfil() {
+        Forms.cargarForm(new FrmPerfil(this, unitOfWork, usuarioLoggeado), this);
     }
 
 }
