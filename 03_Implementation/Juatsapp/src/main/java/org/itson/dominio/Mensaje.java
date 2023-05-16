@@ -14,7 +14,7 @@ public class Mensaje {
     private ObjectId _id;
     private ObjectId userId;
     private String mensaje;
-    private Document imagen;
+    private Imagen imagen;
     private LocalDateTime timestamp;
     private boolean disponibilidad;
 
@@ -24,7 +24,7 @@ public class Mensaje {
     public Mensaje(
             final ObjectId userId,
             final String mensaje,
-            final Document imagen,
+            final Imagen imagen,
             final LocalDateTime timestamp,
             final boolean disponibilidad
     ) {
@@ -39,7 +39,7 @@ public class Mensaje {
             final ObjectId _id,
             final ObjectId userId,
             final String mensaje,
-            final Document imagen,
+            final Imagen imagen,
             final LocalDateTime timestamp,
             final boolean disponibilidad
     ) {
@@ -75,11 +75,11 @@ public class Mensaje {
         this.mensaje = mensaje;
     }
 
-    public Document getImagen() {
+    public Imagen getImagen() {
         return imagen;
     }
 
-    public void setImagen(Document imagen) {
+    public void setImagen(Imagen imagen) {
         this.imagen = imagen;
     }
 

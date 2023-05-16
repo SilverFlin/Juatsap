@@ -11,14 +11,14 @@ import org.bson.types.ObjectId;
  */
 public class Chat {
 
-    private ObjectId _id;
+    private ObjectId id;
     private ObjectId receptor;
     private ObjectId emisor;
     private LocalDateTime fecha;
     private List<Mensaje> historial;
 
     public Chat() {
-        this._id = new ObjectId();
+        this.id = new ObjectId();
         this.historial = new ArrayList<>();
 
     }
@@ -38,8 +38,8 @@ public class Chat {
         this.fecha = fecha;
     }
 
-    public Chat(ObjectId _id, ObjectId receptor, ObjectId emisor, List<Mensaje> historial) {
-        this._id = _id;
+    public Chat(ObjectId id, ObjectId receptor, ObjectId emisor, List<Mensaje> historial) {
+        this.id = id;
         this.receptor = receptor;
         this.emisor = emisor;
         this.historial = historial;
@@ -70,11 +70,11 @@ public class Chat {
     }
 
     public ObjectId getId() {
-        return _id;
+        return id;
     }
 
-    public void setId(ObjectId _id) {
-        this._id = _id;
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     public void agregarMensajes(Mensaje mensaje) {

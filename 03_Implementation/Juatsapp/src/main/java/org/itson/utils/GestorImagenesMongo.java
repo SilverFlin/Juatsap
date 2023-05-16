@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import org.bson.Document;
 import org.bson.types.Binary;
+import org.itson.dominio.Imagen;
 
 /**
  *
@@ -73,7 +74,7 @@ public final class GestorImagenesMongo {
      * @return El documento con la información de la imagen.
      * @throws IOException
      */
-    public static Document saveImage(
+    public static Imagen crearImagen(
             final String fileName,
             final File imageFile
     ) throws IOException {
@@ -81,11 +82,11 @@ public final class GestorImagenesMongo {
         // Lee el archivo de imagen y conviértelo en un arreglo de bytes
         byte[] imageData = readImageData(imageFile);
 
-        Document imageDocument = new Document();
-        imageDocument.append("filename", fileName);
-        imageDocument.append("imageData", new Binary(imageData));
-        return imageDocument;
+        Imagen imagenDocument = new Imagen();
+        imagenDocument.setImageData(new Binary(imageData));
+        imagenDocument.setFileName(fileName);
 
+        return imagenDocument;
     }
 
     /**
@@ -97,10 +98,10 @@ public final class GestorImagenesMongo {
      * @return El icono con las dimensiones pedidas.
      */
     public static ImageIcon getImageIcon(
-            final Document imageDocument,
+            final Imagen imageDocument,
             final SizeImage size) {
 
-        Binary imageData = imageDocument.get("imageData", Binary.class);
+        Binary imageData = imageDocument.getImageData();
 
         return resizeImageIcon(imageData, size);
 

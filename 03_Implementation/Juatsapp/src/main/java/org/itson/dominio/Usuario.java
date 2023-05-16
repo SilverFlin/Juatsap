@@ -7,48 +7,48 @@ import org.bson.types.ObjectId;
 
 /**
  *
- * @author deivi
+ *
  */
 public class Usuario {
 
-    private ObjectId _id;
+    private ObjectId id;
     private String nombre;
     private String correo;
     private String password;
     private String telefono;
     private Sexo sexo;
     private List<ObjectId> chat;
-    private ObjectId imagenPerfil;
-    private Calendar fecha_nacimiento;
+    private Imagen imagenPerfil;
+    private Calendar fechaNacimiento;
     private Direccion direccion;
 
     public Usuario() {
     }
 
-    public Usuario(ObjectId _id, String nombre, String correo, String contraseña, String telefono, Sexo sexo, List<ObjectId> chat, Calendar fecha_nacimiento) {
-        this._id = _id;
+    public Usuario(ObjectId id, String nombre, String correo, String password, String telefono, Sexo sexo, List<ObjectId> chat, Calendar fechaNacimiento) {
+        this.id = id;
         this.nombre = nombre;
         this.correo = correo;
-        this.password = contraseña;
+        this.password = password;
         this.telefono = telefono;
         this.sexo = sexo;
         this.chat = chat;
-        this.fecha_nacimiento = fecha_nacimiento;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Usuario(String correo, String contraseña, String telefono, Sexo sexo, List<ObjectId> chat, Calendar fecha_nacimiento) {
+    public Usuario(String correo, String password, String telefono, Sexo sexo, List<ObjectId> chat, Calendar fechaNacimiento) {
         this.correo = correo;
-        this.password = contraseña;
+        this.password = password;
         this.telefono = telefono;
         this.sexo = sexo;
         this.chat = chat;
-        this.fecha_nacimiento = fecha_nacimiento;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Usuario(String nombre, String correo, String contraseña) {
+    public Usuario(String nombre, String correo, String password) {
         this.nombre = nombre;
         this.correo = correo;
-        this.password = contraseña;
+        this.password = password;
     }
 
     public Usuario(String nombre, List<ObjectId> chat) {
@@ -56,44 +56,12 @@ public class Usuario {
         this.chat = chat;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public Calendar getFecha_nacimiento() {
-        return fecha_nacimiento;
-    }
-
-    public void setFecha_nacimiento(Calendar fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
-    }
-
-    public Sexo getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
-    }
-
-    public List<ObjectId> getChat() {
-        return chat;
-    }
-
-    public void setChat(List<ObjectId> chat) {
-        this.chat = chat;
-    }
-
     public ObjectId getId() {
-        return _id;
+        return id;
     }
 
-    public void setId(ObjectId _id) {
-        this._id = _id;
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -112,29 +80,66 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getContraseña() {
+    public String getPassword() {
         return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.password = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void agregarChat(ObjectId id) {
-        chat.add(id);
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public List<ObjectId> getChat() {
+        return chat;
+    }
+
+    public void setChat(List<ObjectId> chat) {
+        this.chat = chat;
+    }
+
+    public Imagen getImagenPerfil() {
+        return imagenPerfil;
+    }
+
+    public void setImagenPerfil(Imagen imagenPerfil) {
+        this.imagenPerfil = imagenPerfil;
+    }
+
+    public Calendar getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Calendar fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + Objects.hashCode(this._id);
-        hash = 43 * hash + Objects.hashCode(this.nombre);
-        hash = 43 * hash + Objects.hashCode(this.correo);
-        hash = 43 * hash + Objects.hashCode(this.password);
-        hash = 43 * hash + Objects.hashCode(this.telefono);
-        hash = 43 * hash + Objects.hashCode(this.sexo);
-        hash = 43 * hash + Objects.hashCode(this.chat);
-        hash = 43 * hash + Objects.hashCode(this.fecha_nacimiento);
+        int hash = 5;
+        hash = 47 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -150,33 +155,12 @@ public class Usuario {
             return false;
         }
         final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        if (!Objects.equals(this.correo, other.correo)) {
-            return false;
-        }
-        if (!Objects.equals(this.password, other.password)) {
-            return false;
-        }
-        if (!Objects.equals(this.telefono, other.telefono)) {
-            return false;
-        }
-        if (!Objects.equals(this._id, other._id)) {
-            return false;
-        }
-        if (this.sexo != other.sexo) {
-            return false;
-        }
-        if (!Objects.equals(this.chat, other.chat)) {
-            return false;
-        }
-        return Objects.equals(this.fecha_nacimiento, other.fecha_nacimiento);
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "Usuario{" + "_id=" + _id + ", nombre=" + nombre + ", correo=" + correo + ", contrase\u00f1a=" + password + ", telefono=" + telefono + ", sexo=" + sexo + ", chat=" + chat + ", fecha_nacimiento=" + fecha_nacimiento + '}';
+        return "Usuario{" + "nombre=" + nombre + ", correo=" + correo + ", password=" + password + '}';
     }
 
 }
