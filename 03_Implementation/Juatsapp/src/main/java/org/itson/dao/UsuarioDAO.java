@@ -12,9 +12,8 @@ import org.itson.utils.Encriptador;
 
 /**
  *
- * @author
  */
-public class UsuarioDAO extends BaseDAO<Usuario> {
+public final class UsuarioDAO extends BaseDAO<Usuario> {
 
     /**
      * Logger.
@@ -28,10 +27,11 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
     }
 
     @Override
-    public void agregar(Usuario usuario) {
+    public void agregar(final Usuario usuario) {
         try {
             MongoCollection<Usuario> coleccion = this.getCollection();
-            String hashedPassword = Encriptador.encriptarPassword(usuario.getPassword());
+            String hashedPassword
+                    = Encriptador.encriptarPassword(usuario.getPassword());
             usuario.setPassword(hashedPassword);
             coleccion.insertOne(usuario);
         } catch (Exception e) {
@@ -40,13 +40,13 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
     }
 
     @Override
-    public void actualizar(Usuario usuario) {
+    public void actualizar(final Usuario usuario) {
         throw new UnsupportedOperationException("Not supported yet.");
 
     }
 
     @Override
-    public Usuario consultar(String idEntidad) {
+    public Usuario consultar(final String idEntidad) {
         List<Usuario> listaUsuarios = new ArrayList<>();
         MongoCollection<Usuario> coleccion = this.getCollection();
         Document filtro = new Document();
@@ -67,9 +67,54 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
         return listaUsuarios;
     }
 
-    public void pushChat(ObjectId userId, ObjectId chatId) {
-        Document updateQuery = new Document("$push", new Document("chats", chatId));
-        this.getCollection().updateOne(new Document("_id", userId), updateQuery);
+    /**
+     * Consulta al usuario por username.
+     *
+     * @param username
+     * @return el ususario, si se encontró.
+     */
+    public Usuario consultarPorUsername(final String username) {
+        List<Usuario> listaUsuarios = new ArrayList<>();
+        MongoCollection<Usuario> coleccion = this.getCollection();
+        Document filtro = new Document();
+        filtro.append("username", new ObjectId(username));
+        coleccion.find(filtro).into(listaUsuarios);
+        if (listaUsuarios.isEmpty()) {
+            return null;
+        } else {
+            return listaUsuarios.get(0);
+        }
+    }
+
+    /**
+     * Consulta al usuario por correo.
+     *
+     * @param correo
+     * @return el ususario, si se encontró.
+     */
+    public Usuario consultarPorCorreo(final String correo) {
+        List<Usuario> listaUsuarios = new ArrayList<>();
+        MongoCollection<Usuario> coleccion = this.getCollection();
+        Document filtro = new Document();
+        filtro.append("correo", new ObjectId(correo));
+        coleccion.find(filtro).into(listaUsuarios);
+        if (listaUsuarios.isEmpty()) {
+            return null;
+        } else {
+            return listaUsuarios.get(0);
+        }
+    }
+
+    /**
+     * Agrega un chat al usuario.
+     *
+     * @param userId
+     * @param chatId
+     */
+    public void pushChat(final ObjectId userId, final ObjectId chatId) {
+        Document updateQuery
+                = new Document("$push", new Document("chats", chatId));
+        getCollection().updateOne(new Document("_id", userId), updateQuery);
     }
 
 }

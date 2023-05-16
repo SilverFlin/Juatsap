@@ -1,12 +1,17 @@
 package org.itson.juatsapp;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.logging.Logger;
+import org.itson.dao.UsuarioDAO;
+import org.itson.dominio.Sexo;
+import org.itson.dominio.Usuario;
 
 /**
  *
- * @author Toled
+ *
  */
-public class Juatsapp {
+public final class Juatsapp {
 
     /**
      * Logger.
@@ -23,8 +28,8 @@ public class Juatsapp {
      *
      * @param args
      */
-    public static void main(final String[] args) {
-        start();
+    public static void main(final String[] args) throws IOException {
+        probarDominio();
     }
 
     /**
@@ -33,4 +38,19 @@ public class Juatsapp {
     private static void start() {
         // TODO
     }
+
+    private static void probarDominio() throws IOException {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+        Usuario usuario = new Usuario();
+        usuario.setCorreo("asda@sadas.com");
+        usuario.setUsername("asdasdas");
+        usuario.setPassword("asdasd");
+        usuario.setFechaNacimiento(LocalDateTime.now());
+        usuario.setSexo(Sexo.OTRO);
+
+        usuarioDAO.agregar(usuario);
+
+    }
+
 }

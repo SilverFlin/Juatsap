@@ -1,6 +1,5 @@
 # org.itson.database
 
-
 ```mermaid
 classDiagram
 

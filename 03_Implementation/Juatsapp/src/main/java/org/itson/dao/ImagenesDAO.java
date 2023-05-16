@@ -11,9 +11,9 @@ import org.itson.dominio.Imagen;
 
 /**
  *
- * @author Toled
+ *
  */
-public class ImagenesDAO extends BaseDAO<Imagen> {
+public final class ImagenesDAO extends BaseDAO<Imagen> {
 
     /**
      * Logger.
@@ -27,7 +27,7 @@ public class ImagenesDAO extends BaseDAO<Imagen> {
     }
 
     @Override
-    public void agregar(Imagen imagen) {
+    public void agregar(final Imagen imagen) {
         try {
             MongoCollection<Imagen> coleccion = this.getCollection();
             coleccion.insertOne(imagen);
@@ -37,12 +37,12 @@ public class ImagenesDAO extends BaseDAO<Imagen> {
     }
 
     @Override
-    public void actualizar(Imagen entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actualizar(final Imagen entidad) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Imagen consultar(String idEntidad) {
+    public Imagen consultar(final String idEntidad) {
         List<Imagen> listaImagenes = new ArrayList<>();
         MongoCollection<Imagen> coleccion = this.getCollection();
         Document filtro = new Document();

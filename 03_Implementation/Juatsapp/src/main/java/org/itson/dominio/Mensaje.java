@@ -2,112 +2,162 @@ package org.itson.dominio;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import org.bson.Document;
 import org.bson.types.ObjectId;
 
 /**
  *
- * @author Toled
+ *
  */
-public class Mensaje {
+public final class Mensaje {
 
-    private ObjectId _id;
+    /**
+     * Id del mensaje.
+     */
+    private ObjectId id;
+    /**
+     * Id del emisor del mensaje.
+     */
     private ObjectId userId;
-    private String mensaje;
+    /**
+     * Contenido del mensaje (texto).
+     */
+    private String contenidoMensaje;
+    /**
+     * Imágen opcional del mensaje.
+     */
     private Imagen imagen;
+    /**
+     * Timstamp de la creación del mensaje.
+     */
     private LocalDateTime timestamp;
+    /**
+     * Disponibilidad del mensaje, para ver si se borró o no.
+     */
     private boolean disponibilidad;
 
+    /**
+     * Constructor vacío.
+     */
     public Mensaje() {
     }
 
-    public Mensaje(
-            final ObjectId userId,
-            final String mensaje,
-            final Imagen imagen,
-            final LocalDateTime timestamp,
-            final boolean disponibilidad
-    ) {
-        this.userId = userId;
-        this.mensaje = mensaje;
-        this.imagen = imagen;
-        this.timestamp = timestamp;
-        this.disponibilidad = disponibilidad;
-    }
-
-    public Mensaje(
-            final ObjectId _id,
-            final ObjectId userId,
-            final String mensaje,
-            final Imagen imagen,
-            final LocalDateTime timestamp,
-            final boolean disponibilidad
-    ) {
-        this._id = _id;
-        this.userId = userId;
-        this.mensaje = mensaje;
-        this.imagen = imagen;
-        this.timestamp = timestamp;
-        this.disponibilidad = disponibilidad;
-    }
-
+    /**
+     * Obtiene id del mensaje.
+     *
+     * @return id del mensaje.
+     */
     public ObjectId getId() {
-        return _id;
+        return id;
     }
 
-    public void setId(ObjectId _id) {
-        this._id = _id;
+    /**
+     * Establece el id del mensaje.
+     *
+     * @param id
+     */
+    public void setId(final ObjectId id) {
+        this.id = id;
     }
 
+    /**
+     * Obtiene el id del usuario emisor.
+     *
+     * @return id del usuario emisor
+     */
     public ObjectId getUserId() {
         return userId;
     }
 
-    public void setUserId(ObjectId userId) {
+    /**
+     * Establece el id dle usuario emisor.
+     *
+     * @param userId
+     */
+    public void setUserId(final ObjectId userId) {
         this.userId = userId;
     }
 
-    public String getMensaje() {
-        return mensaje;
+    /**
+     * Obtiene el contenido del mensaje.
+     *
+     * @return el contenido del mensaje.
+     */
+    public String getContenidoMensaje() {
+        return contenidoMensaje;
     }
 
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
+    /**
+     * Establece el contneido del mensaje.
+     *
+     * @param contenidoMensaje
+     */
+    public void setContenidoMensaje(final String contenidoMensaje) {
+        this.contenidoMensaje = contenidoMensaje;
     }
 
+    /**
+     * Obtiene la imágen opcional del mensaje.
+     *
+     * @return la imágen opcional del mensaje.
+     */
     public Imagen getImagen() {
         return imagen;
     }
 
-    public void setImagen(Imagen imagen) {
+    /**
+     * Establece la imágen opcional del mensaje.
+     *
+     * @param imagen
+     */
+    public void setImagen(final Imagen imagen) {
         this.imagen = imagen;
     }
 
+    /**
+     * Obtiene la fecha de generación del mensaje.
+     *
+     * @return fecha de generación del mensaje
+     */
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    /**
+     * Establece la fecha de generación del mensaje.
+     *
+     * @param timestamp
+     */
+    public void setTimestamp(final LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
+    /**
+     * Regresa la disponibilidad del mensaje.
+     *
+     * @return la disponibilidad del mensaje.
+     */
     public boolean isDisponibilidad() {
         return disponibilidad;
     }
 
-    public void setDisponibilidad(boolean disponibilidad) {
+    /**
+     * Establece la disponibilidad del mensaje.
+     *
+     * @param disponibilidad
+     */
+    public void setDisponibilidad(final boolean disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 31 * hash + Objects.hashCode(this._id);
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -118,12 +168,16 @@ public class Mensaje {
             return false;
         }
         final Mensaje other = (Mensaje) obj;
-        return Objects.equals(this._id, other._id);
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "Mensaje{" + "mensaje=" + mensaje + ", timestamp=" + timestamp + ", disponibilidad=" + disponibilidad + '}';
+        return "Mensaje{"
+                + "mensaje=" + contenidoMensaje
+                + ", timestamp=" + timestamp
+                + ", disponibilidad=" + disponibilidad
+                + '}';
     }
 
 }

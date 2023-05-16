@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Toled
+ *
  */
 public final class Dialogs {
 

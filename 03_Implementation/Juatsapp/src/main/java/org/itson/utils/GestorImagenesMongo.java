@@ -6,13 +6,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javax.swing.ImageIcon;
-import org.bson.Document;
 import org.bson.types.Binary;
 import org.itson.dominio.Imagen;
 
 /**
  *
- * @author Toled
+ *
  */
 public final class GestorImagenesMongo {
 

@@ -6,56 +6,92 @@ import org.bson.types.ObjectId;
 
 /**
  *
- * @author Toled
+ *
  */
-public class Imagen {
+public final class Imagen {
 
+    /**
+     * Id de la Imagen.
+     */
     private ObjectId id;
+    /**
+     * Nombre del archivo.
+     */
     private String fileName;
+    /**
+     * Datos de la imagen.
+     */
     private Binary imageData;
 
+    /**
+     * Constructor vacío.
+     */
     public Imagen() {
     }
 
-    public Imagen(ObjectId _id, String fileName, Binary imageData) {
-        this.id = _id;
-        this.fileName = fileName;
-        this.imageData = imageData;
-    }
-
+    /**
+     * Obtiene la id de la imágen.
+     *
+     * @return id de la imagen.
+     */
     public ObjectId getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    /**
+     * Establece la id de la imágen.
+     *
+     * @param id
+     */
+    public void setId(final ObjectId id) {
         this.id = id;
     }
 
+    /**
+     * Obtiene el nombre de la imágen.
+     *
+     * @return el nombre de la imágen.
+     */
     public String getFileName() {
         return fileName;
     }
 
-    public void setFileName(String fileName) {
+    /**
+     * Establece el nombre de la imágen.
+     *
+     * @param fileName
+     */
+    public void setFileName(final String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * Obtiene los datos de la imágen.
+     *
+     * @return los datos de la imágen.
+     */
     public Binary getImageData() {
         return imageData;
     }
 
-    public void setImageData(Binary imageData) {
+    /**
+     * Establece los datos de la imágen.
+     *
+     * @param imageData
+     */
+    public void setImageData(final Binary imageData) {
         this.imageData = imageData;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.id);
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

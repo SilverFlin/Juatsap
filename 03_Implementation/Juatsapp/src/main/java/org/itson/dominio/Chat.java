@@ -1,96 +1,142 @@
 package org.itson.dominio;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import org.bson.types.ObjectId;
 
 /**
  *
- * @author deivi
+ *
  */
-public class Chat {
+public final class Chat {
 
+    /**
+     * Id del chat.
+     */
     private ObjectId id;
+    /**
+     * Id del receptor del chat.
+     */
     private ObjectId receptor;
+    /**
+     * Id del emisor del chat.
+     */
     private ObjectId emisor;
+    /**
+     * tiempo de creación del chat.
+     */
     private LocalDateTime fecha;
-    private List<Mensaje> historial;
+    /**
+     * Historial de mensajes del chat chat.
+     */
+    private List<ObjectId> historialMensajes;
 
+    /**
+     * Constructor vacío.
+     */
     public Chat() {
-        this.id = new ObjectId();
-        this.historial = new ArrayList<>();
-
     }
 
-    public Chat(ObjectId receptor, ObjectId emisor, LocalDateTime fecha) {
-        this.fecha = fecha;
-        this.receptor = receptor;
-        this.emisor = emisor;
-        this.historial = new ArrayList<>();
-    }
-
-    public LocalDateTime getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
-    }
-
-    public Chat(ObjectId id, ObjectId receptor, ObjectId emisor, List<Mensaje> historial) {
-        this.id = id;
-        this.receptor = receptor;
-        this.emisor = emisor;
-        this.historial = historial;
-    }
-
-    public ObjectId getEmisor() {
-        return emisor;
-    }
-
-    public void setEmisor(ObjectId emisor) {
-        this.emisor = emisor;
-    }
-
-    public List<Mensaje> getHistorial() {
-        return historial;
-    }
-
-    public void setHistorial(List<Mensaje> historial) {
-        this.historial = historial;
-    }
-
-    public ObjectId getReceptor() {
-        return receptor;
-    }
-
-    public void setReceptor(ObjectId receptor) {
-        this.receptor = receptor;
-    }
-
+    /**
+     * Obtiene id del chat.
+     *
+     * @return id del chat.
+     */
     public ObjectId getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    /**
+     * Establece id del chat.
+     *
+     * @param id
+     */
+    public void setId(final ObjectId id) {
         this.id = id;
     }
 
-    public void agregarMensajes(Mensaje mensaje) {
-        historial.add(mensaje);
+    /**
+     * Obtiene el receptor del mensaje.
+     *
+     * @return El ObjectId del receptor.
+     */
+    public ObjectId getReceptor() {
+        return receptor;
+    }
+
+    /**
+     * Establece el receptor del mensaje.
+     *
+     * @param receptor El ObjectId del receptor.
+     */
+    public void setReceptor(final ObjectId receptor) {
+        this.receptor = receptor;
+    }
+
+    /**
+     * Obtiene el emisor del mensaje.
+     *
+     * @return El ObjectId del emisor.
+     */
+    public ObjectId getEmisor() {
+        return emisor;
+    }
+
+    /**
+     * Establece el emisor del mensaje.
+     *
+     * @param emisor El ObjectId del emisor.
+     */
+    public void setEmisor(final ObjectId emisor) {
+        this.emisor = emisor;
+    }
+
+    /**
+     * Obtiene la fecha del mensaje.
+     *
+     * @return La fecha del mensaje.
+     */
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    /**
+     * Establece la fecha del mensaje.
+     *
+     * @param fecha La fecha del mensaje.
+     */
+    public void setFecha(final LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
+
+    /**
+     * Obtiene el historial de mensajes del chat.
+     *
+     * @return La lista de ObjectId del historial de mensajes.
+     */
+    public List<ObjectId> getHistorialMensajes() {
+        return historialMensajes;
+    }
+
+    /**
+     * Establece el historial de mensajes del chat.
+     *
+     * @param historialMensajes La lista de ObjectId del historial de mensajes.
+     */
+    public void setHistorialMensajes(final List<ObjectId> historialMensajes) {
+        this.historialMensajes = historialMensajes;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 73 * hash + Objects.hashCode(this.id);
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -108,7 +154,5 @@ public class Chat {
     public String toString() {
         return "Chat{" + "fecha=" + fecha + '}';
     }
-    
-    
 
 }

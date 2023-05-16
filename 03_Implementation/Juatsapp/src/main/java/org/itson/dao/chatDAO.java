@@ -1,23 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.itson.dao;
 
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.itson.dominio.Chat;
 
 /**
  *
- * @author deivid
+ *
  */
-public class ChatDAO extends BaseDAO<Chat> {
+public final class ChatDAO extends BaseDAO<Chat> {
 
     @Override
     protected MongoCollection<Chat> getCollection() {
@@ -25,17 +19,17 @@ public class ChatDAO extends BaseDAO<Chat> {
     }
 
     @Override
-    public void agregar(Chat chat) {
-
+    public void agregar(final Chat chat) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void actualizar(Chat chat) {
-
+    public void actualizar(final Chat chat) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Chat consultar(String idChat) {
+    public Chat consultar(final String idChat) {
         List<Chat> listaChats = new ArrayList<>();
         MongoCollection<Chat> coleccion = this.getCollection();
         Document filtro = new Document();
@@ -56,9 +50,16 @@ public class ChatDAO extends BaseDAO<Chat> {
         return listaChat;
     }
 
-    public void pushMensaje(ObjectId chatId, ObjectId mensajeId) {
-        Document updateQuery = new Document("$push", new Document("historial", mensajeId));
-        this.getCollection().updateOne(new Document("_id", chatId), updateQuery);
+    /**
+     * Agrega un mensaje al chat.
+     *
+     * @param chatId
+     * @param mensajeId
+     */
+    public void pushMensaje(final ObjectId chatId, final ObjectId mensajeId) {
+        Document updateQuery
+                = new Document("$push", new Document("historial", mensajeId));
+        getCollection().updateOne(new Document("_id", chatId), updateQuery);
     }
 
 }

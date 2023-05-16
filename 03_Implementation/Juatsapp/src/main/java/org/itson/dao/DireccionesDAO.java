@@ -9,11 +9,7 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.itson.dominio.Direccion;
 
-/**
- *
- * @author Toled
- */
-public class DireccionesDAO extends BaseDAO<Direccion> {
+public final class DireccionesDAO extends BaseDAO<Direccion> {
 
     /**
      * Logger.
@@ -27,7 +23,7 @@ public class DireccionesDAO extends BaseDAO<Direccion> {
     }
 
     @Override
-    public void agregar(Direccion direccion) {
+    public void agregar(final Direccion direccion) {
         try {
             MongoCollection<Direccion> coleccion = this.getCollection();
             coleccion.insertOne(direccion);
@@ -37,12 +33,12 @@ public class DireccionesDAO extends BaseDAO<Direccion> {
     }
 
     @Override
-    public void actualizar(Direccion entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actualizar(final Direccion entidad) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Direccion consultar(String idEntidad) {
+    public Direccion consultar(final String idEntidad) {
         List<Direccion> listaDirecciones = new ArrayList<>();
         MongoCollection<Direccion> coleccion = this.getCollection();
         Document filtro = new Document();
@@ -57,7 +53,7 @@ public class DireccionesDAO extends BaseDAO<Direccion> {
 
     @Override
     public List<Direccion> consultarTodo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }
