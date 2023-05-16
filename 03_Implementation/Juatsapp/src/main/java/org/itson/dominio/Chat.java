@@ -3,6 +3,7 @@ package org.itson.dominio;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.bson.types.ObjectId;
 
 /**
@@ -80,5 +81,34 @@ public class Chat {
     public void agregarMensajes(Mensaje mensaje) {
         historial.add(mensaje);
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 73 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Chat other = (Chat) obj;
+        return Objects.equals(this.id, other.id);
+    }
+
+    @Override
+    public String toString() {
+        return "Chat{" + "fecha=" + fecha + '}';
+    }
+    
+    
 
 }

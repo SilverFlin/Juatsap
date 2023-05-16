@@ -62,4 +62,10 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
         return listaUsuarios;
     }
 
+    public void pushChat(ObjectId userId, ObjectId chatId) {
+        Document updateQuery = new Document("$push", new Document("chats", chatId));
+        this.getCollection().updateOne(new Document("_id", userId), updateQuery);
+
+    }
+
 }

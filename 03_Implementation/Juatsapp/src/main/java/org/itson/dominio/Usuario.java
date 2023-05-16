@@ -1,5 +1,7 @@
 package org.itson.dominio;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
@@ -17,31 +19,31 @@ public class Usuario {
     private String password;
     private String telefono;
     private Sexo sexo;
-    private List<ObjectId> chat;
+    private List<ObjectId> chats;
     private Imagen imagenPerfil;
-    private Calendar fechaNacimiento;
+    private LocalDateTime fechaNacimiento;
     private Direccion direccion;
 
     public Usuario() {
     }
 
-    public Usuario(ObjectId id, String nombre, String correo, String password, String telefono, Sexo sexo, List<ObjectId> chat, Calendar fechaNacimiento) {
+    public Usuario(ObjectId id, String nombre, String correo, String password, String telefono, Sexo sexo, List<ObjectId> chats, LocalDateTime fechaNacimiento) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
         this.password = password;
         this.telefono = telefono;
         this.sexo = sexo;
-        this.chat = chat;
+        this.chats = chats;
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Usuario(String correo, String password, String telefono, Sexo sexo, List<ObjectId> chat, Calendar fechaNacimiento) {
+    public Usuario(String correo, String password, String telefono, Sexo sexo, List<ObjectId> chat, LocalDateTime fechaNacimiento) {
         this.correo = correo;
         this.password = password;
         this.telefono = telefono;
         this.sexo = sexo;
-        this.chat = chat;
+        this.chats = chat;
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -53,7 +55,7 @@ public class Usuario {
 
     public Usuario(String nombre, List<ObjectId> chat) {
         this.nombre = nombre;
-        this.chat = chat;
+        this.chats = chat;
     }
 
     public ObjectId getId() {
@@ -105,11 +107,11 @@ public class Usuario {
     }
 
     public List<ObjectId> getChat() {
-        return chat;
+        return chats;
     }
 
     public void setChat(List<ObjectId> chat) {
-        this.chat = chat;
+        this.chats = chat;
     }
 
     public Imagen getImagenPerfil() {
@@ -120,11 +122,11 @@ public class Usuario {
         this.imagenPerfil = imagenPerfil;
     }
 
-    public Calendar getFechaNacimiento() {
+    public LocalDateTime getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Calendar fechaNacimiento) {
+    public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

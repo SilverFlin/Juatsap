@@ -13,18 +13,14 @@ public class Imagen {
     private ObjectId id;
     private String fileName;
     private Binary imageData;
-    private int width;
-    private int height;
 
     public Imagen() {
     }
 
-    public Imagen(ObjectId _id, String fileName, Binary imageData, int width, int height) {
+    public Imagen(ObjectId _id, String fileName, Binary imageData) {
         this.id = _id;
         this.fileName = fileName;
         this.imageData = imageData;
-        this.width = width;
-        this.height = height;
     }
 
     public ObjectId getId() {
@@ -49,22 +45,6 @@ public class Imagen {
 
     public void setImageData(Binary imageData) {
         this.imageData = imageData;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     @Override
