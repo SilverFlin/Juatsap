@@ -9,7 +9,6 @@ import org.itson.dominio.Chat;
 
 /**
  *
- *
  */
 public final class ChatDAO extends BaseDAO<Chat> {
 
