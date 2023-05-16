@@ -32,5 +32,5 @@ class Mensaje{
     -LocalDateTime timestamp
     -boolean disponibilidad
 }
-}
+
 ```
