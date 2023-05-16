@@ -1,5 +1,6 @@
 package org.itson.presentacion;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JList;
@@ -12,6 +13,8 @@ import org.itson.dominio.Usuario;
 import org.itson.interfaces.JFrameActualizable;
 import org.itson.utils.ChatItem;
 import org.itson.utils.ChatItemListCellRenderer;
+import org.itson.utils.Dialogs;
+import org.itson.utils.Forms;
 
 /**
  *
@@ -56,6 +59,7 @@ public class FrmChats extends JFrameActualizable {
         Background = new javax.swing.JPanel();
         pnListaChats = new javax.swing.JPanel();
         scPnChats = new javax.swing.JScrollPane();
+        btnNuevoChat = new javax.swing.JButton();
         pnChatActivo = new javax.swing.JPanel();
         pnNavBar = new javax.swing.JPanel();
 
@@ -71,16 +75,38 @@ public class FrmChats extends JFrameActualizable {
 
         pnListaChats.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnNuevoChat.setText("NUEVO CHAT");
+        btnNuevoChat.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnNuevoChat.setBorderPainted(false);
+        btnNuevoChat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnNuevoChat.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
+        btnNuevoChat.setForeground(new java.awt.Color(0, 153, 153));
+        btnNuevoChat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNuevoChatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNuevoChatMouseExited(evt);
+            }
+        });
+        btnNuevoChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoChatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnListaChatsLayout = new javax.swing.GroupLayout(pnListaChats);
         pnListaChats.setLayout(pnListaChatsLayout);
         pnListaChatsLayout.setHorizontalGroup(
             pnListaChatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scPnChats, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+            .addComponent(scPnChats)
+            .addComponent(btnNuevoChat, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
         );
         pnListaChatsLayout.setVerticalGroup(
             pnListaChatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnListaChatsLayout.createSequentialGroup()
-                .addGap(0, 60, Short.MAX_VALUE)
+                .addComponent(btnNuevoChat, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(scPnChats, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -135,9 +161,23 @@ public class FrmChats extends JFrameActualizable {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNuevoChatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoChatMouseEntered
+        Forms.iluminarBoton(btnNuevoChat);
+    }//GEN-LAST:event_btnNuevoChatMouseEntered
+
+    private void btnNuevoChatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoChatMouseExited
+        Forms.desiluminarBoton(btnNuevoChat);
+    }//GEN-LAST:event_btnNuevoChatMouseExited
+
+    private void btnNuevoChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoChatActionPerformed
+        this.nuevoChat();
+    }//GEN-LAST:event_btnNuevoChatActionPerformed
+
     //CHECKSTYLE:OFF
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
+    private javax.swing.JButton btnContinuar;
+    private javax.swing.JButton btnNuevoChat;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel pnChatActivo;
     private javax.swing.JPanel pnListaChats;
@@ -148,6 +188,7 @@ public class FrmChats extends JFrameActualizable {
 
     @Override
     public void actualizaFrame() {
+        actualizarUsuarioLoggeado();
         cargarListaChats();
     }
 
@@ -187,6 +228,32 @@ public class FrmChats extends JFrameActualizable {
         }
 
         return lista;
+    }
+
+    private void nuevoChat() {
+        String username = Dialogs.pedirInputUsuario(rootPane, "Ingresa usuario", "Usuario");
+
+        if (username.equals(usuarioLoggeado.getUsername())) {
+            Dialogs.mostrarMensajeError(rootPane, "No puedes hablar contigo mismo.");
+        }
+
+        Usuario usuarioReceptor = usuarioDAO.consultarPorUsername(username);
+
+        Chat chat = new Chat();
+        chat.setEmisor(usuarioLoggeado.getId());
+        chat.setReceptor(usuarioReceptor.getId());
+        chat.setFecha(LocalDateTime.now());
+
+        chatsDAO.agregar(chat);
+
+        usuarioDAO.pushChat(usuarioReceptor.getId(), chat.getId());
+        usuarioDAO.pushChat(usuarioLoggeado.getId(), chat.getId());
+
+        this.actualizaFrame();
+    }
+
+    private void actualizarUsuarioLoggeado() {
+        this.usuarioLoggeado = usuarioDAO.consultar(this.usuarioLoggeado.getId().toString());
     }
 
 }

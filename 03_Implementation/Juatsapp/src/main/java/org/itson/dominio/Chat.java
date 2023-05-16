@@ -1,6 +1,7 @@
 package org.itson.dominio;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import org.bson.types.ObjectId;
@@ -116,6 +117,9 @@ public final class Chat {
      * @return La lista de ObjectId del historial de mensajes.
      */
     public List<ObjectId> getHistorialMensajes() {
+        if (historialMensajes == null) {
+            return new ArrayList<>();
+        }
         return historialMensajes;
     }
 

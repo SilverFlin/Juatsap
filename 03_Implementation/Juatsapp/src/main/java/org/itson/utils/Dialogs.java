@@ -50,4 +50,17 @@ public final class Dialogs {
         );
     }
 
+    public static String pedirInputUsuario(
+            final Component componente,
+            final String titulo,
+            final String texto
+    ) {
+        return (String) JOptionPane.showInputDialog(
+                componente,
+                texto,
+                titulo,
+                JOptionPane.QUESTION_MESSAGE
+        );
+    }
+
 }

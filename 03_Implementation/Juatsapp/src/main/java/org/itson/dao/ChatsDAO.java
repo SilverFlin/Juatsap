@@ -3,6 +3,8 @@ package org.itson.dao;
 import com.mongodb.client.MongoCollection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.itson.dominio.Chat;
@@ -12,6 +14,12 @@ import org.itson.dominio.Chat;
  */
 public final class ChatsDAO extends BaseDAO<Chat> {
 
+    /**
+     * Logger.
+     */
+    private static final Logger LOG
+            = Logger.getLogger(UsuarioDAO.class.getName());
+
     @Override
     protected MongoCollection<Chat> getCollection() {
         return this.getDataBase().getCollection("chats", Chat.class);
@@ -19,7 +27,12 @@ public final class ChatsDAO extends BaseDAO<Chat> {
 
     @Override
     public void agregar(final Chat chat) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            MongoCollection<Chat> coleccion = this.getCollection();
+            coleccion.insertOne(chat);
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+        }
     }
 
     @Override
