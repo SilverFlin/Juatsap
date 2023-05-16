@@ -38,11 +38,11 @@ public class FrmIniciarSesion extends JFrameActualizable {
 
         jButton2 = new javax.swing.JButton();
         Background = new javax.swing.JPanel();
-        txtUsername = new javax.swing.JTextField();
+        campoTextoUsuario = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         lblContraseña = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JPasswordField();
+        campoTextoContraseña = new javax.swing.JPasswordField();
         btnRegistrarse = new javax.swing.JButton();
         lblCorreo1 = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
@@ -58,25 +58,25 @@ public class FrmIniciarSesion extends JFrameActualizable {
         Background.setBackground(new java.awt.Color(255, 255, 255));
         Background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtUsername.setForeground(new java.awt.Color(51, 51, 51));
-        txtUsername.setToolTipText("");
-        txtUsername.setBorder(null);
-        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+        campoTextoUsuario.setForeground(new java.awt.Color(51, 51, 51));
+        campoTextoUsuario.setToolTipText("");
+        campoTextoUsuario.setBorder(null);
+        campoTextoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsernameActionPerformed(evt);
+                campoTextoUsuarioActionPerformed(evt);
             }
         });
-        Background.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 190, 20));
+        Background.add(campoTextoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 190, 20));
         Background.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 190, 10));
         Background.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 190, 10));
 
         lblContraseña.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 24)); // NOI18N
         lblContraseña.setForeground(new java.awt.Color(0, 153, 153));
         lblContraseña.setText("Contraseña");
-        Background.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, -1, -1));
+        Background.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
 
-        txtPassword.setBorder(null);
-        Background.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 190, 20));
+        campoTextoContraseña.setBorder(null);
+        Background.add(campoTextoContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 190, 20));
 
         btnRegistrarse.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnRegistrarse.setForeground(new java.awt.Color(0, 153, 153));
@@ -142,22 +142,14 @@ public class FrmIniciarSesion extends JFrameActualizable {
     }// </editor-fold>//GEN-END:initComponents
 
     @SuppressWarnings("all")
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+    private void campoTextoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTextoUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
+    }//GEN-LAST:event_campoTextoUsuarioActionPerformed
+
     @SuppressWarnings("all")
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
         this.cargarRegistro();
     }//GEN-LAST:event_btnRegistrarseActionPerformed
-    @SuppressWarnings("all")
-    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        this.intentarIniciarSesion();
-    }//GEN-LAST:event_btnIniciarSesionActionPerformed
-
-    @SuppressWarnings("all")
-    private void btnRegistrarseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarseMouseEntered
-        Forms.iluminarBoton(btnRegistrarse);
-    }//GEN-LAST:event_btnRegistrarseMouseEntered
 
     @SuppressWarnings("all")
     private void btnRegistrarseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarseMouseExited
@@ -165,28 +157,38 @@ public class FrmIniciarSesion extends JFrameActualizable {
     }//GEN-LAST:event_btnRegistrarseMouseExited
 
     @SuppressWarnings("all")
-    private void btnIniciarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseEntered
-        Forms.iluminarBoton(btnIniciarSesion);
-    }//GEN-LAST:event_btnIniciarSesionMouseEntered
+    private void btnRegistrarseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarseMouseEntered
+        Forms.iluminarBoton(btnRegistrarse);
+    }//GEN-LAST:event_btnRegistrarseMouseEntered
+
+    @SuppressWarnings("all")
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+        this.intentarIniciarSesion();
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     @SuppressWarnings("all")
     private void btnIniciarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseExited
         Forms.desiluminarBoton(btnIniciarSesion);
     }//GEN-LAST:event_btnIniciarSesionMouseExited
 
+    @SuppressWarnings("all")
+    private void btnIniciarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseEntered
+        Forms.iluminarBoton(btnIniciarSesion);
+    }//GEN-LAST:event_btnIniciarSesionMouseEntered
+
     //CHECKSTYLE:OFF
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
     private javax.swing.JButton btnIniciarSesion;
     private javax.swing.JButton btnRegistrarse;
+    private javax.swing.JPasswordField campoTextoContraseña;
+    private javax.swing.JTextField campoTextoUsuario;
     private javax.swing.JButton jButton2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblContraseña;
     private javax.swing.JLabel lblCorreo1;
     private javax.swing.JLabel lblLogo;
-    private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
     //CHECKSTYLE:ON
 
@@ -228,14 +230,14 @@ public class FrmIniciarSesion extends JFrameActualizable {
         }
 
         Usuario usuario
-                = usuarioDAO.consultarPorUsername(txtUsername.getText());
+                = usuarioDAO.consultarPorUsername(campoTextoUsuario.getText());
 
         if (usuario == null) {
             this.mostrarErrorInicioSesion();
             return;
         }
 
-        String intentoPassword = new String(txtPassword.getPassword());
+        String intentoPassword = new String(campoTextoContraseña.getPassword());
         boolean isPasswordValida
                 = Encriptador.verificarPasswordConHash(
                         intentoPassword,
@@ -247,16 +249,16 @@ public class FrmIniciarSesion extends JFrameActualizable {
             return;
         }
 
-        this.iniciarSesion();
+        this.iniciarSesion(usuario);
     }
 
     private boolean validarCampos() {
 
-        if (txtUsername.getText().isBlank()) {
+        if (campoTextoUsuario.getText().isBlank()) {
             return false;
         }
 
-        if (new String(txtPassword.getPassword()).isBlank()) {
+        if (new String(campoTextoContraseña.getPassword()).isBlank()) {
             return false;
         }
 
@@ -268,8 +270,8 @@ public class FrmIniciarSesion extends JFrameActualizable {
         Dialogs.mostrarMensajeError(rootPane, "Credenciales no validas.");
     }
 
-    private void iniciarSesion() {
-        Forms.cargarForm(new FrmChats(), this);
+    private void iniciarSesion(Usuario usuario) {
+        Forms.cargarForm(new FrmChats(usuario), this);
     }
 
 }
