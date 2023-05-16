@@ -1,4 +1,4 @@
-package org.itson.GUI;
+package org.itson.presentacion;
 
 /**
  *

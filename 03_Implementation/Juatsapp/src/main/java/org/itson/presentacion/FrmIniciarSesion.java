@@ -1,12 +1,10 @@
-package org.itson.GUI;
+package org.itson.presentacion;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import org.itson.interfaces.JFrameActualizable;
 import org.itson.utils.Forms;
 
@@ -15,6 +13,9 @@ import org.itson.utils.Forms;
  */
 public class FrmIniciarSesion extends JFrameActualizable {
 
+    /**
+     * Constuctor único.
+     */
     public FrmIniciarSesion() {
         initComponents();
         cargarLogo();
@@ -143,22 +144,22 @@ public class FrmIniciarSesion extends JFrameActualizable {
 
     @SuppressWarnings("all")
     private void btnRegistrarseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarseMouseEntered
-        this.iluminarBoton(btnRegistrarse);
+        Forms.iluminarBoton(btnRegistrarse);
     }//GEN-LAST:event_btnRegistrarseMouseEntered
 
     @SuppressWarnings("all")
     private void btnRegistrarseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarseMouseExited
-        this.desiluminarBoton(btnRegistrarse);
+        Forms.desiluminarBoton(btnRegistrarse);
     }//GEN-LAST:event_btnRegistrarseMouseExited
 
     @SuppressWarnings("all")
     private void btnIniciarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseEntered
-        this.iluminarBoton(btnIniciarSesion);
+        Forms.iluminarBoton(btnIniciarSesion);
     }//GEN-LAST:event_btnIniciarSesionMouseEntered
 
     @SuppressWarnings("all")
     private void btnIniciarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseExited
-        this.desiluminarBoton(btnIniciarSesion);
+        Forms.desiluminarBoton(btnIniciarSesion);
     }//GEN-LAST:event_btnIniciarSesionMouseExited
 
     //CHECKSTYLE:OFF
@@ -177,39 +178,17 @@ public class FrmIniciarSesion extends JFrameActualizable {
     // End of variables declaration//GEN-END:variables
     //CHECKSTYLE:ON
 
-    private void iluminarBoton(JButton btn) {
-        int rBg = 0;
-        int gBg = 153;
-        int bBg = 153;
-        btn.setBackground(new Color(rBg, gBg, bBg));
-
-        int rFg = 255;
-        int gFg = 255;
-        int bFg = 255;
-
-        btn.setForeground(new Color(rFg, gFg, bFg));
-    }
-
-    private void desiluminarBoton(JButton btn) {
-        int rBg = 255;
-        int gBg = 255;
-        int bBg = 255;
-        btn.setBackground(new Color(rBg, gBg, bBg));
-
-        int rFg = 0;
-        int gFg = 153;
-        int bFg = 153;
-
-        btn.setForeground(new Color(rFg, gFg, bFg));
-    }
-
     private void cargarLogo() {
         // TODO
         try {
-            BufferedImage image = ImageIO.read(FrmIniciarSesion.class.getResource("/gato2.jpg"));
-            int width = 500;  // Set the desired width
-            int height = 500; // Set the desired height
-            Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            BufferedImage image
+                    = ImageIO.read(
+                            FrmIniciarSesion.class.getResource("/gato2.jpg")
+                    );
+            final int width = 500;
+            final int height = 500;
+            Image scaledImage = image
+                    .getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
             // Create an ImageIcon from the scaled image
             ImageIcon imageIcon = new ImageIcon(scaledImage);

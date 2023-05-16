@@ -3,7 +3,7 @@ package org.itson.juatsapp;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.logging.Logger;
-import org.itson.GUI.FrmIniciarSesion;
+import org.itson.presentacion.FrmIniciarSesion;
 import org.itson.dao.UsuarioDAO;
 import org.itson.dominio.Sexo;
 import org.itson.dominio.Usuario;
@@ -29,7 +29,7 @@ public final class Juatsapp {
      *
      * @param args
      */
-    public static void main(final String[] args)  {
+    public static void main(final String[] args) {
         probarGUI();
     }
 
@@ -39,7 +39,7 @@ public final class Juatsapp {
     private static void start() {
         // TODO
     }
-    
+
     private static void probarGUI() {
         FrmIniciarSesion frmIniciarSesion = new FrmIniciarSesion();
         frmIniciarSesion.setVisible(true);
