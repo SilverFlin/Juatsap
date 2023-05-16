@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import org.itson.dao.UsuarioDAO;
 import org.itson.dominio.Usuario;
 import org.itson.interfaces.JFrameActualizable;
 import org.itson.utils.Dialogs;
@@ -18,9 +17,9 @@ import org.itson.utils.Forms;
 public class FrmIniciarSesion extends JFrameActualizable {
 
     /**
-     * Clase para gestionar el crud de dao.
+     * Unidad de trabajo con los DAO.
      */
-    private UsuarioDAO usuarioDAO;
+    private final UnitOfWork unitOfWork;
 
     /**
      * Constuctor único.
@@ -28,7 +27,7 @@ public class FrmIniciarSesion extends JFrameActualizable {
     public FrmIniciarSesion() {
         initComponents();
         cargarLogo();
-        this.usuarioDAO = new UsuarioDAO();
+        this.unitOfWork = new UnitOfWork();
 
     }
 
@@ -216,7 +215,7 @@ public class FrmIniciarSesion extends JFrameActualizable {
     }
 
     private void cargarRegistro() {
-        Forms.cargarForm(new FrmRegistrarPaso1(this), this);
+        Forms.cargarForm(new FrmRegistrarPaso1(this, unitOfWork), this);
     }
 
     @Override
@@ -229,8 +228,9 @@ public class FrmIniciarSesion extends JFrameActualizable {
             return;
         }
 
-        Usuario usuario
-                = usuarioDAO.consultarPorUsername(campoTextoUsuario.getText());
+        Usuario usuario = unitOfWork
+                .usuariosDAO()
+                .consultarPorUsername(campoTextoUsuario.getText());
 
         if (usuario == null) {
             this.mostrarErrorInicioSesion();
@@ -271,7 +271,7 @@ public class FrmIniciarSesion extends JFrameActualizable {
     }
 
     private void iniciarSesion(Usuario usuario) {
-        Forms.cargarForm(new FrmChats(usuario), this);
+        Forms.cargarForm(new FrmChats(usuario, unitOfWork), this);
     }
 
 }

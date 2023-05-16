@@ -4,8 +4,11 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.List;
 import org.itson.database.MongoConnectionImpl;
+import org.itson.interfaces.MongoConnection;
 
 public abstract class BaseDAO<E> {
+
+    protected MongoConnection mongoConnection;
 
     /**
      * Obtiene la base de datos de la conexión.
@@ -13,7 +16,12 @@ public abstract class BaseDAO<E> {
      * @return la base de datos.
      */
     protected MongoDatabase getDataBase() {
-        return new MongoConnectionImpl().getDatabase();
+        if (mongoConnection != null) {
+            return mongoConnection.getDatabase();
+        } else {
+            mongoConnection = new MongoConnectionImpl();
+            return mongoConnection.getDatabase();
+        }
     }
 
     /**

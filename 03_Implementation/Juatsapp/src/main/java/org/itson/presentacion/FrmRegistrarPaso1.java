@@ -36,9 +36,9 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
     private Usuario usuarioRegistrando;
 
     /**
-     * Clase para gestionar el crud de dao.
+     * Unidad de trabajo con los DAO.
      */
-    private UsuarioDAO usuarioDAO;
+    private final UnitOfWork unitOfWork;
 
     /**
      * Imagen de perfil seleccionada.
@@ -49,12 +49,15 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
      * Constructor único.
      *
      * @param frmAnterior
+     * @param unitOfWork
      */
-    public FrmRegistrarPaso1(final JFrameActualizable frmAnterior) {
+    public FrmRegistrarPaso1(
+            final JFrameActualizable frmAnterior,
+            final UnitOfWork unitOfWork
+    ) {
         initComponents();
         this.frmAnterior = frmAnterior;
-        this.usuarioDAO = new UsuarioDAO();
-
+        this.unitOfWork = unitOfWork;
     }
 
     @SuppressWarnings("all")
@@ -451,8 +454,9 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
             return false;
         }
 
-        Usuario usuario
-                = this.usuarioDAO.consultarPorUsername(username);
+        Usuario usuario = this.unitOfWork
+                .usuariosDAO()
+                .consultarPorUsername(username);
 
         if (usuario != null) {
             Dialogs.mostrarMensajeError(rootPane, "Username existente");
@@ -476,7 +480,9 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
         }
 
         Usuario usuario
-                = this.usuarioDAO.consultarPorCorreo(correo);
+                = this.unitOfWork
+                        .usuariosDAO()
+                        .consultarPorCorreo(correo);
 
         if (usuario != null) {
             Dialogs.mostrarMensajeError(rootPane, "Correo existente.");
@@ -512,7 +518,10 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
     }
 
     private void cargarSiguientePaso() {
-        Forms.cargarForm(new FrmRegistrarPaso2(this, usuarioRegistrando), this);
+        Forms.cargarForm(
+                new FrmRegistrarPaso2(this, unitOfWork, usuarioRegistrando),
+                this
+        );
     }
 
 }

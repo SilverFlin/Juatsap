@@ -19,9 +19,9 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
      */
     private JFrameActualizable frmAnterior;
     /**
-     * Clase para gestionar el crud de dao.
+     * Unidad de trabajo con los DAO.
      */
-    private UsuarioDAO usuarioDAO;
+    private final UnitOfWork unitOfWork;
     /**
      * Usuario que se esta registrando.
      */
@@ -31,16 +31,18 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
      * Constructor único.
      *
      * @param frmAnterior
+     * @param unitOfWork
      * @param usuarioRegistrado
      */
     public FrmRegistrarPaso2(
             final JFrameActualizable frmAnterior,
+            final UnitOfWork unitOfWork,
             final Usuario usuarioRegistrado
     ) {
         initComponents();
         this.frmAnterior = frmAnterior;
         this.usuarioRegistrando = usuarioRegistrado;
-        this.usuarioDAO = new UsuarioDAO();
+        this.unitOfWork = unitOfWork;
     }
 
     @SuppressWarnings("all")
@@ -519,7 +521,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
     }
 
     private void guardarUsuario() {
-        usuarioDAO.agregar(usuarioRegistrando);
+        this.unitOfWork.usuariosDAO().agregar(usuarioRegistrando);
     }
 
     private void regresarALogin() {

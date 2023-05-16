@@ -22,14 +22,9 @@ import org.itson.utils.Forms;
 public class FrmChats extends JFrameActualizable {
 
     /**
-     * Clase para gestionar el crud de ususarios.
+     * Unidad de trabajo con los DAO.
      */
-    private UsuarioDAO usuarioDAO;
-
-    /**
-     * Clase para gestionar el crud de chats.
-     */
-    private ChatsDAO chatsDAO;
+    private final UnitOfWork unitOfWork;
     /**
      * Lista de chats del usuario registrado.
      */
@@ -41,12 +36,17 @@ public class FrmChats extends JFrameActualizable {
 
     /**
      * Constuctor único.
+     *
+     * @param usuarioLoggeado
+     * @param unitOfWork
      */
-    public FrmChats(Usuario usuarioLoggeado) {
+    public FrmChats(
+            final Usuario usuarioLoggeado,
+            final UnitOfWork unitOfWork
+    ) {
         initComponents();
-        this.usuarioDAO = new UsuarioDAO();
-        this.chatsDAO = new ChatsDAO();
         this.usuarioLoggeado = usuarioLoggeado;
+        this.unitOfWork = unitOfWork;
         cargarListaChats();
 
     }
@@ -212,13 +212,13 @@ public class FrmChats extends JFrameActualizable {
         List<ChatItem> lista = new ArrayList<>();
 
         for (ObjectId id : listaIds) {
-            Chat chat = chatsDAO.consultar(id.toString());
+            Chat chat = unitOfWork.chatsDAO().consultar(id.toString());
 
             Usuario usuarioObjectivo = usuarioLoggeado;
             if (chat.getEmisor() == usuarioLoggeado.getId()) {
-                usuarioObjectivo = usuarioDAO.consultar(chat.getReceptor().toString());
+                usuarioObjectivo = unitOfWork.usuariosDAO().consultar(chat.getEmisor().toString());
             } else {
-                usuarioObjectivo = usuarioDAO.consultar(chat.getEmisor().toString());
+                usuarioObjectivo = unitOfWork.usuariosDAO().consultar(chat.getReceptor().toString());
             }
 
             String titulo = usuarioObjectivo.getUsername();
@@ -237,23 +237,23 @@ public class FrmChats extends JFrameActualizable {
             Dialogs.mostrarMensajeError(rootPane, "No puedes hablar contigo mismo.");
         }
 
-        Usuario usuarioReceptor = usuarioDAO.consultarPorUsername(username);
+        Usuario usuarioReceptor = unitOfWork.usuariosDAO().consultarPorUsername(username);
 
         Chat chat = new Chat();
         chat.setEmisor(usuarioLoggeado.getId());
         chat.setReceptor(usuarioReceptor.getId());
         chat.setFecha(LocalDateTime.now());
 
-        chatsDAO.agregar(chat);
+        unitOfWork.chatsDAO().agregar(chat);
 
-        usuarioDAO.pushChat(usuarioReceptor.getId(), chat.getId());
-        usuarioDAO.pushChat(usuarioLoggeado.getId(), chat.getId());
+        unitOfWork.usuariosDAO().pushChat(usuarioReceptor.getId(), chat.getId());
+        unitOfWork.usuariosDAO().pushChat(usuarioLoggeado.getId(), chat.getId());
 
         this.actualizaFrame();
     }
 
     private void actualizarUsuarioLoggeado() {
-        this.usuarioLoggeado = usuarioDAO.consultar(this.usuarioLoggeado.getId().toString());
+        this.usuarioLoggeado = unitOfWork.usuariosDAO().consultar(this.usuarioLoggeado.getId().toString());
     }
 
 }
