@@ -36,11 +36,11 @@ public final class GestorImagenesMongo {
     /**
      * Ancho para imagen pequeña.
      */
-    private static final int SMALL_WIDTH = 100;
+    private static final int SMALL_WIDTH = 70;
     /**
      * Alto para imagen pequeña.
      */
-    private static final int SMALL_HEIGHT = 100;
+    private static final int SMALL_HEIGHT = 70;
 
     /**
      * Ancho para imagen mediana.
