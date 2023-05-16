@@ -37,6 +37,24 @@ public final class ValidadorFrames {
     }
 
     /**
+     * Checa si un string es una contraseña válida.
+     *
+     * @param password
+     * @return true si es válido.
+     */
+    public static boolean isValidPassword(final String password) {
+
+        String regex
+                = "^(?=.*[0-9])"
+                + "(?=.*[a-z])"
+                + "(?=.*[A-Z])"
+                + "(?=.*[!@#$%^&+=])"
+                + "(?=\\S+$).{8,}$";
+
+        return password.matches(regex);
+    }
+
+    /**
      * Valida el formato de un teléfono.
      *
      * @param telefono
@@ -46,7 +64,7 @@ public final class ValidadorFrames {
         // TODO buscar regex para telefono.
 
         // Expresión regular que valida un string de 1 a 100 caracteres
-        String regex = "^.{8,10}$";
+        String regex = "\\d{10}";
         // Validar el texto con la expresión regular
         return telefono.matches(regex);
     }

@@ -77,7 +77,7 @@ public final class UsuarioDAO extends BaseDAO<Usuario> {
         List<Usuario> listaUsuarios = new ArrayList<>();
         MongoCollection<Usuario> coleccion = this.getCollection();
         Document filtro = new Document();
-        filtro.append("username", new ObjectId(username));
+        filtro.append("username", username);
         coleccion.find(filtro).into(listaUsuarios);
         if (listaUsuarios.isEmpty()) {
             return null;
@@ -96,7 +96,7 @@ public final class UsuarioDAO extends BaseDAO<Usuario> {
         List<Usuario> listaUsuarios = new ArrayList<>();
         MongoCollection<Usuario> coleccion = this.getCollection();
         Document filtro = new Document();
-        filtro.append("correo", new ObjectId(correo));
+        filtro.append("correo", correo);
         coleccion.find(filtro).into(listaUsuarios);
         if (listaUsuarios.isEmpty()) {
             return null;
