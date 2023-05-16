@@ -26,12 +26,12 @@ public class ChatDAO extends BaseDAO<Chat> {
 
     @Override
     public void agregar(Chat chat) {
-       
+
     }
 
     @Override
     public void actualizar(Chat chat) {
-        
+
     }
 
     @Override
@@ -41,9 +41,9 @@ public class ChatDAO extends BaseDAO<Chat> {
         Document filtro = new Document();
         filtro.append("_id", new ObjectId(idChat));
         coleccion.find(filtro).into(listaChats);
-        if(listaChats.isEmpty()){
+        if (listaChats.isEmpty()) {
             return null;
-        }else{
+        } else {
             return listaChats.get(0);
         }
     }
@@ -55,5 +55,10 @@ public class ChatDAO extends BaseDAO<Chat> {
         coleccion.find().into(listaChat);
         return listaChat;
     }
-    
+
+    public void pushMensaje(ObjectId chatId, ObjectId mensajeId) {
+        Document updateQuery = new Document("$push", new Document("historial", mensajeId));
+        this.getCollection().updateOne(new Document("_id", chatId), updateQuery);
+    }
+
 }
