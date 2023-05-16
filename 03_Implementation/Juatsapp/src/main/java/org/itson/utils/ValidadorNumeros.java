@@ -2,7 +2,6 @@ package org.itson.utils;
 
 /**
  *
- * @author Toled
  */
 public final class ValidadorNumeros {
 

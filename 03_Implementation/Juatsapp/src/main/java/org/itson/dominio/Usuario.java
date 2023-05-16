@@ -1,149 +1,267 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.itson.dominio;
 
-
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import org.bson.types.ObjectId;
 
-
 /**
  *
- * @author deivi
+ *
  */
-public class Usuario {
+public final class Usuario {
 
-    private ObjectId _id;
-    private String nombre, correo, contraseña,telefono;
+    /**
+     * Id del documento.
+     */
+    private ObjectId id;
+    /**
+     * Nombre del usuario.
+     */
+    private String username;
+    /**
+     * Correo del usuario.
+     */
+    private String correo;
+    /**
+     * Contraseña del usuario.
+     */
+    private String password;
+    /**
+     * Teléfono del usuario.
+     */
+    private String telefono;
+    /**
+     * Sexo del usuario.
+     */
     private Sexo sexo;
-    private List<ObjectId> chat;
+    /**
+     * Lista de chats del usuario.
+     */
+    private List<ObjectId> chats;
+    /**
+     * Imágen de perfil del usuario.
+     */
+    private Imagen imagenPerfil;
+    /**
+     * Fecha de nacimiento del usuario.
+     */
+    private LocalDateTime fechaNacimiento;
+    /**
+     * Dirección del usuario.
+     */
+    private Direccion direccion;
 
-    private Calendar fecha_nacimiento;
-    
+    /**
+     * Constructor vacío.
+     */
     public Usuario() {
     }
 
-    public Usuario(ObjectId _id, String nombre, String correo, String contraseña, String telefono, Sexo sexo, List<ObjectId> chat, Calendar fecha_nacimiento) {
-        this._id = _id;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.contraseña = contraseña;
-        this.telefono = telefono;
-        this.sexo = sexo;
-        this.chat = chat;
-        this.fecha_nacimiento = fecha_nacimiento;
-    }
-
-    public Usuario(String correo, String contraseña, String telefono, Sexo sexo, List<ObjectId> chat, Calendar fecha_nacimiento) {
-        this.correo = correo;
-        this.contraseña = contraseña;
-        this.telefono = telefono;
-        this.sexo = sexo;
-        this.chat = chat;
-        this.fecha_nacimiento = fecha_nacimiento;
-    }
-
-    public Usuario(String nombre, String correo, String contraseña) {
-        this.nombre = nombre;
-        this.correo = correo;
-        this.contraseña = contraseña;
-    }
-
-    public Usuario(String nombre, List<ObjectId> chat) {
-        this.nombre = nombre;
-        this.chat = chat;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public Calendar getFecha_nacimiento() {
-        return fecha_nacimiento;
-    }
-
-    public void setFecha_nacimiento(Calendar fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
-    }
-
-      
-    public Sexo getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
-    }
-
-    public List<ObjectId> getChat() {
-        return chat;
-    }
-
-    public void setChat(List<ObjectId> chat) {
-        this.chat = chat;
-    }
-
+    /**
+     * Regresa la id del ususario.
+     *
+     * @return id del usuario.
+     */
     public ObjectId getId() {
-        return _id;
+        return id;
     }
 
-    public void setId(ObjectId _id) {
-        this._id = _id;
+    /**
+     * Establece la id del usuario.
+     *
+     * @param id
+     */
+    public void setId(final ObjectId id) {
+        this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    /**
+     * Regresa el username del usuario.
+     *
+     * @return el username.
+     */
+    public String getUsername() {
+        return username;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    /**
+     * Establece el username del usuario.
+     *
+     * @param username
+     */
+    public void setUsername(final String username) {
+        this.username = username;
     }
 
+    /**
+     * Regresa el correo del usuario.
+     *
+     * @return el correo del usuario.
+     */
     public String getCorreo() {
         return correo;
     }
 
-    public void setCorreo(String correo) {
+    /**
+     * Establece el correo del usuario.
+     *
+     * @param correo
+     */
+    public void setCorreo(final String correo) {
         this.correo = correo;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    /**
+     * Obtiene el la contraseña encriptada del usuario.
+     *
+     * @return contraseña encriptada.
+     */
+    public String getPassword() {
+        return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-    
-    public void agregarChat(ObjectId id){
-        chat.add(id);
+    /**
+     * Establece la contraseña del usuario.
+     *
+     * @param password
+     */
+    public void setPassword(final String password) {
+        this.password = password;
     }
 
+    /**
+     * Regresa el teléfono del usuario.
+     *
+     * @return el teléfono del usuario
+     */
+    public String getTelefono() {
+        return telefono;
+    }
+
+    /**
+     * Esteblece el teléfono del usuario.
+     *
+     * @param telefono
+     */
+    public void setTelefono(final String telefono) {
+        this.telefono = telefono;
+    }
+
+    /**
+     * Obtiene el sexo del usuario.
+     *
+     * @return el sexo sel usuario
+     */
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    /**
+     * Establece el sexo del usuario.
+     *
+     * @param sexo
+     */
+    public void setSexo(final Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    /**
+     * Obtiene la lista de los chatid del usuario.
+     *
+     * @return lista de chatsid.
+     */
+    public List<ObjectId> getChats() {
+        if (chats == null) {
+            return new ArrayList<>();
+        }
+        return chats;
+    }
+
+    /**
+     * Establece la lista de chats del usuario.
+     *
+     * @param chats
+     */
+    public void setChats(final List<ObjectId> chats) {
+        this.chats = chats;
+    }
+
+    /**
+     * Obtiene el documento de la imágen de perfil del usuario.
+     *
+     * @return el documento de la imágen.
+     */
+    public Imagen getImagenPerfil() {
+        return imagenPerfil;
+    }
+
+    /**
+     * Establece el documento de la imágen de perfil del usuario.
+     *
+     * @param imagenPerfil
+     */
+    public void setImagenPerfil(final Imagen imagenPerfil) {
+        this.imagenPerfil = imagenPerfil;
+    }
+
+    /**
+     * Obtiene la fecha de nacimiento del usuario.
+     *
+     * @return la fecha de nacimiento del usuario
+     */
+    public LocalDateTime getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    /**
+     * Establece la fecha de nacimiento del usuario.
+     *
+     * @param fechaNacimiento
+     */
+    public void setFechaNacimiento(final LocalDateTime fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    /**
+     * Obtiene la dirección del usuario.
+     *
+     * @return la dirección del usuario.
+     */
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    /**
+     * Establece la dirección del usuario.
+     *
+     * @param direccion
+     */
+    public void setDireccion(final Direccion direccion) {
+        this.direccion = direccion;
+    }
+
+    /**
+     * Genera el hashcode de la clase.
+     *
+     * @return el hashcode
+     */
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + Objects.hashCode(this._id);
-        hash = 43 * hash + Objects.hashCode(this.nombre);
-        hash = 43 * hash + Objects.hashCode(this.correo);
-        hash = 43 * hash + Objects.hashCode(this.contraseña);
-        hash = 43 * hash + Objects.hashCode(this.telefono);
-        hash = 43 * hash + Objects.hashCode(this.sexo);
-        hash = 43 * hash + Objects.hashCode(this.chat);
-        hash = 43 * hash + Objects.hashCode(this.fecha_nacimiento);
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
+    /**
+     * Compara la clase en base al id.
+     *
+     * @param obj
+     * @return true si coinciden.
+     */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -154,39 +272,16 @@ public class Usuario {
             return false;
         }
         final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        if (!Objects.equals(this.correo, other.correo)) {
-            return false;
-        }
-        if (!Objects.equals(this.contraseña, other.contraseña)) {
-            return false;
-        }
-        if (!Objects.equals(this.telefono, other.telefono)) {
-            return false;
-        }
-        if (!Objects.equals(this._id, other._id)) {
-            return false;
-        }
-        if (this.sexo != other.sexo) {
-            return false;
-        }
-        if (!Objects.equals(this.chat, other.chat)) {
-            return false;
-        }
-        return Objects.equals(this.fecha_nacimiento, other.fecha_nacimiento);
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "Usuario{" + "_id=" + _id + ", nombre=" + nombre + ", correo=" + correo + ", contrase\u00f1a=" + contraseña + ", telefono=" + telefono + ", sexo=" + sexo + ", chat=" + chat + ", fecha_nacimiento=" + fecha_nacimiento + '}';
+        return "Usuario{"
+                + "nombre=" + username
+                + ", correo=" + correo
+                + ", password=" + password
+                + '}';
     }
-
-    
-
-    
-
-        
 
 }

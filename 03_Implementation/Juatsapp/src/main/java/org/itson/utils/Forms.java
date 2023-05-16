@@ -5,7 +5,6 @@ import org.itson.interfaces.JFrameActualizable;
 
 /**
  *
- * @author Toled
  */
 public final class Forms {
 

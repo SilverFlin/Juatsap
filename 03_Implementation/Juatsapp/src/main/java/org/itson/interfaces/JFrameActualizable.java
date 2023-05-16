@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Toled
+ *
  */
 public abstract class JFrameActualizable extends JFrame {
 

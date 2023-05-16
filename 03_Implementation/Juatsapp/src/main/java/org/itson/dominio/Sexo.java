@@ -1,13 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
- */
 package org.itson.dominio;
 
 /**
  *
- * @author deivi
+ *
  */
 public enum Sexo {
-    
+    /**
+     * Sexo masculino.
+     */
+    MASCULINO,
+    /**
+     * Sexo femenino.
+     */
+    FEMENINO,
+    /**
+     * Sexo robot.
+     */
+    ROBOT,
+    /**
+     * Sexo ninja.
+     */
+    NINJA,
+    /**
+     * Sexo otro.
+     */
+    OTRO
 }

@@ -4,9 +4,14 @@ import com.mongodb.client.MongoDatabase;
 
 /**
  *
- * @author Toled
+ *
  */
 public interface MongoConnection {
 
-    public MongoDatabase getDatabase();
+    /**
+     * Regresa la base de datos.
+     *
+     * @return la base de datos
+     */
+    MongoDatabase getDatabase();
 }

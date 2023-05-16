@@ -4,7 +4,6 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 
 /**
  *
- * @author Toled
  */
 public final class Encriptador {
 
