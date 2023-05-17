@@ -36,7 +36,7 @@ public final class Juatsapp {
      * @param args
      */
     public static void main(final String[] args) {
-        start();
+        probarGUI();
     }
 
     /**

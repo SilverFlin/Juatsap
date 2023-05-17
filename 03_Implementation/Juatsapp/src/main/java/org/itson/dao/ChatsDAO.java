@@ -78,6 +78,13 @@ public final class ChatsDAO extends BaseDAO<Chat> {
         getCollection().updateOne(new Document("_id", chatId), updateQuery);
     }
 
+    /**
+     * Verifica si dos usuarios tienen un chat en comun.
+     *
+     * @param idEmisor
+     * @param idReceptor
+     * @return true, si tienen un chat en comun.
+     */
     public boolean verificarChatExistente(
             final String idEmisor,
             final String idReceptor

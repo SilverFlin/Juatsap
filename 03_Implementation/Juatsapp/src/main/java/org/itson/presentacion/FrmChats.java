@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.text.StyledDocument;
 import org.bson.types.ObjectId;
 import org.itson.dominio.Chat;
 import org.itson.dominio.Imagen;
@@ -695,16 +697,6 @@ public final class FrmChats extends JFrameActualizable {
             JPanel messagePanel = createMessagePanel(mensaje);
             pnMsgsChat.add(messagePanel);
         }
-//        scPnChatActivo.setViewportView(pnMsgsChat);
-//        scPnChatActivo
-//                .setVerticalScrollBarPolicy(
-//                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
-//                );
-//        scPnChatActivo.revalidate();
-//        scPnChatActivo.repaint();
-//        scPnChatActivo
-//                .getVerticalScrollBar()
-//                .setValue(scPnChatActivo.getVerticalScrollBar().getMaximum());
 
     }
 
@@ -718,10 +710,10 @@ public final class FrmChats extends JFrameActualizable {
         JTextArea txtContent = new JTextArea(mensaje.getContenidoMensaje());
         txtContent.setEditable(false);
         txtContent.setLineWrap(true);
-
         if (mensaje.getImagenMensaje() != null) {
             JLabel imageLabel = new JLabel(mensaje.getImagenMensaje());
             messagePanel.add(imageLabel, BorderLayout.WEST);
+
         }
 
         JPanel textPanel = new JPanel(new BorderLayout());
@@ -781,7 +773,11 @@ public final class FrmChats extends JFrameActualizable {
                         leftRight
                 ));
 
-        final int alturaMensaje = 55;
+        final int alturaTexto = 55;
+        final int alturaImagen = 72;
+        final int alturaMensaje
+                = mensaje.getImagenMensaje() == null
+                ? alturaTexto : alturaImagen;
 
         messagePanel
                 .setPreferredSize(
@@ -794,6 +790,14 @@ public final class FrmChats extends JFrameActualizable {
         messagePanel.add(textPanel, BorderLayout.CENTER);
 
         return messagePanel;
+    }
+
+    private JTextPane createMessageTextPane(final MensajeItem mensaje) {
+        JTextPane msgTxtPane = new JTextPane();
+        StyledDocument doc = msgTxtPane.getStyledDocument();
+
+        return null;
+
     }
 
     private void enviarMensaje() {

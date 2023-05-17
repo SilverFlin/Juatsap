@@ -1,14 +1,11 @@
 package org.itson.presentacion;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import org.itson.dominio.Imagen;
 import org.itson.dominio.Usuario;
@@ -22,6 +19,12 @@ import org.itson.utils.GestorImagenesMongo;
  *
  */
 public class FrmIniciarSesion extends JFrameActualizable {
+
+    /**
+     * Logger.
+     */
+    private static final Logger LOG
+            = Logger.getLogger(FrmIniciarSesion.class.getName());
 
     /**
      * Unidad de trabajo con los DAO.
@@ -202,13 +205,18 @@ public class FrmIniciarSesion extends JFrameActualizable {
     private void cargarLogo() {
 
         try {
-
-            File file = new File(FrmIniciarSesion.class.getResource("/logo.jpg").toURI());
+            URL urlLogo = FrmIniciarSesion.class.getResource("/logo.jpg");
+            File file = new File(urlLogo.toURI());
             Imagen imgLogo = GestorImagenesMongo.crearImagen("logo", file);
-            ImageIcon imgageIcon = GestorImagenesMongo.getImageIcon(imgLogo, GestorImagenesMongo.SizeImage.SMALL);
+            ImageIcon imgageIcon
+                    = GestorImagenesMongo
+                            .getImageIcon(
+                                    imgLogo,
+                                    GestorImagenesMongo.SizeImage.SMALL
+                            );
             lblLogo.setIcon(imgageIcon);
         } catch (IOException | URISyntaxException ex) {
-            Logger.getLogger(FrmIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
         }
 
     }
