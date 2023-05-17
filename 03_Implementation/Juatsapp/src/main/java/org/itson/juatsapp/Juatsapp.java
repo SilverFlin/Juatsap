@@ -1,17 +1,8 @@
 package org.itson.juatsapp;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.logging.Logger;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
 import org.bson.types.ObjectId;
 import org.itson.dao.ChatsDAO;
 import org.itson.presentacion.FrmIniciarSesion;
@@ -70,8 +61,18 @@ public final class Juatsapp {
         mensaje2.setUserId(new ObjectId("6463d1859401a57d3ecb2762"));
         new UnitOfWork().mensajesDAO().agregar(mensaje2);
 
-        new UnitOfWork().chatsDAO().pushMensaje(new ObjectId("6463fd9b23bb3a1be58f45e5"), mensaje.getId());
-        new UnitOfWork().chatsDAO().pushMensaje(new ObjectId("6463fd9b23bb3a1be58f45e5"), mensaje2.getId());
+        new UnitOfWork()
+                .chatsDAO()
+                .pushMensaje(
+                        new ObjectId("6463fd9b23bb3a1be58f45e5"),
+                        mensaje.getId()
+                );
+        new UnitOfWork()
+                .chatsDAO().
+                pushMensaje(
+                        new ObjectId("6463fd9b23bb3a1be58f45e5"),
+                        mensaje2.getId()
+                );
     }
 
     private static void probarAgregarChats() {
@@ -80,15 +81,22 @@ public final class Juatsapp {
         chat.setReceptor(new ObjectId("6463dd5397ce261b0e6f1657"));
         new ChatsDAO().agregar(chat);
 
-        new UsuarioDAO().pushChat(new ObjectId("6463d1859401a57d3ecb2762"), chat.getId());
-        new UsuarioDAO().pushChat(new ObjectId("6463dd5397ce261b0e6f1657"), chat.getId());
+        new UsuarioDAO().pushChat(
+                new ObjectId("6463d1859401a57d3ecb2762"),
+                chat.getId()
+        );
+        new UsuarioDAO().pushChat(
+                new ObjectId("6463dd5397ce261b0e6f1657"),
+                chat.getId()
+        );
 
     }
 
     private static void probarGUI() {
 
         UnitOfWork unitOfWork = new UnitOfWork();
-        Usuario usuarioLoggeado = unitOfWork.usuariosDAO().consultarPorUsername("QWE");
+        Usuario usuarioLoggeado
+                = unitOfWork.usuariosDAO().consultarPorUsername("QWE");
         FrmChats frmChats = new FrmChats(usuarioLoggeado, unitOfWork);
 
         frmChats.setVisible(true);

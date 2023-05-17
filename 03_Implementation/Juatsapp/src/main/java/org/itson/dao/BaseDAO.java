@@ -8,7 +8,10 @@ import org.itson.interfaces.MongoConnection;
 
 public abstract class BaseDAO<E> {
 
-    protected MongoConnection mongoConnection;
+    /**
+     * Mongo Connection.
+     */
+    private MongoConnection mongoConnection;
 
     /**
      * Obtiene la base de datos de la conexión.
@@ -16,12 +19,20 @@ public abstract class BaseDAO<E> {
      * @return la base de datos.
      */
     protected MongoDatabase getDataBase() {
-        if (mongoConnection != null) {
-            return mongoConnection.getDatabase();
+        if (getMongoConnection() != null) {
+            return getMongoConnection().getDatabase();
         } else {
-            mongoConnection = new MongoConnectionImpl();
-            return mongoConnection.getDatabase();
+            setMongoConnection(new MongoConnectionImpl());
+            return getMongoConnection().getDatabase();
         }
+    }
+
+    private MongoConnection getMongoConnection() {
+        return mongoConnection;
+    }
+
+    private void setMongoConnection(final MongoConnection mongoConnection) {
+        this.mongoConnection = mongoConnection;
     }
 
     /**

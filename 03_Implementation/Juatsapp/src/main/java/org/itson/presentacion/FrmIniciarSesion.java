@@ -271,7 +271,7 @@ public class FrmIniciarSesion extends JFrameActualizable {
         Dialogs.mostrarMensajeError(rootPane, "Credenciales no validas.");
     }
 
-    private void iniciarSesion(Usuario usuario) {
+    private void iniciarSesion(final Usuario usuario) {
         Forms.cargarForm(new FrmChats(usuario, unitOfWork), this);
     }
 

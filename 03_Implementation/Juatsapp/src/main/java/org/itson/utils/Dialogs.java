@@ -50,12 +50,20 @@ public final class Dialogs {
         );
     }
 
+    /**
+     * Pide input al usuario y lo regresa.
+     *
+     * @param componente
+     * @param titulo
+     * @param texto
+     * @return Input del usuario
+     */
     public static String pedirInputUsuario(
             final Component componente,
             final String titulo,
             final String texto
     ) {
-        return (String) JOptionPane.showInputDialog(
+        return JOptionPane.showInputDialog(
                 componente,
                 texto,
                 titulo,

@@ -70,7 +70,10 @@ public final class ChatsDAO extends BaseDAO<Chat> {
      */
     public void pushMensaje(final ObjectId chatId, final ObjectId mensajeId) {
         Document updateQuery
-                = new Document("$push", new Document("historialMensajes", mensajeId));
+                = new Document(
+                        "$push",
+                        new Document("historialMensajes", mensajeId)
+                );
         getCollection().updateOne(new Document("_id", chatId), updateQuery);
     }
 

@@ -13,7 +13,7 @@ import org.itson.utils.ValidadorFrames;
 /**
  *
  */
-public class FrmPerfil extends JFrameActualizable {
+public final class FrmPerfil extends JFrameActualizable {
 
     /**
      * Frame anterior.
@@ -506,22 +506,27 @@ public class FrmPerfil extends JFrameActualizable {
     private void btnGuardarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnGuardarFocusLost
     }//GEN-LAST:event_btnGuardarFocusLost
 
+    @SuppressWarnings("all")
     private void btnEditarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarFocusGained
 
+    @SuppressWarnings("all")
     private void btnEditarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarFocusLost
 
+    @SuppressWarnings("all")
     private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarMouseEntered
 
+    @SuppressWarnings("all")
     private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarMouseExited
 
+    @SuppressWarnings("all")
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         this.toggleModoEditar();
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -657,7 +662,12 @@ public class FrmPerfil extends JFrameActualizable {
             throw new IllegalStateException("Debe existir un usuario loggeado");
         }
 
-        ImageIcon imageIcon = GestorImagenesMongo.getImageIcon(usuarioLoggeado.getImagenPerfil(), GestorImagenesMongo.SizeImage.SMALL);
+        ImageIcon imageIcon
+                = GestorImagenesMongo
+                        .getImageIcon(
+                                usuarioLoggeado.getImagenPerfil(),
+                                GestorImagenesMongo.SizeImage.SMALL
+                        );
         fotoPerfil.setIcon(imageIcon);
 
         lblUsername.setText(usuarioLoggeado.getUsername());
@@ -683,7 +693,7 @@ public class FrmPerfil extends JFrameActualizable {
 
     }
 
-    private void isCamposActivos(boolean estado) {
+    private void isCamposActivos(final boolean estado) {
         txtCalle.setEnabled(estado);
         txtNumero.setEnabled(estado);
         txtColonia.setEnabled(estado);

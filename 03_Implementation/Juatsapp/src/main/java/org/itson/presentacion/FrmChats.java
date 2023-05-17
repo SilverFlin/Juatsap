@@ -11,14 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.Document;
 import org.bson.types.ObjectId;
 import org.itson.dominio.Chat;
 import org.itson.dominio.Imagen;
@@ -30,6 +27,7 @@ import org.itson.utils.ChatItemListCellRenderer;
 import org.itson.utils.Dialogs;
 import org.itson.utils.Forms;
 import org.itson.utils.GestorImagenesMongo;
+import org.itson.utils.GestorImagenesMongo.SizeImage;
 import org.itson.utils.MensajeItem;
 import org.itson.utils.MensajeItem.MsgSide;
 import org.itson.utils.ValidadorFrames;
@@ -37,7 +35,7 @@ import org.itson.utils.ValidadorFrames;
 /**
  *
  */
-public class FrmChats extends JFrameActualizable {
+public final class FrmChats extends JFrameActualizable {
 
     /**
      * Unidad de trabajo con los DAO.
@@ -48,11 +46,23 @@ public class FrmChats extends JFrameActualizable {
      */
     private List<ChatItem> chatItems;
 
+    /**
+     * JList de los chat items.
+     */
     private JList<ChatItem> chatsJList;
 
+    /**
+     * Usuario logeado.
+     */
     private Usuario usuarioLoggeado;
 
+    /**
+     * JPanel para mostrar los mensajes. Se encuentra en prueba
+     */
     private JPanel chatPanelTest;
+    /**
+     * Chat seleccionado de la lista de chats.
+     */
     private Chat chatSeleccionado;
 
     /**
@@ -90,7 +100,7 @@ public class FrmChats extends JFrameActualizable {
         lblChatSeleccionado = new javax.swing.JLabel();
         fotoChatSeleccionado = new javax.swing.JLabel();
         pnMsgsChat = new javax.swing.JPanel();
-        scPnChatSeleccionado = new javax.swing.JScrollPane();
+        scPnChatActivo = new javax.swing.JScrollPane();
         pnNavBar = new javax.swing.JPanel();
         btnCerrarSesion = new javax.swing.JButton();
         btnPerfil = new javax.swing.JButton();
@@ -223,13 +233,17 @@ public class FrmChats extends JFrameActualizable {
         pnMsgsChat.setLayout(pnMsgsChatLayout);
         pnMsgsChatLayout.setHorizontalGroup(
             pnMsgsChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scPnChatSeleccionado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMsgsChatLayout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(scPnChatActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89))
         );
         pnMsgsChatLayout.setVerticalGroup(
             pnMsgsChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMsgsChatLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scPnChatSeleccionado, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
+            .addGroup(pnMsgsChatLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(scPnChatActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnChatActivoLayout = new javax.swing.GroupLayout(pnChatActivo);
@@ -358,66 +372,82 @@ public class FrmChats extends JFrameActualizable {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    @SuppressWarnings("all")
     private void btnNuevoChatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoChatMouseEntered
         Forms.iluminarBoton(btnNuevoChat);
     }//GEN-LAST:event_btnNuevoChatMouseEntered
 
+    @SuppressWarnings("all")
     private void btnNuevoChatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoChatMouseExited
         Forms.desiluminarBoton(btnNuevoChat);
     }//GEN-LAST:event_btnNuevoChatMouseExited
 
+    @SuppressWarnings("all")
     private void btnNuevoChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoChatActionPerformed
         this.nuevoChat();
     }//GEN-LAST:event_btnNuevoChatActionPerformed
 
+    @SuppressWarnings("all")
     private void btnCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseEntered
         Forms.iluminarBoton(btnCerrarSesion);
     }//GEN-LAST:event_btnCerrarSesionMouseEntered
 
+    @SuppressWarnings("all")
     private void btnCerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseExited
         Forms.desiluminarBoton(btnCerrarSesion);
     }//GEN-LAST:event_btnCerrarSesionMouseExited
 
+    @SuppressWarnings("all")
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         this.cerrarSesion();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
+    @SuppressWarnings("all")
     private void btnEnviarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseEntered
         Forms.iluminarBoton(btnEnviar);
     }//GEN-LAST:event_btnEnviarMouseEntered
 
+    @SuppressWarnings("all")
     private void btnEnviarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseExited
         Forms.desiluminarBoton(btnEnviar);
     }//GEN-LAST:event_btnEnviarMouseExited
 
+    @SuppressWarnings("all")
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         this.enviarMensaje();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
+    @SuppressWarnings("all")
     private void btnPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPerfilMouseEntered
         Forms.iluminarBoton(btnPerfil);
     }//GEN-LAST:event_btnPerfilMouseEntered
 
+    @SuppressWarnings("all")
     private void btnPerfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPerfilMouseExited
         Forms.desiluminarBoton(btnPerfil);
     }//GEN-LAST:event_btnPerfilMouseExited
 
+    @SuppressWarnings("all")
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         this.cargarPerfil();
     }//GEN-LAST:event_btnPerfilActionPerformed
 
+    @SuppressWarnings("all")
     private void btnFotoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFotoMouseEntered
         Forms.iluminarBoton(btnFoto);
     }//GEN-LAST:event_btnFotoMouseEntered
 
+    @SuppressWarnings("all")
     private void btnFotoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFotoMouseExited
         Forms.desiluminarBoton(btnFoto);
     }//GEN-LAST:event_btnFotoMouseExited
 
+    @SuppressWarnings("all")
     private void btnFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFotoActionPerformed
 
+    @SuppressWarnings("all")
     private void scPnChatsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scPnChatsMouseClicked
 
     }//GEN-LAST:event_scPnChatsMouseClicked
@@ -438,7 +468,7 @@ public class FrmChats extends JFrameActualizable {
     private javax.swing.JPanel pnMsgsChat;
     private javax.swing.JPanel pnNavBar;
     private javax.swing.JPanel pnTituloChat;
-    private javax.swing.JScrollPane scPnChatSeleccionado;
+    private javax.swing.JScrollPane scPnChatActivo;
     private javax.swing.JScrollPane scPnChats;
     private javax.swing.JTextField txtNuevoMensaje;
     // End of variables declaration//GEN-END:variables
@@ -464,7 +494,7 @@ public class FrmChats extends JFrameActualizable {
 
         chatsJList.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(final MouseEvent e) {
                 seleccionarChat();
             }
 
@@ -480,12 +510,16 @@ public class FrmChats extends JFrameActualizable {
     private void cargarTituloChat() {
         ChatItem selectedItem = chatsJList.getSelectedValue();
         lblChatSeleccionado.setText(selectedItem.getNombreChat());
-        fotoChatSeleccionado.setIcon(GestorImagenesMongo.getImageIcon(selectedItem.getImagen(), GestorImagenesMongo.SizeImage.SMALL));
+        fotoChatSeleccionado.setIcon(
+                GestorImagenesMongo.getImageIcon(selectedItem.getImagen(),
+                        GestorImagenesMongo.SizeImage.SMALL)
+        );
     }
 
     private void cargarChat() {
         ChatItem selectedItem = chatsJList.getSelectedValue();
-        this.chatSeleccionado = unitOfWork.chatsDAO().consultar(selectedItem.getId());
+        this.chatSeleccionado
+                = unitOfWork.chatsDAO().consultar(selectedItem.getId());
         List<MensajeItem> mensajes = consultarMensajes(chatSeleccionado);
 
         agregarMensajesAChat(mensajes);
@@ -505,22 +539,30 @@ public class FrmChats extends JFrameActualizable {
             Chat chat = unitOfWork.chatsDAO().consultar(id.toString());
 
             Usuario usuarioObjectivo;
-            if (chat.getEmisor().toString().equals(usuarioLoggeado.getId().toString())) {
-                usuarioObjectivo = unitOfWork.usuariosDAO().consultar(chat.getReceptor().toString());
+            String idEmisor = chat.getEmisor().toString();
+            if (idEmisor.equals(usuarioLoggeado.getId().toString())) {
+                usuarioObjectivo
+                        = unitOfWork
+                                .usuariosDAO()
+                                .consultar(chat.getReceptor().toString());
             } else {
-                usuarioObjectivo = unitOfWork.usuariosDAO().consultar(chat.getEmisor().toString());
+                usuarioObjectivo
+                        = unitOfWork
+                                .usuariosDAO()
+                                .consultar(chat.getEmisor().toString());
             }
 
             String titulo = usuarioObjectivo.getUsername();
             Imagen imagen = usuarioObjectivo.getImagenPerfil();
-            ChatItem chatItem = new ChatItem(titulo, imagen, chat.getId().toString());
+            String idChat = chat.getId().toString();
+            ChatItem chatItem = new ChatItem(titulo, imagen, idChat);
             lista.add(chatItem);
         }
 
         return lista;
     }
 
-    private List<MensajeItem> consultarMensajes(Chat chat) {
+    private List<MensajeItem> consultarMensajes(final Chat chat) {
         List<ObjectId> listaIds = chat.getHistorialMensajes();
 
         List<MensajeItem> lista = new ArrayList<>();
@@ -530,19 +572,29 @@ public class FrmChats extends JFrameActualizable {
 
             Usuario usuarioObjectivo;
             MensajeItem mensajeItem;
-            if (mensaje.getUserId().toString().equals(usuarioLoggeado.getId().toString())) {
-                usuarioObjectivo = unitOfWork.usuariosDAO().consultar(usuarioLoggeado.getId().toString());
+            String mensajeId = mensaje.getUserId().toString();
+            if (mensajeId.equals(usuarioLoggeado.getId().toString())) {
+                usuarioObjectivo
+                        = unitOfWork
+                                .usuariosDAO()
+                                .consultar(usuarioLoggeado.getId().toString());
                 String username = usuarioObjectivo.getUsername();
-                mensajeItem = new MensajeItem(username, MensajeItem.MsgSide.RIGHT);
+                mensajeItem = new MensajeItem(username, MsgSide.RIGHT);
 
             } else {
-                usuarioObjectivo = unitOfWork.usuariosDAO().consultar(mensaje.getUserId().toString());
+                usuarioObjectivo
+                        = unitOfWork
+                                .usuariosDAO()
+                                .consultar(mensaje.getUserId().toString());
                 String username = usuarioObjectivo.getUsername();
-                mensajeItem = new MensajeItem(username, MensajeItem.MsgSide.LEFT);
+                mensajeItem = new MensajeItem(username, MsgSide.LEFT);
             }
 
             if (mensaje.getImagen() != null) {
-                mensajeItem.setImagenMensaje(GestorImagenesMongo.getImageIcon(mensaje.getImagen(), GestorImagenesMongo.SizeImage.MEDIUM));
+                mensajeItem.setImagenMensaje(
+                        GestorImagenesMongo.getImageIcon(mensaje.getImagen(),
+                                SizeImage.MEDIUM)
+                );
             } else {
                 mensajeItem.setContenidoMensaje(mensaje.getContenidoMensaje());
             }
@@ -554,14 +606,24 @@ public class FrmChats extends JFrameActualizable {
     }
 
     private void nuevoChat() {
-        String username = Dialogs.pedirInputUsuario(rootPane, "Ingresa usuario", "Usuario");
+        String username = Dialogs.pedirInputUsuario(
+                rootPane,
+                "Ingresa usuario",
+                "Usuario"
+        );
 
         if (username.equals(usuarioLoggeado.getUsername())) {
-            Dialogs.mostrarMensajeError(rootPane, "No puedes hablar contigo mismo.");
+            Dialogs.mostrarMensajeError(
+                    rootPane,
+                    "No puedes hablar contigo mismo."
+            );
             return;
         }
 
-        Usuario usuarioReceptor = unitOfWork.usuariosDAO().consultarPorUsername(username);
+        Usuario usuarioReceptor
+                = unitOfWork
+                        .usuariosDAO()
+                        .consultarPorUsername(username);
 
         if (usuarioReceptor == null) {
             Dialogs.mostrarMensajeError(rootPane, "No existe ese usuario.");
@@ -576,14 +638,19 @@ public class FrmChats extends JFrameActualizable {
 
         unitOfWork.chatsDAO().agregar(chat);
 
-        unitOfWork.usuariosDAO().pushChat(usuarioReceptor.getId(), chat.getId());
-        unitOfWork.usuariosDAO().pushChat(usuarioLoggeado.getId(), chat.getId());
+        unitOfWork.usuariosDAO()
+                .pushChat(usuarioReceptor.getId(), chat.getId());
+        unitOfWork.usuariosDAO()
+                .pushChat(usuarioLoggeado.getId(), chat.getId());
 
         this.actualizaFrame();
     }
 
     private void actualizarUsuarioLoggeado() {
-        this.usuarioLoggeado = unitOfWork.usuariosDAO().consultar(this.usuarioLoggeado.getId().toString());
+        this.usuarioLoggeado
+                = unitOfWork
+                        .usuariosDAO()
+                        .consultar(this.usuarioLoggeado.getId().toString());
     }
 
     private void cargarBotones() {
@@ -595,7 +662,10 @@ public class FrmChats extends JFrameActualizable {
     }
 
     private void cargarPerfil() {
-        Forms.cargarForm(new FrmPerfil(this, unitOfWork, usuarioLoggeado), this);
+        Forms.cargarForm(
+                new FrmPerfil(this, unitOfWork, usuarioLoggeado),
+                this
+        );
     }
 
     private void cerrarSesion() {
@@ -603,7 +673,7 @@ public class FrmChats extends JFrameActualizable {
         Forms.cargarForm(new FrmIniciarSesion(), this);
     }
 
-    private void agregarMensajesAChat(List<MensajeItem> mensajes) {
+    private void agregarMensajesAChat(final List<MensajeItem> mensajes) {
         System.out.println(mensajes.size());
         pnMsgsChat.removeAll();
         pnMsgsChat.setLayout(new BoxLayout(pnMsgsChat, BoxLayout.Y_AXIS));
@@ -612,23 +682,28 @@ public class FrmChats extends JFrameActualizable {
             pnMsgsChat.add(messagePanel);
         }
 //        scPnChatSeleccionado.setViewportView(pnMsgsChat);
-        scPnChatSeleccionado.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scPnChatSeleccionado.revalidate();
-        scPnChatSeleccionado.repaint();
-        scPnChatSeleccionado.getVerticalScrollBar().setValue(scPnChatSeleccionado.getVerticalScrollBar().getMaximum());;
+        scPnChatActivo
+                .setVerticalScrollBarPolicy(
+                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
+                );
+        scPnChatActivo.revalidate();
+        scPnChatActivo.repaint();
+        scPnChatActivo
+                .getVerticalScrollBar()
+                .setValue(scPnChatActivo.getVerticalScrollBar().getMaximum());
 
     }
 
-    private JPanel createMessagePanel(MensajeItem mensaje) {
+    private JPanel createMessagePanel(final MensajeItem mensaje) {
         JPanel messagePanel = new JPanel();
         messagePanel.setLayout(new BorderLayout());
 
-        JTextArea usernameLabel = new JTextArea(mensaje.getUsername());
-        usernameLabel.setEditable(false);
-        usernameLabel.setLineWrap(true);
-        JTextArea contentTextArea = new JTextArea(mensaje.getContenidoMensaje());
-        contentTextArea.setEditable(false);
-        contentTextArea.setLineWrap(true);
+        JTextArea lblUsername = new JTextArea(mensaje.getUsername());
+        lblUsername.setEditable(false);
+        lblUsername.setLineWrap(true);
+        JTextArea txtContent = new JTextArea(mensaje.getContenidoMensaje());
+        txtContent.setEditable(false);
+        txtContent.setLineWrap(true);
 
         if (mensaje.getImagenMensaje() != null) {
             JLabel imageLabel = new JLabel(mensaje.getImagenMensaje());
@@ -639,32 +714,58 @@ public class FrmChats extends JFrameActualizable {
         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
 
         if (mensaje.getMsgSide() == MsgSide.LEFT) {
-            contentTextArea.setBackground(new Color(0, 255, 204));
-            contentTextArea.setForeground(new Color(51, 51, 51));
+            final int rLeftBg = 0;
+            final int gLeftBg = 255;
+            final int bLeftBg = 204;
 
-            usernameLabel.setBackground(new Color(0, 255, 204));
-            usernameLabel.setForeground(new Color(51, 51, 51));
+            final int fgColor = 51;
 
-            usernameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+            txtContent.setBackground(new Color(rLeftBg, gLeftBg, bLeftBg));
+            txtContent.setForeground(new Color(fgColor, fgColor, fgColor));
+
+            lblUsername.setBackground(new Color(rLeftBg, gLeftBg, bLeftBg));
+            lblUsername.setForeground(new Color(fgColor, fgColor, fgColor));
+
+            lblUsername.setAlignmentX(Component.LEFT_ALIGNMENT);
             textPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         } else if (mensaje.getMsgSide() == MsgSide.RIGHT) {
-            contentTextArea.setBackground(new Color(255, 153, 0));
-            contentTextArea.setForeground(new Color(255, 255, 255));
 
-            usernameLabel.setBackground(new Color(255, 153, 0));
-            usernameLabel.setForeground(new Color(255, 255, 255));
+            final int rRightBg = 255;
+            final int gRightBg = 153;
+            final int bRightBg = 0;
+
+            final int fgColor = 255;
+            txtContent.setBackground(new Color(rRightBg, gRightBg, bRightBg));
+            txtContent.setForeground(new Color(fgColor, fgColor, fgColor));
+
+            lblUsername.setBackground(new Color(rRightBg, gRightBg, bRightBg));
+            lblUsername.setForeground(new Color(fgColor, fgColor, fgColor));
 
             textPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
-            usernameLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+            lblUsername.setAlignmentX(Component.RIGHT_ALIGNMENT);
         }
 
-        usernameLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, usernameLabel.getPreferredSize().height)); // Set maximum width for username label
+        lblUsername.setMaximumSize(
+                new Dimension(
+                        Integer.MAX_VALUE,
+                        lblUsername.getPreferredSize().height
+                )
+        );
 
-        textPanel.add(usernameLabel);
-        textPanel.add(contentTextArea);
+        textPanel.add(lblUsername);
+        textPanel.add(txtContent);
 
-        textPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        final int topBottom = 5;
+        final int leftRight = 10;
+
+        textPanel.setBorder(BorderFactory
+                .createEmptyBorder(
+                        topBottom,
+                        leftRight,
+                        topBottom,
+                        leftRight
+                ));
 
         messagePanel.add(textPanel, BorderLayout.CENTER);
 
@@ -686,10 +787,10 @@ public class FrmChats extends JFrameActualizable {
 
         unitOfWork.mensajesDAO().agregar(mensaje);
 
-        unitOfWork.chatsDAO().pushMensaje(chatSeleccionado.getId(), mensaje.getId());
+        unitOfWork.chatsDAO()
+                .pushMensaje(chatSeleccionado.getId(), mensaje.getId());
 
         cargarChat();
-
     }
 
 }

@@ -1,7 +1,6 @@
 package org.itson.presentacion;
 
 import javax.swing.JTextField;
-import org.itson.dao.UsuarioDAO;
 import org.itson.dominio.Direccion;
 import org.itson.dominio.Usuario;
 import org.itson.interfaces.JFrameActualizable;

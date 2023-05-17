@@ -8,17 +8,32 @@ import javax.swing.JList;
 
 /**
  *
- *
  */
-public class ChatItemListCellRenderer extends DefaultListCellRenderer {
+public final class ChatItemListCellRenderer extends DefaultListCellRenderer {
 
     @Override
-    public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-            boolean isSelected, boolean cellHasFocus) {
-        JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+    public Component getListCellRendererComponent(
+            final JList<?> list,
+            final Object value,
+            final int index,
+            final boolean isSelected,
+            final boolean cellHasFocus
+    ) {
+        JLabel label = (JLabel) super
+                .getListCellRendererComponent(
+                        list,
+                        value,
+                        index,
+                        isSelected,
+                        cellHasFocus
+                );
 
         ChatItem chat = (ChatItem) value;
-        label.setIcon(GestorImagenesMongo.getImageIcon(chat.getImagen(), GestorImagenesMongo.SizeImage.SMALL));
+        label.setIcon(
+                GestorImagenesMongo.getImageIcon(
+                        chat.getImagen(),
+                        GestorImagenesMongo.SizeImage.SMALL
+                ));
         label.setHorizontalTextPosition(JLabel.RIGHT);
         label.setFont(label.getFont().deriveFont(Font.BOLD));
 

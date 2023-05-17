@@ -13,13 +13,13 @@ import org.itson.dominio.Mensaje;
  *
  * @author Toled
  */
-public class MensajesDAO extends BaseDAO<Mensaje> {
+public final class MensajesDAO extends BaseDAO<Mensaje> {
 
     /**
      * Logger.
      */
     private static final Logger LOG
-            = Logger.getLogger(UsuarioDAO.class.getName());
+            = Logger.getLogger(MensajesDAO.class.getName());
 
     @Override
     protected MongoCollection<Mensaje> getCollection() {
@@ -27,7 +27,7 @@ public class MensajesDAO extends BaseDAO<Mensaje> {
     }
 
     @Override
-    public void agregar(Mensaje chat) {
+    public void agregar(final Mensaje chat) {
         try {
             MongoCollection<Mensaje> coleccion = this.getCollection();
             coleccion.insertOne(chat);
@@ -37,12 +37,12 @@ public class MensajesDAO extends BaseDAO<Mensaje> {
     }
 
     @Override
-    public void actualizar(Mensaje entidad) {
+    public void actualizar(final Mensaje entidad) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Mensaje consultar(String idMensaje) {
+    public Mensaje consultar(final String idMensaje) {
         List<Mensaje> listaMensajes = new ArrayList<>();
         MongoCollection<Mensaje> coleccion = this.getCollection();
         Document filtro = new Document();

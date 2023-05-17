@@ -10,10 +10,19 @@ import org.itson.dao.UsuarioDAO;
  */
 public class UnitOfWork {
 
+    /**
+     * UsuarioDao.
+     */
     private UsuarioDAO usuarioDAO;
 
+    /**
+     * ChatsDAO.
+     */
     private ChatsDAO chatsDAO;
 
+    /**
+     * MensajesDAO.
+     */
     private MensajesDAO mensajesDAO;
 
     /**
@@ -50,8 +59,8 @@ public class UnitOfWork {
             return chatsDAO;
         }
     }
-    
-      /**
+
+    /**
      * Si no existe la implementación la crea.
      *
      * @return Implementación de MensajesDAO.

@@ -10,7 +10,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.itson.dao.UsuarioDAO;
 import org.itson.dominio.Imagen;
 import org.itson.dominio.Usuario;
 import org.itson.dominio.Sexo;
