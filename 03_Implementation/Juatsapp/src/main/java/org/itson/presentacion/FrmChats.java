@@ -235,11 +235,11 @@ public final class FrmChats extends JFrameActualizable {
         pnMsgsChat.setLayout(pnMsgsChatLayout);
         pnMsgsChatLayout.setHorizontalGroup(
             pnMsgsChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 698, Short.MAX_VALUE)
+            .addGap(0, 696, Short.MAX_VALUE)
         );
         pnMsgsChatLayout.setVerticalGroup(
             pnMsgsChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
+            .addGap(0, 261, Short.MAX_VALUE)
         );
 
         scPnChatActivo.setViewportView(pnMsgsChat);
@@ -251,16 +251,14 @@ public final class FrmChats extends JFrameActualizable {
             .addGroup(pnChatActivoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnChatActivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnTituloChat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnChatActivoLayout.createSequentialGroup()
-                        .addComponent(scPnChatActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(pnTituloChat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChatActivoLayout.createSequentialGroup()
                         .addComponent(txtNuevoMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)))
+                        .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(scPnChatActivo))
                 .addContainerGap())
         );
         pnChatActivoLayout.setVerticalGroup(
@@ -268,16 +266,14 @@ public final class FrmChats extends JFrameActualizable {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChatActivoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnTituloChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(scPnChatActivo, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnChatActivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(btnFoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnChatActivoLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(txtNuevoMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(scPnChatActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(pnChatActivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNuevoMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         Background.add(pnChatActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 710, 450));
@@ -573,7 +569,7 @@ public final class FrmChats extends JFrameActualizable {
                                 .usuariosDAO()
                                 .consultar(usuarioLoggeado.getId().toString());
                 String username = usuarioObjectivo.getUsername();
-                mensajeItem = new MensajeItem(username, MsgSide.RIGHT);
+                mensajeItem = new MensajeItem(username, MsgSide.LEFT);
 
             } else {
                 usuarioObjectivo
@@ -581,7 +577,7 @@ public final class FrmChats extends JFrameActualizable {
                                 .usuariosDAO()
                                 .consultar(mensaje.getUserId().toString());
                 String username = usuarioObjectivo.getUsername();
-                mensajeItem = new MensajeItem(username, MsgSide.LEFT);
+                mensajeItem = new MensajeItem(username, MsgSide.RIGHT);
             }
 
             if (mensaje.getImagen() != null) {
@@ -668,29 +664,28 @@ public final class FrmChats extends JFrameActualizable {
     }
 
     private void agregarMensajesAChat(final List<MensajeItem> mensajes) {
-        System.out.println(mensajes.size());
         pnMsgsChat.removeAll();
-        pnMsgsChat.setLayout(new BoxLayout(pnMsgsChat, BoxLayout.Y_AXIS));
+        pnMsgsChat.setLayout(new BoxLayout(pnMsgsChat, BoxLayout.PAGE_AXIS));
         for (MensajeItem mensaje : mensajes) {
             JPanel messagePanel = createMessagePanel(mensaje);
             pnMsgsChat.add(messagePanel);
         }
-//        scPnChatSeleccionado.setViewportView(pnMsgsChat);
-        scPnChatActivo
-                .setVerticalScrollBarPolicy(
-                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
-                );
-        scPnChatActivo.revalidate();
-        scPnChatActivo.repaint();
-        scPnChatActivo
-                .getVerticalScrollBar()
-                .setValue(scPnChatActivo.getVerticalScrollBar().getMaximum());
+//        scPnChatActivo.setViewportView(pnMsgsChat);
+//        scPnChatActivo
+//                .setVerticalScrollBarPolicy(
+//                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
+//                );
+//        scPnChatActivo.revalidate();
+//        scPnChatActivo.repaint();
+//        scPnChatActivo
+//                .getVerticalScrollBar()
+//                .setValue(scPnChatActivo.getVerticalScrollBar().getMaximum());
 
     }
 
     private JPanel createMessagePanel(final MensajeItem mensaje) {
         JPanel messagePanel = new JPanel();
-        messagePanel.setLayout(new BorderLayout());
+        messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
 
         JTextArea lblUsername = new JTextArea(mensaje.getUsername());
         lblUsername.setEditable(false);
@@ -705,7 +700,7 @@ public final class FrmChats extends JFrameActualizable {
         }
 
         JPanel textPanel = new JPanel(new BorderLayout());
-        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.PAGE_AXIS));
 
         if (mensaje.getMsgSide() == MsgSide.LEFT) {
             final int rLeftBg = 0;
@@ -761,6 +756,16 @@ public final class FrmChats extends JFrameActualizable {
                         leftRight
                 ));
 
+        final int alturaMensaje = 55;
+
+        messagePanel
+                .setPreferredSize(
+                        new Dimension(
+                                messagePanel.getPreferredSize().width,
+                                alturaMensaje
+                        )
+                );
+
         messagePanel.add(textPanel, BorderLayout.CENTER);
 
         return messagePanel;
@@ -783,7 +788,7 @@ public final class FrmChats extends JFrameActualizable {
 
         unitOfWork.chatsDAO()
                 .pushMensaje(chatSeleccionado.getId(), mensaje.getId());
-
+        txtNuevoMensaje.setText("");
         cargarChat();
     }
 

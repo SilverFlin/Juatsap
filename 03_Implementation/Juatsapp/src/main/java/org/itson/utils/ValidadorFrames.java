@@ -18,7 +18,7 @@ public final class ValidadorFrames {
      */
     public static boolean isValidText(final String texto) {
         // Expresión regular que valida un string de 1 a 100 caracteres
-        String regex = "^.{1,100}$";
+        String regex = "^.{1,80}$";
         // Validar el texto con la expresión regular
         return texto.matches(regex);
     }
