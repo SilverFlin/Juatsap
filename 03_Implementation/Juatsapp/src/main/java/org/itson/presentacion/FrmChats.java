@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
@@ -160,6 +161,12 @@ public final class FrmChats extends JFrameActualizable {
         Background.add(pnListaChats, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 230, 450));
 
         pnChatActivo.setBackground(new java.awt.Color(255, 255, 255));
+
+        txtNuevoMensaje.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNuevoMensajeKeyPressed(evt);
+            }
+        });
 
         btnEnviar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnEnviar.setForeground(new java.awt.Color(0, 153, 153));
@@ -440,6 +447,13 @@ public final class FrmChats extends JFrameActualizable {
     private void scPnChatsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scPnChatsMouseClicked
 
     }//GEN-LAST:event_scPnChatsMouseClicked
+
+    @SuppressWarnings("all")
+    private void txtNuevoMensajeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoMensajeKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.enviarMensaje();
+        }
+    }//GEN-LAST:event_txtNuevoMensajeKeyPressed
 
     //CHECKSTYLE:OFF
     // Variables declaration - do not modify//GEN-BEGIN:variables
