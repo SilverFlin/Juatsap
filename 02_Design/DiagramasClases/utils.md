@@ -16,6 +16,8 @@ class Encriptador{
 class Forms{
     +cargarForm (JFrame cargar, JFrame actual) void
     +regresar(JFrameActualizable frmAnterior, JFrame actual) void
+    +iluminarBoton(JButton btn)
+    +desiluminarBoton (JButton btn)
 }
 ```
 
@@ -30,8 +32,8 @@ class GestorImagenesMongo{
     -int LARGE_WIDTH
     -int LARGE_HEIGHT
 
-    +saveImage(String fileName,File imageFile) Document
-    +getImageIcon(Document imageDocument,SizeImage) ImageIcon
+    +crearImage(String fileName,File imageFile) Imagen
+    +getImageIcon(Imagen imageDocument,SizeImage size) ImageIcon
     -resizeImageIcon(Binary imageData, SizeImage size)  ImageIcon
     -readImageData(File file) byte[]
 
@@ -40,6 +42,7 @@ class GestorImagenesMongo{
 class ValidadorFrames{
     +isValidText(String texto) boolean
     +isValidEmail(String email) boolean
+    +isValidPassword(String password) boolean
     +isValidTelefono(String telefono) boolean
 }
 class ValidadorNumeros{
