@@ -1,17 +1,19 @@
 package org.itson.presentacion;
 
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import org.itson.dominio.Direccion;
 import org.itson.dominio.Usuario;
 import org.itson.interfaces.JFrameActualizable;
 import org.itson.utils.Dialogs;
 import org.itson.utils.Forms;
+import org.itson.utils.GestorImagenesMongo;
 import org.itson.utils.ValidadorFrames;
 
 /**
  *
  */
-public class FrmRegistrarPaso2 extends JFrameActualizable {
+public final class FrmPerfil extends JFrameActualizable {
 
     /**
      * Frame anterior.
@@ -22,26 +24,33 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
      */
     private final UnitOfWork unitOfWork;
     /**
-     * Usuario que se esta registrando.
+     * Usuario que está loggeado.
      */
-    private Usuario usuarioRegistrando;
+    private Usuario usuarioLoggeado;
+
+    /**
+     * Especifica si el ususario esta en modo editar perfil.
+     */
+    private boolean isEditando;
 
     /**
      * Constructor único.
      *
      * @param frmAnterior
      * @param unitOfWork
-     * @param usuarioRegistrado
+     * @param usuarioLoggeado
      */
-    public FrmRegistrarPaso2(
+    public FrmPerfil(
             final JFrameActualizable frmAnterior,
             final UnitOfWork unitOfWork,
-            final Usuario usuarioRegistrado
+            final Usuario usuarioLoggeado
     ) {
         initComponents();
         this.frmAnterior = frmAnterior;
-        this.usuarioRegistrando = usuarioRegistrado;
+        this.usuarioLoggeado = usuarioLoggeado;
         this.unitOfWork = unitOfWork;
+        this.isEditando = false;
+        this.configurarFrame();
     }
 
     @SuppressWarnings("all")
@@ -63,7 +72,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         lblCorreo3 = new javax.swing.JLabel();
         lblCorreo4 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
-        btnTerminar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         lblCorreo5 = new javax.swing.JLabel();
         txtNumero = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
@@ -73,6 +82,13 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         lblCorreo7 = new javax.swing.JLabel();
         txtPais = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lblCorreo = new javax.swing.JLabel();
+        fotoPerfil = new javax.swing.JLabel();
+        btnEditar = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
@@ -97,13 +113,13 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
                 txtCalleActionPerformed(evt);
             }
         });
-        Background.add(txtCalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 160, 20));
-        Background.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 160, 10));
+        Background.add(txtCalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 160, 20));
+        Background.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 160, 10));
 
         lblCorreo1.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 18)); // NOI18N
         lblCorreo1.setForeground(new java.awt.Color(0, 153, 153));
         lblCorreo1.setText("Calle");
-        Background.add(lblCorreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 80, 20));
+        Background.add(lblCorreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 80, 20));
 
         txtColonia.setForeground(new java.awt.Color(51, 51, 51));
         txtColonia.setToolTipText("");
@@ -118,8 +134,8 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
                 txtColoniaActionPerformed(evt);
             }
         });
-        Background.add(txtColonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 160, 20));
-        Background.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 160, 10));
+        Background.add(txtColonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 160, 20));
+        Background.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 160, 10));
 
         txtEstado.setForeground(new java.awt.Color(51, 51, 51));
         txtEstado.setToolTipText("");
@@ -134,13 +150,13 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
                 txtEstadoActionPerformed(evt);
             }
         });
-        Background.add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 160, 20));
-        Background.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 160, 10));
+        Background.add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 160, 20));
+        Background.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 160, 10));
 
         lblCorreo2.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 18)); // NOI18N
         lblCorreo2.setForeground(new java.awt.Color(0, 153, 153));
         lblCorreo2.setText("Estado");
-        Background.add(lblCorreo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 80, 20));
+        Background.add(lblCorreo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 80, 20));
 
         txtTelefono.setForeground(new java.awt.Color(51, 51, 51));
         txtTelefono.setToolTipText("");
@@ -155,18 +171,18 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
                 txtTelefonoActionPerformed(evt);
             }
         });
-        Background.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 160, 20));
-        Background.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 160, 10));
+        Background.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 160, 20));
+        Background.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 160, 10));
 
         lblCorreo3.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 18)); // NOI18N
         lblCorreo3.setForeground(new java.awt.Color(0, 153, 153));
         lblCorreo3.setText("Teléfono");
-        Background.add(lblCorreo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 160, 20));
+        Background.add(lblCorreo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 160, 20));
 
         lblCorreo4.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 18)); // NOI18N
         lblCorreo4.setForeground(new java.awt.Color(0, 153, 153));
         lblCorreo4.setText("Colonia");
-        Background.add(lblCorreo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 80, 20));
+        Background.add(lblCorreo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 80, 20));
 
         btnRegresar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(0, 153, 153));
@@ -189,39 +205,39 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         });
         Background.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 30));
 
-        btnTerminar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
-        btnTerminar.setForeground(new java.awt.Color(0, 153, 153));
-        btnTerminar.setText("TERMINAR");
-        btnTerminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnTerminar.setBorderPainted(false);
-        btnTerminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnTerminar.addFocusListener(new java.awt.event.FocusAdapter() {
+        btnGuardar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(0, 153, 153));
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnGuardar.setBorderPainted(false);
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnGuardar.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                btnTerminarFocusGained(evt);
+                btnGuardarFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                btnTerminarFocusLost(evt);
+                btnGuardarFocusLost(evt);
             }
         });
-        btnTerminar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnTerminarMouseEntered(evt);
+                btnGuardarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnTerminarMouseExited(evt);
+                btnGuardarMouseExited(evt);
             }
         });
-        btnTerminar.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTerminarActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        Background.add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, 90, 30));
+        Background.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, 90, 30));
 
         lblCorreo5.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 18)); // NOI18N
         lblCorreo5.setForeground(new java.awt.Color(0, 153, 153));
         lblCorreo5.setText("Número");
-        Background.add(lblCorreo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 80, 20));
+        Background.add(lblCorreo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 80, 20));
 
         txtNumero.setForeground(new java.awt.Color(51, 51, 51));
         txtNumero.setToolTipText("");
@@ -236,13 +252,13 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
                 txtNumeroActionPerformed(evt);
             }
         });
-        Background.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 160, 20));
-        Background.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 160, 10));
+        Background.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 160, 20));
+        Background.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 160, 10));
 
         lblCorreo6.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 18)); // NOI18N
         lblCorreo6.setForeground(new java.awt.Color(0, 153, 153));
         lblCorreo6.setText("Ciudad");
-        Background.add(lblCorreo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 80, 20));
+        Background.add(lblCorreo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 80, 20));
 
         txtCiudad.setForeground(new java.awt.Color(51, 51, 51));
         txtCiudad.setToolTipText("");
@@ -257,13 +273,13 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
                 txtCiudadActionPerformed(evt);
             }
         });
-        Background.add(txtCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 160, 20));
-        Background.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 160, 10));
+        Background.add(txtCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 160, 20));
+        Background.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 160, 10));
 
         lblCorreo7.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 18)); // NOI18N
         lblCorreo7.setForeground(new java.awt.Color(0, 153, 153));
         lblCorreo7.setText("País");
-        Background.add(lblCorreo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 80, 20));
+        Background.add(lblCorreo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, 80, 20));
 
         txtPais.setForeground(new java.awt.Color(51, 51, 51));
         txtPais.setToolTipText("");
@@ -278,8 +294,95 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
                 txtPaisActionPerformed(evt);
             }
         });
-        Background.add(txtPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 160, 20));
-        Background.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 160, 10));
+        Background.add(txtPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 160, 20));
+        Background.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 160, 10));
+
+        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("username");
+
+        lblUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblUsername.setForeground(new java.awt.Color(255, 255, 255));
+        lblUsername.setText("...");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Correo Electrónico");
+
+        lblCorreo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCorreo.setForeground(new java.awt.Color(255, 255, 255));
+        lblCorreo.setText("...");
+
+        fotoPerfil.setText("FotoPerfil");
+        fotoPerfil.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(fotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(fotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblUsername)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCorreo)
+                .addGap(28, 28, 28))
+        );
+
+        Background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 190, 300));
+
+        btnEditar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(0, 153, 153));
+        btnEditar.setText("EDITAR");
+        btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEditar.setBorderPainted(false);
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEditar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnEditarFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnEditarFocusLost(evt);
+            }
+        });
+        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEditarMouseExited(evt);
+            }
+        });
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        Background.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -289,7 +392,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -331,19 +434,19 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     @SuppressWarnings("all")
-    private void btnTerminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTerminarMouseEntered
+    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTerminarMouseEntered
+    }//GEN-LAST:event_btnGuardarMouseEntered
 
     @SuppressWarnings("all")
-    private void btnTerminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTerminarMouseExited
+    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTerminarMouseExited
+    }//GEN-LAST:event_btnGuardarMouseExited
 
     @SuppressWarnings("all")
-    private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
-        this.terminarRegistro();
-    }//GEN-LAST:event_btnTerminarActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        this.guardar();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     @SuppressWarnings("all")
     private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
@@ -396,19 +499,49 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
     }//GEN-LAST:event_txtTelefonoFocusLost
 
     @SuppressWarnings("all")
-    private void btnTerminarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnTerminarFocusGained
-    }//GEN-LAST:event_btnTerminarFocusGained
+    private void btnGuardarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnGuardarFocusGained
+    }//GEN-LAST:event_btnGuardarFocusGained
 
     @SuppressWarnings("all")
-    private void btnTerminarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnTerminarFocusLost
-    }//GEN-LAST:event_btnTerminarFocusLost
+    private void btnGuardarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnGuardarFocusLost
+    }//GEN-LAST:event_btnGuardarFocusLost
+
+    @SuppressWarnings("all")
+    private void btnEditarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarFocusGained
+
+    @SuppressWarnings("all")
+    private void btnEditarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarFocusLost
+
+    @SuppressWarnings("all")
+    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarMouseEntered
+
+    @SuppressWarnings("all")
+    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarMouseExited
+
+    @SuppressWarnings("all")
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        this.toggleModoEditar();
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     //CHECKSTYLE:OFF
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JButton btnTerminar;
+    private javax.swing.JLabel fotoPerfil;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -416,6 +549,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblCorreo1;
     private javax.swing.JLabel lblCorreo2;
     private javax.swing.JLabel lblCorreo3;
@@ -423,6 +557,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
     private javax.swing.JLabel lblCorreo5;
     private javax.swing.JLabel lblCorreo6;
     private javax.swing.JLabel lblCorreo7;
+    private javax.swing.JLabel lblUsername;
     private javax.swing.JTextField txtCalle;
     private javax.swing.JTextField txtCiudad;
     private javax.swing.JTextField txtColonia;
@@ -435,7 +570,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
 
     @Override
     public void actualizaFrame() {
-
+        configurarFrame();
     }
 
     private void regresar() {
@@ -490,7 +625,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         return true;
     }
 
-    private void terminarRegistro() {
+    private void guardar() {
 
         if (!this.validarCamposVacios()) {
             return;
@@ -500,7 +635,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
             return;
         }
 
-        usuarioRegistrando.setTelefono(txtTelefono.getText());
+        usuarioLoggeado.setTelefono(txtTelefono.getText());
 
         Direccion direccion = new Direccion();
 
@@ -511,20 +646,76 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         direccion.setNumero(txtNumero.getText());
         direccion.setPais(txtPais.getText());
 
-        usuarioRegistrando.setDireccion(direccion);
+        usuarioLoggeado.setDireccion(direccion);
 
-        this.guardarUsuario();
+        this.actualizarUsuario();
+        this.isEditando = false;
+        this.actualizaFrame();
+    }
 
-        this.regresarALogin();
+    private void actualizarUsuario() {
+        this.unitOfWork.usuariosDAO().actualizar(usuarioLoggeado);
+    }
+
+    private void cargarDatosUsuario() {
+        if (this.usuarioLoggeado == null) {
+            throw new IllegalStateException("Debe existir un usuario loggeado");
+        }
+
+        ImageIcon imageIcon
+                = GestorImagenesMongo
+                        .getImageIcon(
+                                usuarioLoggeado.getImagenPerfil(),
+                                GestorImagenesMongo.SizeImage.SMALL
+                        );
+        fotoPerfil.setIcon(imageIcon);
+
+        lblUsername.setText(usuarioLoggeado.getUsername());
+        lblCorreo.setText(usuarioLoggeado.getCorreo());
+
+        txtTelefono.setText(usuarioLoggeado.getTelefono());
+
+        Direccion direccion = usuarioLoggeado.getDireccion();
+        txtCalle.setText(direccion.getCalle());
+        txtNumero.setText(direccion.getNumero());
+        txtColonia.setText(direccion.getColonia());
+        txtCiudad.setText(direccion.getCiudad());
+        txtEstado.setText(direccion.getEstado());
+        txtPais.setText(direccion.getPais());
 
     }
 
-    private void guardarUsuario() {
-        this.unitOfWork.usuariosDAO().agregar(usuarioRegistrando);
+    private void configurarFrame() {
+        this.isCamposActivos(isEditando);
+        this.cargarDatosUsuario();
+
+        this.ajustarVisibilidadBotonesEditar();
+
     }
 
-    private void regresarALogin() {
-        Forms.cargarForm(new FrmIniciarSesion(), this);
+    private void isCamposActivos(final boolean estado) {
+        txtCalle.setEnabled(estado);
+        txtNumero.setEnabled(estado);
+        txtColonia.setEnabled(estado);
+        txtCiudad.setEnabled(estado);
+        txtEstado.setEnabled(estado);
+        txtPais.setEnabled(estado);
+        txtTelefono.setEnabled(estado);
+    }
+
+    private void ajustarVisibilidadBotonesEditar() {
+        this.btnGuardar.setVisible(isEditando);
+        if (isEditando) {
+            btnEditar.setText("CANCELAR");
+        } else {
+            btnEditar.setText("EDITAR");
+        }
+    }
+
+    private void toggleModoEditar() {
+        this.isEditando = !this.isEditando;
+        configurarFrame();
+
     }
 
 }

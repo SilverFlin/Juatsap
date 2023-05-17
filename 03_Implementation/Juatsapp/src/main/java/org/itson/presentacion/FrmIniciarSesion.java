@@ -5,7 +5,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import org.itson.dominio.Usuario;
 import org.itson.interfaces.JFrameActualizable;
+import org.itson.utils.Dialogs;
+import org.itson.utils.Encriptador;
 import org.itson.utils.Forms;
 
 /**
@@ -14,11 +17,19 @@ import org.itson.utils.Forms;
 public class FrmIniciarSesion extends JFrameActualizable {
 
     /**
+     * Unidad de trabajo con los DAO.
+     */
+    private final UnitOfWork unitOfWork;
+
+    /**
      * Constuctor único.
      */
     public FrmIniciarSesion() {
         initComponents();
         cargarLogo();
+        cargarBotones();
+        this.unitOfWork = new UnitOfWork();
+
     }
 
     @SuppressWarnings("all")
@@ -70,7 +81,7 @@ public class FrmIniciarSesion extends JFrameActualizable {
         btnRegistrarse.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnRegistrarse.setForeground(new java.awt.Color(0, 153, 153));
         btnRegistrarse.setText("REGISTRARSE");
-        btnRegistrarse.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRegistrarse.setBorder(null);
         btnRegistrarse.setBorderPainted(false);
         btnRegistrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegistrarse.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,7 +108,7 @@ public class FrmIniciarSesion extends JFrameActualizable {
         btnIniciarSesion.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnIniciarSesion.setForeground(new java.awt.Color(0, 153, 153));
         btnIniciarSesion.setText("INICIAR SESIÓN");
-        btnIniciarSesion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnIniciarSesion.setBorder(null);
         btnIniciarSesion.setBorderPainted(false);
         btnIniciarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnIniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,7 +130,7 @@ public class FrmIniciarSesion extends JFrameActualizable {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,18 +145,11 @@ public class FrmIniciarSesion extends JFrameActualizable {
     private void campoTextoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTextoUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoTextoUsuarioActionPerformed
+
     @SuppressWarnings("all")
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
         this.cargarRegistro();
     }//GEN-LAST:event_btnRegistrarseActionPerformed
-    @SuppressWarnings("all")
-    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-    }//GEN-LAST:event_btnIniciarSesionActionPerformed
-
-    @SuppressWarnings("all")
-    private void btnRegistrarseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarseMouseEntered
-        Forms.iluminarBoton(btnRegistrarse);
-    }//GEN-LAST:event_btnRegistrarseMouseEntered
 
     @SuppressWarnings("all")
     private void btnRegistrarseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarseMouseExited
@@ -153,14 +157,24 @@ public class FrmIniciarSesion extends JFrameActualizable {
     }//GEN-LAST:event_btnRegistrarseMouseExited
 
     @SuppressWarnings("all")
-    private void btnIniciarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseEntered
-        Forms.iluminarBoton(btnIniciarSesion);
-    }//GEN-LAST:event_btnIniciarSesionMouseEntered
+    private void btnRegistrarseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarseMouseEntered
+        Forms.iluminarBoton(btnRegistrarse);
+    }//GEN-LAST:event_btnRegistrarseMouseEntered
+
+    @SuppressWarnings("all")
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+        this.intentarIniciarSesion();
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     @SuppressWarnings("all")
     private void btnIniciarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseExited
         Forms.desiluminarBoton(btnIniciarSesion);
     }//GEN-LAST:event_btnIniciarSesionMouseExited
+
+    @SuppressWarnings("all")
+    private void btnIniciarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseEntered
+        Forms.iluminarBoton(btnIniciarSesion);
+    }//GEN-LAST:event_btnIniciarSesionMouseEntered
 
     //CHECKSTYLE:OFF
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -202,11 +216,68 @@ public class FrmIniciarSesion extends JFrameActualizable {
     }
 
     private void cargarRegistro() {
-        Forms.cargarForm(new FrmRegistrarPaso1(this), this);
+        Forms.cargarForm(new FrmRegistrarPaso1(this, unitOfWork), this);
     }
 
     @Override
     public void actualizaFrame() {
+    }
+
+    private void intentarIniciarSesion() {
+
+        if (!this.validarCampos()) {
+            return;
+        }
+
+        Usuario usuario = unitOfWork
+                .usuariosDAO()
+                .consultarPorUsername(campoTextoUsuario.getText());
+
+        if (usuario == null) {
+            this.mostrarErrorInicioSesion();
+            return;
+        }
+
+        String intentoPassword = new String(campoTextoContraseña.getPassword());
+        boolean isPasswordValida
+                = Encriptador.verificarPasswordConHash(
+                        intentoPassword,
+                        usuario.getPassword()
+                );
+
+        if (!isPasswordValida) {
+            this.mostrarErrorInicioSesion();
+            return;
+        }
+
+        this.iniciarSesion(usuario);
+    }
+
+    private boolean validarCampos() {
+
+        if (campoTextoUsuario.getText().isBlank()) {
+            return false;
+        }
+
+        if (new String(campoTextoContraseña.getPassword()).isBlank()) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+    private void mostrarErrorInicioSesion() {
+        Dialogs.mostrarMensajeError(rootPane, "Credenciales no validas.");
+    }
+
+    private void iniciarSesion(final Usuario usuario) {
+        Forms.cargarForm(new FrmChats(usuario, unitOfWork), this);
+    }
+
+    private void cargarBotones() {
+        Forms.desiluminarBoton(btnIniciarSesion);
+        Forms.desiluminarBoton(btnRegistrarse);
     }
 
 }
