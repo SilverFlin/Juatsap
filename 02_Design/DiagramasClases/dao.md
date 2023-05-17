@@ -20,10 +20,20 @@ class BaseDAO~E~{
 
 class UsuarioDAO{
     consultar(String usuario) Usuario
+    agregar(Usuario usuario)
+    actualizar(Usuario usuario)
+    consultarTodo() List~Usuario~
+    consultarPorUsername(String username) Usuario
+    consultarPorCorreo(String correo) Usuario
+    pushChat(ObjectId userId,ObjectId chatId)
 }
 
 class ChatDAO{
     consultarTodo(ObjectId idUsuario) List~Chat~
+    agregar(Chat chat)
+    actualizar(Chat chat)
+    consultar(String idChat) Chat
+    pushMensaje(ObjectId chatId,ObjectId mensajeId)
 }
 
 ```
