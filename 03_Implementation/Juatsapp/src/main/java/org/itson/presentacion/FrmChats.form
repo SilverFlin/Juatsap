@@ -146,18 +146,15 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="scPnChatActivo" min="-2" pref="689" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="pnTituloChat" alignment="1" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
+                          <Component id="pnTituloChat" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="txtNuevoMensaje" min="-2" pref="552" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnFoto" min="-2" pref="69" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnEnviar" pref="65" max="32767" attributes="0"/>
+                              <Component id="btnEnviar" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="scPnChatActivo" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -168,24 +165,24 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pnTituloChat" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="scPnChatActivo" pref="284" max="32767" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="btnEnviar" pref="42" max="32767" attributes="0"/>
-                          <Component id="btnFoto" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                              <Component id="txtNuevoMensaje" pref="40" max="32767" attributes="0"/>
-                          </Group>
+                      <EmptySpace pref="9" max="32767" attributes="0"/>
+                      <Component id="scPnChatActivo" min="-2" pref="263" max="-2" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtNuevoMensaje" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                          <Component id="btnFoto" alignment="3" max="32767" attributes="0"/>
+                          <Component id="btnEnviar" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="txtNuevoMensaje">
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNuevoMensajeKeyPressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnEnviar">
               <Properties>
@@ -298,12 +295,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="698" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="696" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="272" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="261" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>

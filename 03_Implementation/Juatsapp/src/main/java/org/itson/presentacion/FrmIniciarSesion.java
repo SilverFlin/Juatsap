@@ -1,20 +1,30 @@
 package org.itson.presentacion;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import org.itson.dominio.Imagen;
 import org.itson.dominio.Usuario;
 import org.itson.interfaces.JFrameActualizable;
 import org.itson.utils.Dialogs;
 import org.itson.utils.Encriptador;
 import org.itson.utils.Forms;
+import org.itson.utils.GestorImagenesMongo;
 
 /**
  *
  */
 public class FrmIniciarSesion extends JFrameActualizable {
+
+    /**
+     * Logger.
+     */
+    private static final Logger LOG
+            = Logger.getLogger(FrmIniciarSesion.class.getName());
 
     /**
      * Unidad de trabajo con los DAO.
@@ -102,8 +112,8 @@ public class FrmIniciarSesion extends JFrameActualizable {
         lblCorreo1.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 24)); // NOI18N
         lblCorreo1.setForeground(new java.awt.Color(0, 153, 153));
         lblCorreo1.setText("Usuario");
-        Background.add(lblCorreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 80, 20));
-        Background.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 70, 60));
+        Background.add(lblCorreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 80, 20));
+        Background.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 70, 70));
 
         btnIniciarSesion.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnIniciarSesion.setForeground(new java.awt.Color(0, 153, 153));
@@ -193,24 +203,20 @@ public class FrmIniciarSesion extends JFrameActualizable {
     //CHECKSTYLE:ON
 
     private void cargarLogo() {
-        // TODO
+
         try {
-            BufferedImage image
-                    = ImageIO.read(
-                            FrmIniciarSesion.class.getResource("/gato2.jpg")
-                    );
-            final int width = 500;
-            final int height = 500;
-            Image scaledImage = image
-                    .getScaledInstance(width, height, Image.SCALE_SMOOTH);
-
-            // Create an ImageIcon from the scaled image
-            ImageIcon imageIcon = new ImageIcon(scaledImage);
-
-            // Set the image icon on the label
-            lblLogo.setIcon(imageIcon);
-        } catch (IOException e) {
-            e.printStackTrace();
+            URL urlLogo = FrmIniciarSesion.class.getResource("/logo.jpg");
+            File file = new File(urlLogo.toURI());
+            Imagen imgLogo = GestorImagenesMongo.crearImagen("logo", file);
+            ImageIcon imgageIcon
+                    = GestorImagenesMongo
+                            .getImageIcon(
+                                    imgLogo,
+                                    GestorImagenesMongo.SizeImage.SMALL
+                            );
+            lblLogo.setIcon(imgageIcon);
+        } catch (IOException | URISyntaxException ex) {
+            LOG.log(Level.SEVERE, null, ex);
         }
 
     }

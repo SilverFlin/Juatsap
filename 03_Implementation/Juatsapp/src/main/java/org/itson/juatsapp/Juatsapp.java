@@ -36,7 +36,7 @@ public final class Juatsapp {
      * @param args
      */
     public static void main(final String[] args) {
-        start();
+        probarGUI();
     }
 
     /**
@@ -96,7 +96,7 @@ public final class Juatsapp {
 
         UnitOfWork unitOfWork = new UnitOfWork();
         Usuario usuarioLoggeado
-                = unitOfWork.usuariosDAO().consultarPorUsername("QWE");
+                = unitOfWork.usuariosDAO().consultarPorUsername("qwe");
         FrmChats frmChats = new FrmChats(usuarioLoggeado, unitOfWork);
 
         frmChats.setVisible(true);
