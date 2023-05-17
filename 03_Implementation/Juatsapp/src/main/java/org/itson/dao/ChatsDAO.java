@@ -18,7 +18,7 @@ public final class ChatsDAO extends BaseDAO<Chat> {
      * Logger.
      */
     private static final Logger LOG
-            = Logger.getLogger(UsuarioDAO.class.getName());
+            = Logger.getLogger(ChatsDAO.class.getName());
 
     @Override
     protected MongoCollection<Chat> getCollection() {
@@ -70,7 +70,7 @@ public final class ChatsDAO extends BaseDAO<Chat> {
      */
     public void pushMensaje(final ObjectId chatId, final ObjectId mensajeId) {
         Document updateQuery
-                = new Document("$push", new Document("historial", mensajeId));
+                = new Document("$push", new Document("historialMensajes", mensajeId));
         getCollection().updateOne(new Document("_id", chatId), updateQuery);
     }
 

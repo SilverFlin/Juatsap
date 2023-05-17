@@ -10,10 +10,12 @@ public class ChatItem {
 
     private String nombreChat;
     private Imagen imagen;
+    private String id;
 
-    public ChatItem(String nombreChat, Imagen imagen) {
+    public ChatItem(String nombreChat, Imagen imagen, String id) {
         this.nombreChat = nombreChat;
         this.imagen = imagen;
+        this.id = id;
     }
 
     public String getNombreChat() {
@@ -30,6 +32,14 @@ public class ChatItem {
 
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
