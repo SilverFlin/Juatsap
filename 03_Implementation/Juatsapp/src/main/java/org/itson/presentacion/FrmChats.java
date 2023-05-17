@@ -292,7 +292,7 @@ public class FrmChats extends JFrameActualizable {
     }//GEN-LAST:event_btnCerrarSesionMouseExited
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        // TODO add your handling code here:
+        this.cerrarSesion();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnEnviarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseEntered
@@ -429,6 +429,11 @@ public class FrmChats extends JFrameActualizable {
 
     private void cargarPerfil() {
         Forms.cargarForm(new FrmPerfil(this, unitOfWork, usuarioLoggeado), this);
+    }
+
+    private void cerrarSesion() {
+        this.usuarioLoggeado = null;
+        Forms.cargarForm(new FrmIniciarSesion(), this);
     }
 
 }
