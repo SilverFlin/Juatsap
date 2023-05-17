@@ -41,7 +41,23 @@ public final class UsuarioDAO extends BaseDAO<Usuario> {
 
     @Override
     public void actualizar(final Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        Document filter = new Document("_id", usuario.getId());
+
+        Document updateDireccion
+                = new Document(
+                        "$set",
+                        new Document("direccion", usuario.getDireccion())
+                );
+
+        Document updateTelefono
+                = new Document(
+                        "$set",
+                        new Document("telefono", usuario.getTelefono())
+                );
+
+        this.getCollection().updateOne(filter, updateTelefono);
+        this.getCollection().updateOne(filter, updateDireccion);
 
     }
 

@@ -445,7 +445,7 @@ public class FrmPerfil extends JFrameActualizable {
 
     @SuppressWarnings("all")
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        this.terminarRegistro();
+        this.guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     @SuppressWarnings("all")
@@ -565,7 +565,7 @@ public class FrmPerfil extends JFrameActualizable {
 
     @Override
     public void actualizaFrame() {
-
+        configurarFrame();
     }
 
     private void regresar() {
@@ -620,7 +620,7 @@ public class FrmPerfil extends JFrameActualizable {
         return true;
     }
 
-    private void terminarRegistro() {
+    private void guardar() {
 
         if (!this.validarCamposVacios()) {
             return;
@@ -643,18 +643,13 @@ public class FrmPerfil extends JFrameActualizable {
 
         usuarioLoggeado.setDireccion(direccion);
 
-        this.guardarUsuario();
-
-        this.regresarALogin();
-
+        this.actualizarUsuario();
+        this.isEditando = false;
+        this.actualizaFrame();
     }
 
-    private void guardarUsuario() {
-        this.unitOfWork.usuariosDAO().agregar(usuarioLoggeado);
-    }
-
-    private void regresarALogin() {
-        Forms.cargarForm(new FrmIniciarSesion(), this);
+    private void actualizarUsuario() {
+        this.unitOfWork.usuariosDAO().actualizar(usuarioLoggeado);
     }
 
     private void cargarDatosUsuario() {
@@ -710,7 +705,6 @@ public class FrmPerfil extends JFrameActualizable {
     private void toggleModoEditar() {
         this.isEditando = !this.isEditando;
         configurarFrame();
-
 
     }
 
