@@ -1,6 +1,7 @@
 package org.itson.dao;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -75,6 +76,24 @@ public final class ChatsDAO extends BaseDAO<Chat> {
                         new Document("historialMensajes", mensajeId)
                 );
         getCollection().updateOne(new Document("_id", chatId), updateQuery);
+    }
+
+    public boolean verificarChatExistente(
+            final String idEmisor,
+            final String idReceptor
+    ) {
+        List<Chat> listaChats = new ArrayList<>();
+        MongoCollection<Chat> coleccion = this.getCollection();
+        Document filtro1 = new Document();
+        filtro1.append("receptor", new ObjectId(idEmisor));
+        filtro1.append("emisor", new ObjectId(idReceptor));
+
+        Document filtro2 = new Document();
+        filtro2.append("receptor", new ObjectId(idReceptor));
+        filtro2.append("emisor", new ObjectId(idEmisor));
+
+        coleccion.find(Filters.or(filtro1, filtro2)).into(listaChats);
+        return !listaChats.isEmpty();
     }
 
 }

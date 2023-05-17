@@ -14,7 +14,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import org.bson.types.ObjectId;
 import org.itson.dominio.Chat;
@@ -619,8 +618,20 @@ public final class FrmChats extends JFrameActualizable {
             Dialogs.mostrarMensajeError(rootPane, "No existe ese usuario.");
             return;
         }
+        String idUsuarioReceptor = usuarioReceptor.getId().toString();
+        String idUsuarioLoggeado = usuarioLoggeado.getId().toString();
+        boolean existeChat
+                = unitOfWork
+                        .chatsDAO()
+                        .verificarChatExistente(
+                                idUsuarioLoggeado,
+                                idUsuarioReceptor
+                        );
+        if (existeChat) {
+            Dialogs.mostrarMensajeError(rootPane, "Chat ya existe");
+            return;
+        }
 
-        // TODO verificar si ya tienes chat con esa persona
         Chat chat = new Chat();
         chat.setEmisor(usuarioLoggeado.getId());
         chat.setReceptor(usuarioReceptor.getId());
