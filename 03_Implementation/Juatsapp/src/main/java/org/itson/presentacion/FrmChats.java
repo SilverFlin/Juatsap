@@ -1,22 +1,20 @@
 package org.itson.presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
 import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import org.bson.types.ObjectId;
 import org.itson.dominio.Chat;
@@ -265,8 +263,11 @@ public final class FrmChats extends JFrameActualizable {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(scPnChatActivo))
+                        .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
+                    .addGroup(pnChatActivoLayout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(scPnChatActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnChatActivoLayout.setVerticalGroup(
@@ -274,9 +275,9 @@ public final class FrmChats extends JFrameActualizable {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChatActivoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnTituloChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scPnChatActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(pnChatActivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNuevoMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -533,6 +534,9 @@ public final class FrmChats extends JFrameActualizable {
         pnMsgsChat.revalidate();
         pnMsgsChat.repaint();
 
+        JScrollBar verticalScrollBar = scPnChatActivo.getVerticalScrollBar();
+        verticalScrollBar.setValue(verticalScrollBar.getMaximum());
+
     }
 
     private List<ChatItem> consultarChats() {
@@ -694,114 +698,49 @@ public final class FrmChats extends JFrameActualizable {
         pnMsgsChat.removeAll();
         pnMsgsChat.setLayout(new BoxLayout(pnMsgsChat, BoxLayout.PAGE_AXIS));
         for (MensajeItem mensaje : mensajes) {
-            JPanel messagePanel = createMessagePanel(mensaje);
+            JTextPane messagePanel = createMessageTextPane(mensaje);
             pnMsgsChat.add(messagePanel);
         }
 
     }
 
-    private JPanel createMessagePanel(final MensajeItem mensaje) {
-        JPanel messagePanel = new JPanel();
-        messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
-
-        JTextArea lblUsername = new JTextArea(mensaje.getUsername());
-        lblUsername.setEditable(false);
-        lblUsername.setLineWrap(true);
-        JTextArea txtContent = new JTextArea(mensaje.getContenidoMensaje());
-        txtContent.setEditable(false);
-        txtContent.setLineWrap(true);
-        if (mensaje.getImagenMensaje() != null) {
-            JLabel imageLabel = new JLabel(mensaje.getImagenMensaje());
-            messagePanel.add(imageLabel, BorderLayout.WEST);
-
-        }
-
-        JPanel textPanel = new JPanel(new BorderLayout());
-        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.PAGE_AXIS));
-
-        if (mensaje.getMsgSide() == MsgSide.LEFT) {
-            final int rLeftBg = 0;
-            final int gLeftBg = 255;
-            final int bLeftBg = 204;
-
-            final int fgColor = 51;
-
-            txtContent.setBackground(new Color(rLeftBg, gLeftBg, bLeftBg));
-            txtContent.setForeground(new Color(fgColor, fgColor, fgColor));
-
-            lblUsername.setBackground(new Color(rLeftBg, gLeftBg, bLeftBg));
-            lblUsername.setForeground(new Color(fgColor, fgColor, fgColor));
-
-            lblUsername.setAlignmentX(Component.LEFT_ALIGNMENT);
-            textPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        } else if (mensaje.getMsgSide() == MsgSide.RIGHT) {
-
-            final int rRightBg = 255;
-            final int gRightBg = 153;
-            final int bRightBg = 0;
-
-            final int fgColor = 255;
-            txtContent.setBackground(new Color(rRightBg, gRightBg, bRightBg));
-            txtContent.setForeground(new Color(fgColor, fgColor, fgColor));
-
-            lblUsername.setBackground(new Color(rRightBg, gRightBg, bRightBg));
-            lblUsername.setForeground(new Color(fgColor, fgColor, fgColor));
-
-            textPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
-            lblUsername.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        }
-
-        lblUsername.setMaximumSize(
-                new Dimension(
-                        Integer.MAX_VALUE,
-                        lblUsername.getPreferredSize().height
-                )
-        );
-
-        textPanel.add(lblUsername);
-        textPanel.add(txtContent);
-
-        final int topBottom = 5;
-        final int leftRight = 10;
-
-        textPanel.setBorder(BorderFactory
-                .createEmptyBorder(
-                        topBottom,
-                        leftRight,
-                        topBottom,
-                        leftRight
-                ));
-
-        final int alturaTexto = 55;
-        final int alturaImagen = 72;
-        final int alturaMensaje
-                = mensaje.getImagenMensaje() == null
-                ? alturaTexto : alturaImagen;
-
-        messagePanel
-                .setPreferredSize(
-                        new Dimension(
-                                messagePanel.getPreferredSize().width,
-                                alturaMensaje
-                        )
-                );
-
-        messagePanel.add(textPanel, BorderLayout.CENTER);
-
-        return messagePanel;
-    }
-
     private JTextPane createMessageTextPane(final MensajeItem mensaje) {
-        JTextPane msgTxtPane = new JTextPane();
-        StyledDocument doc = msgTxtPane.getStyledDocument();
+        String username = mensaje.getUsername();
+        String fecha = "05 de Mayo del 2023";
+        String contenido = mensaje.getContenidoMensaje();
+        ImageIcon optionalImage = mensaje.getImagenMensaje();
+        MsgSide side = mensaje.getMsgSide();
 
-        return null;
+        JTextPane textPane = new JTextPane();
+        textPane.setEditable(false);
+        textPane.setOpaque(false);
+
+        if (side == MsgSide.LEFT) {
+            textPane.setAlignmentX(JTextPane.LEFT_ALIGNMENT);
+            textPane.setText("\n" + "tú" + " (" + fecha + "):\n" + contenido);
+        } else {
+            textPane.setAlignmentX(JTextPane.RIGHT_ALIGNMENT);
+            textPane.setText(contenido + "\n"
+                    + username + " (" + fecha + ")\n");
+        }
+
+        if (optionalImage != null) {
+            Style style = textPane.addStyle("image", null);
+            StyleConstants.setIcon(style, optionalImage);
+            StyledDocument doc = textPane.getStyledDocument();
+            try {
+                doc.insertString(doc.getLength(), "ignored text", style);
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return textPane;
 
     }
 
     private void enviarMensaje() {
-        String contenidoMensaje = txtNuevoMensaje.getText();
+        String contenidoMensaje = txtNuevoMensaje.getText().trim();
 
         if (!ValidadorFrames.isValidText(contenidoMensaje)) {
             return;

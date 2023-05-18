@@ -61,11 +61,21 @@ public final class ChatItem {
         this.nombreChat = nombreChat;
     }
 
+    /**
+     * Obtiene la fecha con formato.
+     *
+     * @return la fecha con formato.
+     */
     public String getFechaTexto() {
         return fechaTexto;
     }
 
-    public void setFechaTexto(String fechaTexto) {
+    /**
+     * Establece la fecha con formato.
+     *
+     * @param fechaTexto
+     */
+    public void setFechaTexto(final String fechaTexto) {
         this.fechaTexto = fechaTexto;
     }
 
