@@ -3,9 +3,12 @@ package org.itson.presentacion;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
@@ -25,6 +28,7 @@ import org.itson.interfaces.JFrameActualizable;
 import org.itson.utils.ChatItem;
 import org.itson.utils.ChatItemListCellRenderer;
 import org.itson.utils.Dialogs;
+import org.itson.utils.Fecha;
 import org.itson.utils.Forms;
 import org.itson.utils.GestorImagenesMongo;
 import org.itson.utils.GestorImagenesMongo.SizeImage;
@@ -36,6 +40,12 @@ import org.itson.utils.ValidadorFrames;
  *
  */
 public final class FrmChats extends JFrameActualizable {
+
+    /**
+     * Logger.
+     */
+    private static final Logger LOG
+            = Logger.getLogger(FrmChats.class.getName());
 
     /**
      * Unidad de trabajo con los DAO.
@@ -414,6 +424,7 @@ public final class FrmChats extends JFrameActualizable {
     @SuppressWarnings("all")
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         this.enviarMensaje();
+
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     @SuppressWarnings("all")
@@ -580,7 +591,7 @@ public final class FrmChats extends JFrameActualizable {
             Mensaje mensaje = unitOfWork.mensajesDAO().consultar(id.toString());
 
             Usuario usuarioObjectivo;
-            MensajeItem mensajeItem;
+            MensajeItem mensajeItem = null;
             String mensajeId = mensaje.getUserId().toString();
             if (mensajeId.equals(usuarioLoggeado.getId().toString())) {
                 usuarioObjectivo
@@ -607,6 +618,13 @@ public final class FrmChats extends JFrameActualizable {
             } else {
                 mensajeItem.setContenidoMensaje(mensaje.getContenidoMensaje());
             }
+            String fecha = "";
+            try {
+                fecha = Fecha.formatoFechaConHora(mensaje.getTimestamp());
+            } catch (ParseException ex) {
+                LOG.log(Level.SEVERE, null, ex);
+            }
+            mensajeItem.setFechaTexto(fecha);
 
             lista.add(mensajeItem);
         }
@@ -706,7 +724,7 @@ public final class FrmChats extends JFrameActualizable {
 
     private JTextPane createMessageTextPane(final MensajeItem mensaje) {
         String username = mensaje.getUsername();
-        String fecha = "05 de Mayo del 2023";
+        String fecha = mensaje.getFechaTexto();
         String contenido = mensaje.getContenidoMensaje();
         ImageIcon optionalImage = mensaje.getImagenMensaje();
         MsgSide side = mensaje.getMsgSide();
