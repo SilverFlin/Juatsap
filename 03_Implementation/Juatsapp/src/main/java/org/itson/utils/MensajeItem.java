@@ -93,7 +93,7 @@ public class MensajeItem {
      * @return el contenido en texto del mensaje.
      */
     public String getContenidoMensaje() {
-        return contenidoMensaje;
+        return contenidoMensaje == null ? "" : contenidoMensaje;
     }
 
     /**
