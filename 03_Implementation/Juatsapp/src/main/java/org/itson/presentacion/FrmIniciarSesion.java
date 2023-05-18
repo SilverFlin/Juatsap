@@ -36,7 +36,7 @@ public class FrmIniciarSesion extends JFrameActualizable {
      */
     public FrmIniciarSesion() {
         initComponents();
-        cargarLogo();
+//        cargarLogo();
         cargarBotones();
         this.unitOfWork = new UnitOfWork();
 
