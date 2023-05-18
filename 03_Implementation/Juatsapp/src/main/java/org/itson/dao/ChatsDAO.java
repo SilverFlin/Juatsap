@@ -103,4 +103,17 @@ public final class ChatsDAO extends BaseDAO<Chat> {
         return !listaChats.isEmpty();
     }
 
+    /**
+     * Intenta eliminar un chat, y regresa si se pudo eliminar o no.
+     *
+     * @param chat
+     * @return True, si se elimino.
+     */
+    public boolean eliminarChat(final Chat chat) {
+        Document filter = new Document("_id", chat.getId());
+        long deletedCount
+                = this.getCollection().deleteOne(filter).getDeletedCount();
+
+        return deletedCount > 0;
+    }
 }

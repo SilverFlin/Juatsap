@@ -37,8 +37,19 @@ public final class MensajesDAO extends BaseDAO<Mensaje> {
     }
 
     @Override
-    public void actualizar(final Mensaje entidad) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void actualizar(final Mensaje mensaje) {
+        Document filter = new Document("_id", mensaje.getId());
+
+        Document updateContenido
+                = new Document(
+                        "$set",
+                        new Document(
+                                "contenidoMensaje",
+                                mensaje.getContenidoMensaje()
+                        )
+                );
+
+        this.getCollection().updateOne(filter, updateContenido);
     }
 
     @Override
@@ -58,6 +69,31 @@ public final class MensajesDAO extends BaseDAO<Mensaje> {
     @Override
     public List<Mensaje> consultarTodo() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     * Deshabilita el mensaje y lo regresa.
+     *
+     * @param mensaje
+     * @return el mensaje actualizado.
+     */
+    public Mensaje deshabilitarMensaje(final Mensaje mensaje) {
+        Document filter = new Document("_id", mensaje.getId());
+
+        mensaje.setDisponibilidad(false);
+
+        Document updateDisponibilidad
+                = new Document(
+                        "$set",
+                        new Document(
+                                "disponibilidad",
+                                mensaje.isDisponibilidad()
+                        )
+                );
+
+        this.getCollection().updateOne(filter, updateDisponibilidad);
+
+        return mensaje;
     }
 
 }
