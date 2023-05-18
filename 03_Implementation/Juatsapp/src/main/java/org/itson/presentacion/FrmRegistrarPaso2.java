@@ -446,7 +446,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
             final JTextField campo,
             final String nombreCampo
     ) {
-        if (!ValidadorFrames.isValidText(campo.getText())) {
+        if (!ValidadorFrames.isValidText(campo.getText().trim())) {
             Dialogs.mostrarMensajeError(
                     this,
                     nombreCampo + " es un campo necesario."
@@ -482,7 +482,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         };
 
         for (JTextField field : txtFieldsArr) {
-            if (!ValidadorFrames.isValidText(field.getText())) {
+            if (!ValidadorFrames.isValidText(field.getText().trim())) {
                 return false;
             }
         }

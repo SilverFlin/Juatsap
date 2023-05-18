@@ -446,7 +446,7 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
 
     private boolean validarUsername() {
 
-        String username = txtUsername.getText();
+        String username = txtUsername.getText().trim();
 
         if (!ValidadorFrames.isValidText(username)) {
             Dialogs.mostrarMensajeError(rootPane, "Username es obligatorio.");
@@ -466,7 +466,7 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
     }
 
     private boolean validarCorreo() {
-        String correo = txtCorreo.getText();
+        String correo = txtCorreo.getText().trim();
 
         if (!ValidadorFrames.isValidEmail(correo)) {
             Dialogs.mostrarMensajeError(rootPane, "Correo inválido.");
@@ -508,7 +508,9 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
         if (!ValidadorFrames.isValidPassword(password)) {
             Dialogs.mostrarMensajeError(
                     rootPane,
-                    "La contraseña no es lo suficiente segura."
+                    "La contraseña no es lo suficiente segura.\n"
+                    + "Contraseña segura: Mayúscula, minúscula,\n "
+                    + "número, carácter especial, 8+ caracteres."
             );
             return false;
         }
