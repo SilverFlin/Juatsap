@@ -58,11 +58,11 @@ class Sexo {
     +NINJA
     +OTRO
 }
-`Mensaje` -- `User`
-`User` ..> `Sexo`
-`User` --> `Direccion`
-`User` --> `Imagen`
-`Mensaje` --> `Imagen`
-`Mensaje` --* `Chat`
+Mensaje -- User
+User ..> Sexo
+User --> Direccion
+User --> Imagen
+Mensaje --> Imagen
+Mensaje --* Chat
 
 ```
