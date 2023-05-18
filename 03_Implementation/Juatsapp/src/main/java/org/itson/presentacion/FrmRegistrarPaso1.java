@@ -85,6 +85,7 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
         datePicker = new com.github.lgooddatepicker.components.DatePicker();
         txtPassword = new javax.swing.JPasswordField();
         txtConfirmarPassword = new javax.swing.JPasswordField();
+        jPanel1 = new javax.swing.JPanel();
 
         jButton2.setText("jButton2");
 
@@ -245,6 +246,21 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
         });
         Background.add(txtConfirmarPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 160, 20));
 
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+        );
+
+        Background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 50, -1, 370));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -253,7 +269,7 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -348,6 +364,7 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
     private javax.swing.JComboBox<String> cBoxSexo;
     private com.github.lgooddatepicker.components.DatePicker datePicker;
     private javax.swing.JButton jButton2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;

@@ -73,6 +73,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         lblCorreo7 = new javax.swing.JLabel();
         txtPais = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
 
         jButton2.setText("jButton2");
 
@@ -168,11 +169,11 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         lblCorreo4.setText("Colonia");
         Background.add(lblCorreo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 80, 20));
 
-        btnRegresar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnRegresar.setText("Regresar");
         btnRegresar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRegresar.setBorderPainted(false);
         btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegresar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseEntered(evt);
@@ -188,11 +189,11 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         });
         Background.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 30));
 
-        btnTerminar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnTerminar.setText("TERMINAR");
         btnTerminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnTerminar.setBorderPainted(false);
         btnTerminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnTerminar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnTerminar.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 btnTerminarFocusGained(evt);
@@ -279,6 +280,21 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         Background.add(txtPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 160, 20));
         Background.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 160, 10));
 
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+        );
+
+        Background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 60, -1, 370));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -287,7 +303,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -407,6 +423,7 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnTerminar;
     private javax.swing.JButton jButton2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
