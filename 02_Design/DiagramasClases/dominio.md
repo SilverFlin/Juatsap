@@ -2,6 +2,9 @@
 
 ```mermaid
 classDiagram
+classDiagram
+
+
 
 class User{
     -ObjectId _id
@@ -32,5 +35,34 @@ class Mensaje{
     -LocalDateTime timestamp
     -boolean disponibilidad
 }
+
+class Direccion{
+    -String calle
+    -String numero
+    -String colonia
+    -String ciudad
+    -String estado
+    -Stringpais
+}
+
+class Imagen{
+    -String fileName
+    -Binary imagenData
+    
+}
+
+class Sexo {
+    +MASCULINO
+    +FEMENINO
+    +ROBOT
+    +NINJA
+    +OTRO
+}
+`Mensaje` -- `User`
+`User` ..> `Sexo`
+`User` --> `Direccion`
+`User` --> `Imagen`
+`Mensaje` --> `Imagen`
+`Mensaje` --* `Chat`
 
 ```
