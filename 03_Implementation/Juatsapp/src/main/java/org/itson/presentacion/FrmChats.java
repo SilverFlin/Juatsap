@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +13,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JTextPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -34,7 +38,7 @@ import org.itson.utils.GestorImagenesMongo;
 import org.itson.utils.GestorImagenesMongo.SizeImage;
 import org.itson.utils.MensajeItem;
 import org.itson.utils.MensajeItem.MsgSide;
-import org.itson.utils.ValidadorFrames;
+import static org.itson.utils.ValidadorFrames.isValidText;
 
 /**
  *
@@ -454,7 +458,11 @@ public final class FrmChats extends JFrameActualizable {
 
     @SuppressWarnings("all")
     private void btnFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoActionPerformed
-        // TODO add your handling code here:
+        try {
+            this.enviarFoto();
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnFotoActionPerformed
 
     @SuppressWarnings("all")
@@ -589,9 +597,11 @@ public final class FrmChats extends JFrameActualizable {
 
         for (ObjectId id : listaIds) {
             Mensaje mensaje = unitOfWork.mensajesDAO().consultar(id.toString());
-
+            if (mensaje == null) {
+                continue;
+            }
             Usuario usuarioObjectivo;
-            MensajeItem mensajeItem = null;
+            MensajeItem mensajeItem;
             String mensajeId = mensaje.getUserId().toString();
             if (mensajeId.equals(usuarioLoggeado.getId().toString())) {
                 usuarioObjectivo
@@ -613,7 +623,7 @@ public final class FrmChats extends JFrameActualizable {
             if (mensaje.getImagen() != null) {
                 mensajeItem.setImagenMensaje(
                         GestorImagenesMongo.getImageIcon(mensaje.getImagen(),
-                                SizeImage.MEDIUM)
+                                SizeImage.SMALL)
                 );
             } else {
                 mensajeItem.setContenidoMensaje(mensaje.getContenidoMensaje());
@@ -760,7 +770,7 @@ public final class FrmChats extends JFrameActualizable {
     private void enviarMensaje() {
         String contenidoMensaje = txtNuevoMensaje.getText().trim();
 
-        if (!ValidadorFrames.isValidText(contenidoMensaje)) {
+        if (!isValidText(contenidoMensaje) || this.chatSeleccionado == null) {
             return;
         }
 
@@ -776,6 +786,51 @@ public final class FrmChats extends JFrameActualizable {
                 .pushMensaje(chatSeleccionado.getId(), mensaje.getId());
         txtNuevoMensaje.setText("");
         cargarChat();
+    }
+
+    private void enviarFoto() throws IOException {
+        if (this.chatSeleccionado == null) {
+            return;
+        }
+        String path = this.obtenerPath();
+
+        File file = new File(path);
+        Imagen imagenEnviar = GestorImagenesMongo.crearImagen("perfil", file);
+
+        Mensaje mensaje = new Mensaje();
+        mensaje.setDisponibilidad(true);
+        mensaje.setImagen(imagenEnviar);
+        mensaje.setTimestamp(LocalDateTime.now());
+        mensaje.setUserId(usuarioLoggeado.getId());
+
+        unitOfWork.mensajesDAO().agregar(mensaje);
+
+        unitOfWork.chatsDAO()
+                .pushMensaje(chatSeleccionado.getId(), mensaje.getId());
+
+        cargarChat();
+
+    }
+
+    private String obtenerPath() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Seleccionar la imagen de perfil.");
+
+        FileNameExtensionFilter imageFilter
+                = new FileNameExtensionFilter(
+                        "Image files",
+                        "jpg", "jpeg", "png"
+                );
+        fileChooser.setFileFilter(imageFilter);
+
+        int userSelection = fileChooser.showOpenDialog(null);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+
+            return fileChooser.getSelectedFile().getAbsolutePath();
+        } else {
+            return null;
+        }
     }
 
 }
