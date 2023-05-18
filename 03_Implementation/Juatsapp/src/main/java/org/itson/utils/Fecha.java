@@ -19,7 +19,7 @@ public class Fecha {
      *
      * @return ahora, fecha y hora del preciso momento.
      */
-    public LocalDateTime fechaAhora() {
+    public static LocalDateTime fechaAhora() {
         return LocalDateTime.now();
     }
     
@@ -28,7 +28,7 @@ public class Fecha {
      *
      * @return ahora, fecha y hora del preciso momento.
      */
-    public String fechaAhoraConHora() {
+    public static String fechaAhoraConHora() {
         LocalDateTime ahora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return ahora.format(formatter);
@@ -39,7 +39,7 @@ public class Fecha {
      *
      * @return ahora, fecha del preciso momento.
      */
-    public String fechaAhoraSinHora() {
+    public static String fechaAhoraSinHora() {
         LocalDateTime ahora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return ahora.format(formatter);
@@ -54,7 +54,7 @@ public class Fecha {
      * @throws ParseException en caso que haya una excepción en los tipos de
      * datos.
      */
-    public String formatoFechaConHora(LocalDateTime fecha) throws ParseException {
+    public static String formatoFechaConHora(LocalDateTime fecha) throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return fecha.format(formatter);
     }
@@ -68,7 +68,7 @@ public class Fecha {
      * @throws ParseException en caso que haya una excepción en los tipos de
      * datos.
      */
-    public String formatoFechaSinHora(LocalDateTime fecha) throws ParseException {
+    public static String formatoFechaSinHora(LocalDateTime fecha) throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return fecha.format(formatter);
     }

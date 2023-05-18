@@ -25,6 +25,7 @@ import org.itson.interfaces.JFrameActualizable;
 import org.itson.utils.ChatItem;
 import org.itson.utils.ChatItemListCellRenderer;
 import org.itson.utils.Dialogs;
+import org.itson.utils.Fecha;
 import org.itson.utils.Forms;
 import org.itson.utils.GestorImagenesMongo;
 import org.itson.utils.GestorImagenesMongo.SizeImage;
@@ -706,7 +707,7 @@ public final class FrmChats extends JFrameActualizable {
 
     private JTextPane createMessageTextPane(final MensajeItem mensaje) {
         String username = mensaje.getUsername();
-        String fecha = "05 de Mayo del 2023";
+        String fecha = Fecha.fechaAhoraConHora();
         String contenido = mensaje.getContenidoMensaje();
         ImageIcon optionalImage = mensaje.getImagenMensaje();
         MsgSide side = mensaje.getMsgSide();
