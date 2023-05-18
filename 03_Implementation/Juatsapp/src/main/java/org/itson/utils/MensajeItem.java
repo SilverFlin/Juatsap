@@ -13,6 +13,10 @@ public class MensajeItem {
      */
     private String username;
     /**
+     * Fecha con formato.
+     */
+    private String fechaTexto;
+    /**
      * Contenido en texto del mensaje.
      */
     private String contenidoMensaje;
@@ -63,6 +67,24 @@ public class MensajeItem {
      */
     public void setUsername(final String username) {
         this.username = username;
+    }
+    
+    /**
+     * Obtiene la fecha con formato.
+     *
+     * @return la fecha con formato.
+     */
+    public String getFechaTexto() {
+        return fechaTexto;
+    }
+
+    /**
+     * Establece la fecha con formato.
+     *
+     * @param fechaTexto
+     */
+    public void setFechaTexto(final String fechaTexto) {
+        this.fechaTexto = fechaTexto;
     }
 
     /**

@@ -3,9 +3,12 @@ package org.itson.presentacion;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
@@ -414,7 +417,11 @@ public final class FrmChats extends JFrameActualizable {
 
     @SuppressWarnings("all")
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        this.enviarMensaje();
+        try {
+            this.enviarMensaje();
+        } catch (ParseException ex) {
+            Logger.getLogger(FrmChats.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     @SuppressWarnings("all")
@@ -455,7 +462,11 @@ public final class FrmChats extends JFrameActualizable {
     @SuppressWarnings("all")
     private void txtNuevoMensajeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoMensajeKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.enviarMensaje();
+            try {
+                this.enviarMensaje();
+            } catch (ParseException ex) {
+                Logger.getLogger(FrmChats.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_txtNuevoMensajeKeyPressed
 
@@ -502,14 +513,18 @@ public final class FrmChats extends JFrameActualizable {
         chatsJList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
-                seleccionarChat();
+                try {
+                    seleccionarChat();
+                } catch (ParseException ex) {
+                    Logger.getLogger(FrmChats.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         });
 
     }
 
-    private void seleccionarChat() {
+    private void seleccionarChat() throws ParseException {
         cargarTituloChat();
         cargarChat();
     }
@@ -523,7 +538,7 @@ public final class FrmChats extends JFrameActualizable {
         );
     }
 
-    private void cargarChat() {
+    private void cargarChat() throws ParseException {
         ChatItem selectedItem = chatsJList.getSelectedValue();
         this.chatSeleccionado
                 = unitOfWork.chatsDAO().consultar(selectedItem.getId());
@@ -572,7 +587,7 @@ public final class FrmChats extends JFrameActualizable {
         return lista;
     }
 
-    private List<MensajeItem> consultarMensajes(final Chat chat) {
+    private List<MensajeItem> consultarMensajes(final Chat chat) throws ParseException {
         List<ObjectId> listaIds = chat.getHistorialMensajes();
 
         List<MensajeItem> lista = new ArrayList<>();
@@ -581,7 +596,9 @@ public final class FrmChats extends JFrameActualizable {
             Mensaje mensaje = unitOfWork.mensajesDAO().consultar(id.toString());
 
             Usuario usuarioObjectivo;
-            MensajeItem mensajeItem;
+            MensajeItem mensajeItem = null;
+            String fecha = Fecha.formatoFechaConHora(mensaje.getTimestamp());
+            mensajeItem.setFechaTexto(fecha);
             String mensajeId = mensaje.getUserId().toString();
             if (mensajeId.equals(usuarioLoggeado.getId().toString())) {
                 usuarioObjectivo
@@ -707,7 +724,7 @@ public final class FrmChats extends JFrameActualizable {
 
     private JTextPane createMessageTextPane(final MensajeItem mensaje) {
         String username = mensaje.getUsername();
-        String fecha = Fecha.fechaAhoraConHora();
+        String fecha = mensaje.getFechaTexto();
         String contenido = mensaje.getContenidoMensaje();
         ImageIcon optionalImage = mensaje.getImagenMensaje();
         MsgSide side = mensaje.getMsgSide();
@@ -740,7 +757,7 @@ public final class FrmChats extends JFrameActualizable {
 
     }
 
-    private void enviarMensaje() {
+    private void enviarMensaje() throws ParseException {
         String contenidoMensaje = txtNuevoMensaje.getText().trim();
 
         if (!ValidadorFrames.isValidText(contenidoMensaje)) {
@@ -749,7 +766,7 @@ public final class FrmChats extends JFrameActualizable {
 
         Mensaje mensaje = new Mensaje();
         mensaje.setDisponibilidad(true);
-        mensaje.setTimestamp(LocalDateTime.now());
+        mensaje.setTimestamp(Fecha.fechaAhora());
         mensaje.setContenidoMensaje(contenidoMensaje);
         mensaje.setUserId(usuarioLoggeado.getId());
 
