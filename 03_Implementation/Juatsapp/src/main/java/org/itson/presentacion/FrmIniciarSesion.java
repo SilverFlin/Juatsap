@@ -57,6 +57,8 @@ public class FrmIniciarSesion extends JFrameActualizable {
         lblCorreo1 = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         btnIniciarSesion = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         jButton2.setText("jButton2");
 
@@ -76,17 +78,17 @@ public class FrmIniciarSesion extends JFrameActualizable {
                 campoTextoUsuarioActionPerformed(evt);
             }
         });
-        Background.add(campoTextoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 190, 20));
-        Background.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 190, 10));
-        Background.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 190, 10));
+        Background.add(campoTextoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 190, 20));
+        Background.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 190, 10));
+        Background.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 190, 10));
 
         lblContraseña.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 24)); // NOI18N
         lblContraseña.setForeground(new java.awt.Color(0, 153, 153));
         lblContraseña.setText("Contraseña");
-        Background.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
+        Background.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, -1));
 
         campoTextoContraseña.setBorder(null);
-        Background.add(campoTextoContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 190, 20));
+        Background.add(campoTextoContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 190, 20));
 
         btnRegistrarse.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnRegistrarse.setForeground(new java.awt.Color(0, 153, 153));
@@ -107,13 +109,13 @@ public class FrmIniciarSesion extends JFrameActualizable {
                 btnRegistrarseActionPerformed(evt);
             }
         });
-        Background.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 90, 30));
+        Background.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 90, 30));
 
         lblCorreo1.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 24)); // NOI18N
         lblCorreo1.setForeground(new java.awt.Color(0, 153, 153));
         lblCorreo1.setText("Usuario");
-        Background.add(lblCorreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 80, 20));
-        Background.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 70, 70));
+        Background.add(lblCorreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 80, 20));
+        Background.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 70, 70));
 
         btnIniciarSesion.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
         btnIniciarSesion.setForeground(new java.awt.Color(0, 153, 153));
@@ -134,17 +136,39 @@ public class FrmIniciarSesion extends JFrameActualizable {
                 btnIniciarSesionActionPerformed(evt);
             }
         });
-        Background.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 100, 30));
+        Background.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 100, 30));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel1.setText("¿No tienes cuenta?");
+        Background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 430, Short.MAX_VALUE)
+        );
+
+        Background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 430));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(Background, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -194,6 +218,8 @@ public class FrmIniciarSesion extends JFrameActualizable {
     private javax.swing.JPasswordField campoTextoContraseña;
     private javax.swing.JTextField campoTextoUsuario;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblContraseña;

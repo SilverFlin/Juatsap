@@ -89,6 +89,7 @@
                       <Component id="btnNuevoChat" min="-2" pref="62" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="scPnChats" min="-2" pref="390" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -146,6 +147,10 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="scPnChatActivo" min="-2" pref="552" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                           <Component id="pnTituloChat" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="txtNuevoMensaje" min="-2" pref="552" max="-2" attributes="0"/>
@@ -153,11 +158,6 @@
                               <Component id="btnFoto" min="-2" pref="69" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnEnviar" pref="65" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                              <Component id="scPnChatActivo" min="-2" pref="496" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -170,8 +170,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pnTituloChat" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="scPnChatActivo" min="-2" pref="263" max="-2" attributes="0"/>
-                      <EmptySpace pref="30" max="32767" attributes="0"/>
+                      <Component id="scPnChatActivo" min="-2" pref="287" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtNuevoMensaje" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
                           <Component id="btnFoto" alignment="3" max="32767" attributes="0"/>
@@ -304,7 +304,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="261" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="275" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>

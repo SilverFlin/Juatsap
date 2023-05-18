@@ -169,7 +169,6 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         Background.add(lblCorreo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 80, 20));
 
         btnRegresar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
-        btnRegresar.setForeground(new java.awt.Color(0, 153, 153));
         btnRegresar.setText("Regresar");
         btnRegresar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRegresar.setBorderPainted(false);
@@ -190,7 +189,6 @@ public class FrmRegistrarPaso2 extends JFrameActualizable {
         Background.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 30));
 
         btnTerminar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
-        btnTerminar.setForeground(new java.awt.Color(0, 153, 153));
         btnTerminar.setText("TERMINAR");
         btnTerminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnTerminar.setBorderPainted(false);

@@ -185,7 +185,6 @@ public final class FrmPerfil extends JFrameActualizable {
         Background.add(lblCorreo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 80, 20));
 
         btnRegresar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
-        btnRegresar.setForeground(new java.awt.Color(0, 153, 153));
         btnRegresar.setText("Regresar");
         btnRegresar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRegresar.setBorderPainted(false);
@@ -206,7 +205,6 @@ public final class FrmPerfil extends JFrameActualizable {
         Background.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 30));
 
         btnGuardar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(0, 153, 153));
         btnGuardar.setText("GUARDAR");
         btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnGuardar.setBorderPainted(false);
@@ -356,7 +354,6 @@ public final class FrmPerfil extends JFrameActualizable {
         Background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 190, 300));
 
         btnEditar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(0, 153, 153));
         btnEditar.setText("EDITAR");
         btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditar.setBorderPainted(false);

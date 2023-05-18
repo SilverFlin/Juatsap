@@ -96,9 +96,9 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
         Background.setBackground(new java.awt.Color(255, 255, 255));
         Background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtUsername.setBorder(null);
         txtUsername.setForeground(new java.awt.Color(51, 51, 51));
         txtUsername.setToolTipText("");
-        txtUsername.setBorder(null);
         txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtUsernameFocusLost(evt);
@@ -184,7 +184,6 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
         Background.add(lblPreviewPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 70, 70));
 
         btnRegresar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
-        btnRegresar.setForeground(new java.awt.Color(0, 153, 153));
         btnRegresar.setText("Regresar");
         btnRegresar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRegresar.setBorderPainted(false);
@@ -205,7 +204,6 @@ public class FrmRegistrarPaso1 extends JFrameActualizable {
         Background.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 30));
 
         btnContinuar.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 12)); // NOI18N
-        btnContinuar.setForeground(new java.awt.Color(0, 153, 153));
         btnContinuar.setText("CONTINUAR");
         btnContinuar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnContinuar.setBorderPainted(false);
