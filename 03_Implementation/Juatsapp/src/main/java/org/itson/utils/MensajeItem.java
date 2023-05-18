@@ -68,7 +68,7 @@ public class MensajeItem {
     public void setUsername(final String username) {
         this.username = username;
     }
-    
+
     /**
      * Obtiene la fecha con formato.
      *

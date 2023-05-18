@@ -12,7 +12,7 @@ public final class ChatItem {
      * Nombre del chat.
      */
     private String nombreChat;
-    
+
     /**
      * Imagen del chat.
      */

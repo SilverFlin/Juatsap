@@ -12,7 +12,11 @@ import java.time.format.DateTimeFormatter;
  * Esta clase permite encapsular herramientas útiles a la hora de querer
  * implementar fechas.
  */
-public class Fecha {
+public final class Fecha {
+
+    private Fecha() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * Método para obtener la fecha en tipo LocalDateTime del preciso momento.
@@ -22,7 +26,7 @@ public class Fecha {
     public static LocalDateTime fechaAhora() {
         return LocalDateTime.now();
     }
-    
+
     /**
      * Método para obtener la fecha y hora del preciso momento.
      *
@@ -30,10 +34,11 @@ public class Fecha {
      */
     public static String fechaAhoraConHora() {
         LocalDateTime ahora = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter
+                = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return ahora.format(formatter);
     }
-    
+
     /**
      * Método para obtener la fecha del preciso momento.
      *
@@ -46,29 +51,34 @@ public class Fecha {
     }
 
     /**
-     * Método que toma un fecha tipo LocalDateTime y regresa un string que incluye
-     * la fecha, horas y minutos de dicha fecha.
+     * Método que toma un fecha tipo LocalDateTime y regresa un string que
+     * incluye la fecha, horas y minutos de dicha fecha.
      *
      * @param fecha Ojeto tipo LocalDateTime que regresará como string.
      * @return Fecha representada en format dd/MM/yyyy HH:mm en un string.
      * @throws ParseException en caso que haya una excepción en los tipos de
      * datos.
      */
-    public static String formatoFechaConHora(LocalDateTime fecha) throws ParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    public static String formatoFechaConHora(
+            final LocalDateTime fecha
+    ) throws ParseException {
+        DateTimeFormatter formatter
+                = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return fecha.format(formatter);
     }
-    
+
     /**
-     * Método que toma un fecha tipo LocalDateTime y regresa un string que incluye
-     * la fecha.
+     * Método que toma un fecha tipo LocalDateTime y regresa un string que
+     * incluye la fecha.
      *
      * @param fecha Ojeto tipo LocalDateTime que regresará como string.
      * @return Fecha representada en format dd/MM/yyyy en un string.
      * @throws ParseException en caso que haya una excepción en los tipos de
      * datos.
      */
-    public static String formatoFechaSinHora(LocalDateTime fecha) throws ParseException {
+    public static String formatoFechaSinHora(
+            final LocalDateTime fecha
+    ) throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return fecha.format(formatter);
     }
